@@ -22,7 +22,7 @@ export default function Page() {
             مشاهده همه
           </Link>
         </div>
-        <Suspense fallback={<Spinner className="mx-auto my-8" />}>
+        <Suspense fallback={<Spinner className="mx-auto my-8 size-5" />}>
           <RecentExpenseList />
         </Suspense>
       </section>

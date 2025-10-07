@@ -1,9 +1,8 @@
 'use client'
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { format } from 'date-fns-jalali'
 import type { Prisma } from 'generated/prisma'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
@@ -29,12 +28,12 @@ export const TransactionCard = ({
   description,
   category,
 }: TransactionCardProps) => {
-  const router = useRouter()
+  const qc = useQueryClient()
   const [open, setOpen] = useState(false)
   const { mutate, isPending } = useMutation(
     client.transaction.delete.mutationOptions({
       onSuccess() {
-        router.refresh()
+        qc.invalidateQueries({ queryKey: client.transaction.getAll.queryKey() })
         toast.info('تراکنش حذف شد')
         setOpen(false)
       },

@@ -1,7 +1,6 @@
 import { notFound } from 'next/navigation'
 import { Fragment, Suspense } from 'react'
 import { AppHeader } from '@/components/layouts/app-header'
-import { Separator } from '@/components/ui/separator'
 import { Spinner } from '@/components/ui/spinner'
 import { api } from '@/rpc/orpc.client'
 import { UploadAvatar } from './components/upload-avatar'
@@ -30,7 +29,7 @@ export default async function AccountPage() {
   return (
     <Fragment>
       <AppHeader title="ویرایش حساب کاربری" />
-      <Suspense fallback={<Spinner className="mx-auto my-16" />}>
+      <Suspense fallback={<Spinner className="mx-auto my-16 size-5" />}>
         <UserDetails />
       </Suspense>
     </Fragment>

@@ -11,7 +11,7 @@ export default async function Page() {
   if (userId) return redirect('/home')
   return (
     <section className="container-sm min-h-svh bg-background p-4">
-      <h1 className="mt-24 text-center font-bold text-3xl text-primary">
+      <h1 className="mt-20 text-center font-bold text-3xl text-primary">
         خرجینو
       </h1>
       <h3 className="my-4 text-center font-medium">ورود به حساب کاربری</h3>
