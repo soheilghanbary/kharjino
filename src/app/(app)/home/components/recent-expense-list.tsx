@@ -7,7 +7,7 @@ export async function RecentExpenseList() {
   if (!transactions.length) return <EmptyTransactionList />
 
   return (
-    <div className="grid gap-2">
+    <div className="fade-up-transition grid gap-2">
       {transactions.map((t) => (
         <TransactionCard key={t.id} {...t} />
       ))}

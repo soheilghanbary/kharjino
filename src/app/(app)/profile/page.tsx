@@ -35,7 +35,7 @@ export default function ProfilePage() {
   return (
     <Fragment>
       <AppHeader title="پروفایل" />
-      <div className="flex flex-col gap-2">
+      <div className="fade-up-transition flex flex-col gap-2">
         {links.map((l, i) => (
           <Link
             key={i}

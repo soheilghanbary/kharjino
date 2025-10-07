@@ -64,7 +64,7 @@ export const TransactionForm = (props: Props) => {
   )
 
   return (
-    <form onSubmit={onCreate} className="grid gap-4">
+    <form onSubmit={onCreate} className="fade-up-transition grid gap-4">
       <div className="flex items-center justify-between">
         <p className="font-medium text-sm">نوع تراکنش</p>
         <Controller
