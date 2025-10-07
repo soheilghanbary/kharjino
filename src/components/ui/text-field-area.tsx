@@ -2,6 +2,7 @@ import {
   type ForwardedRef,
   forwardRef,
   type TextareaHTMLAttributes,
+  useId,
 } from 'react'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
@@ -17,10 +18,11 @@ export const TextFieldArea = forwardRef(function MyInput(
   { label, className, error, description, ...rest }: TextFieldAreaProps,
   ref: ForwardedRef<HTMLTextAreaElement>
 ) {
+  const id = useId()
   return (
     <div className={cn('grid gap-2 [&>label]:text-sm', className)}>
-      <Label>{label}</Label>
-      <Textarea ref={ref} {...rest} />
+      <Label htmlFor={id}>{label}</Label>
+      <Textarea id={id} ref={ref} {...rest} />
       {description && (
         <span className="text-muted-foreground text-xs">{description}</span>
       )}

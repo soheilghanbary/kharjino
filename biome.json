@@ -52,7 +52,8 @@
       },
       "correctness": {
         "recommended": true,
-        "useExhaustiveDependencies": "off"
+        "useExhaustiveDependencies": "off",
+        "noNestedComponentDefinitions": "off"
       },
       "a11y": {
         "recommended": true,

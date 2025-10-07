@@ -1,7 +1,9 @@
-import { os } from '@orpc/server'
+import { categoryRouter } from './category'
+import { transactionRouter } from './transaction'
+import { userRouter } from './user'
 
 export const router = {
-  sayHello: os.handler(async () => {
-    return { message: 'Hello World!' }
-  }),
+  user: userRouter,
+  category: categoryRouter,
+  transaction: transactionRouter,
 }
