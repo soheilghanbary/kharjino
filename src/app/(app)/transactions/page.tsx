@@ -7,7 +7,14 @@ import { TransactionTypeTab } from './components/transaction-type-tab'
 export default async function TransactionsPage() {
   return (
     <Fragment>
-      <AppHeader title="تراکنش ها" leftChild={<TransactionFilter />} />
+      <AppHeader
+        title="تراکنش ها"
+        leftChild={
+          <Suspense>
+            <TransactionFilter />
+          </Suspense>
+        }
+      />
       <Suspense>
         <TransactionTypeTab type="all" />
         <TransactionList />

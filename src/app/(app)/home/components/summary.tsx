@@ -12,7 +12,7 @@ export const Summary = () => {
   )
 
   return (
-    <div className="z-10 mt-4 rounded-2xl bg-card p-5 shadow-lg">
+    <div className="z-10 mt-4 rounded-3xl bg-card p-5 shadow-lg">
       <div>
         <p className="mb-1 text-center text-muted-foreground text-xs">
           موجودی کل
