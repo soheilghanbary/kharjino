@@ -48,7 +48,7 @@ export default function ProfilePage() {
             href={l.href}
             className="flex h-12 items-center gap-3 rounded-lg border bg-card p-3 duration-150"
           >
-            <l.icon className="size-6" />
+            <l.icon className="size-5" />
             <span className="grow text-right text-sm/[18px]">{l.title}</span>
             <ArrowLeftIcon className="size-5 text-muted-foreground" />
           </Link>

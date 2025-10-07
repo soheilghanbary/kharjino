@@ -89,6 +89,7 @@ model Transaction {
 model Category {
   id           String          @id @default(nanoid())
   name         String
+  icon         String          @default("")
   type         TransactionType // نوع دسته‌بندی (مثلاً "expense" یا "income")
   createdAt    DateTime        @default(now())
   updatedAt    DateTime        @updatedAt

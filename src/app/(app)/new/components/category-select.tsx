@@ -39,7 +39,7 @@ export function CategorySelect({ type, initialValue, onChange }: Props) {
           ) : (
             data?.map((c) => (
               <SelectItem key={c.id} value={c.id}>
-                {c.name}
+                {c.icon} {c.name}
               </SelectItem>
             ))
           )}
