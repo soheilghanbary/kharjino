@@ -65,7 +65,7 @@ export const Summary = () => {
       >
         <Link href={'/new'}>
           <PlusCircleIcon />
-          افزودن خرج
+          تراکنش جدید
         </Link>
       </Button>
     </div>
