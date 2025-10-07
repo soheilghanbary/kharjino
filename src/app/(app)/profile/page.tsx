@@ -1,36 +1,29 @@
+import { ArrowLeftIcon, MagnetIcon, User2Icon, UsersIcon } from 'lucide-react'
 import Link from 'next/link'
 import { Fragment } from 'react'
-import {
-  ArrowLeftIcon,
-  HeadphoneIcon,
-  MagicIcon,
-  MoneyIcon,
-  UserEditIcon,
-  UsersIcon,
-} from '@/assets/icons'
 import { AppHeader } from '@/components/layouts/app-header'
 
 const links = [
   {
     href: '/account',
     title: 'ویرایش حساب کاربری',
-    icon: UserEditIcon,
+    icon: User2Icon,
   },
-  {
-    href: '/profile/currency',
-    title: 'انتخاب واحد پول',
-    icon: MoneyIcon,
-  },
+  // {
+  //   href: '/profile/currency',
+  //   title: 'انتخاب واحد پول',
+  //   icon: MoneyIcon,
+  // },
   {
     href: '/theme',
     title: 'تم اپلیکیشن',
-    icon: MagicIcon,
+    icon: MagnetIcon,
   },
-  {
-    href: '/support',
-    title: 'پشتیبانی',
-    icon: HeadphoneIcon,
-  },
+  // {
+  //   href: '/support',
+  //   title: 'پشتیبانی',
+  //   icon: HeadphoneIcon,
+  // },
   {
     href: '/about',
     title: 'درباره ما',

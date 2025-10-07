@@ -9,9 +9,9 @@ export const transactionRouter = {
     const userId = await getUserId()
     return await db.transaction.findMany({
       where: { userId },
-      orderBy: { createdAt: 'desc' },
-      take: 5,
+      orderBy: { date: 'desc' },
       include: { category: true },
+      take: 5,
     })
   }),
   create: os.input(createTransaction).handler(async ({ input }) => {
@@ -20,13 +20,22 @@ export const transactionRouter = {
       data: { ...input, userId },
     })
   }),
-  getAll: os.handler(async () => {
-    const userId = await getUserId()
-    return await db.transaction.findMany({
-      where: { userId },
-      include: { category: true },
-    })
-  }),
+  getAll: os
+    .input(z.enum(['expense', 'income']).nullish())
+    .handler(async ({ input }) => {
+      const userId = await getUserId()
+      if (input === null)
+        return await db.transaction.findMany({
+          where: { userId },
+          include: { category: true },
+          orderBy: { date: 'desc' },
+        })
+      return await db.transaction.findMany({
+        where: { userId, type: input },
+        include: { category: true },
+        orderBy: { date: 'desc' },
+      })
+    }),
   get: os.input(z.string()).handler(async ({ input }) => {
     return await db.transaction.findUnique({
       where: { id: input },

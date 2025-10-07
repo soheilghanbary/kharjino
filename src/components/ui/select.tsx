@@ -1,8 +1,12 @@
 'use client'
-import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from 'lucide-react'
+import {
+  ChevronDown,
+  CheckIcon,
+  ChevronDownIcon,
+  ChevronUpIcon,
+} from 'lucide-react'
 import { Select as SelectPrimitive } from 'radix-ui'
 import type * as React from 'react'
-import { ArrowDownIcon } from '@/assets/icons'
 import { cn } from '@/lib/utils'
 
 function Select({
@@ -43,7 +47,7 @@ function SelectTrigger({
     >
       {children}
       <SelectPrimitive.Icon asChild>
-        <ArrowDownIcon className="size-6" />
+        <ChevronDown className="size-5" />
       </SelectPrimitive.Icon>
     </SelectPrimitive.Trigger>
   )

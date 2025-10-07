@@ -1,8 +1,9 @@
 'use client'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { useMutation } from '@tanstack/react-query'
 import { format } from 'date-fns-jalali'
 import type { Prisma } from 'generated/prisma'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
@@ -16,7 +17,6 @@ import {
 } from '@/components/ui/drawer'
 import { Spinner } from '@/components/ui/spinner'
 import { client } from '@/rpc/orpc.client'
-import { useRouter } from 'next/navigation'
 
 type TransactionCardProps = Prisma.TransactionGetPayload<{
   include: { category: true }
@@ -34,7 +34,6 @@ export const TransactionCard = ({
   const { mutate, isPending } = useMutation(
     client.transaction.delete.mutationOptions({
       onSuccess() {
-        // qc.invalidateQueries({ queryKey: client.transaction.getAll.key() })
         router.refresh()
         toast.info('تراکنش حذف شد')
         setOpen(false)
@@ -45,16 +44,16 @@ export const TransactionCard = ({
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
-        <div className="flex items-center gap-3 rounded-lg border-b p-3 shadow-xs duration-150 last:border-b-0 hover:bg-muted dark:hover:bg-card">
+        <div className="flex items-center gap-3 rounded-lg border-b p-3 shadow-xs transition-[background] duration-150 last:border-b-0 hover:bg-muted dark:hover:bg-card">
           <p className="size-fit rounded-full bg-primary/5 p-2 text-primary">
-            🛍️
+            💷
           </p>
           <div className="grow">
             <p className="font-medium text-xs/6">{category.name}</p>
             <p className="text-muted-foreground text-tiny">{description}</p>
           </div>
           <div className="text-left">
-            <p className="font-medium text-sm/6">
+            <p className="font-semibold text-sm/6">
               {amount.toLocaleString('fa-IR')} تومان
             </p>
             <p className="text-muted-foreground text-tiny">
