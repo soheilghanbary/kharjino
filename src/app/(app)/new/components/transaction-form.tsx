@@ -41,7 +41,7 @@ export const TransactionForm = (props: Props) => {
       description: '',
     },
   })
-  const { mutate: addMutate, isPending } = useMutation(
+  const { mutate: addMutate, isPending: addLoading } = useMutation(
     client.transaction.create.mutationOptions({
       onSuccess() {
         toast.success('تراکنش با موفقیت ایجاد شد')
@@ -111,13 +111,13 @@ export const TransactionForm = (props: Props) => {
         {...register('description')}
       />
       {props.mode === 'edit' ? (
-        <Button type="submit" variant={'secondary'}>
-          {isPending && <Spinner />}
+        <Button disabled={editLoading} type="submit" variant={'secondary'}>
+          {editLoading && <Spinner />}
           ویرایش
         </Button>
       ) : (
-        <Button type="submit">
-          {editLoading && <Spinner />}
+        <Button disabled={addLoading} type="submit">
+          {addLoading && <Spinner />}
           ذخیره
         </Button>
       )}

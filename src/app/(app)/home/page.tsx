@@ -1,19 +1,15 @@
 import Link from 'next/link'
-import { notFound } from 'next/navigation'
 import { Fragment, Suspense } from 'react'
 import { Spinner } from '@/components/ui/spinner'
-import { api } from '@/rpc/orpc.client'
 import { RecentExpenseList } from './components/recent-expense-list'
 import { Summary } from './components/summary'
 import { UserInfo } from './components/user-info'
 
-export default async function Page() {
-  const user = await api.user.get()
-  if (!user) return notFound()
+export default function Page() {
   return (
     <Fragment>
       <header className="-m-4 h-50 rounded-b-2xl bg-primary/85 p-4 dark:bg-blue-600/85">
-        <UserInfo {...user} />
+        <UserInfo />
         <Summary />
       </header>
       <section className="mt-30">
