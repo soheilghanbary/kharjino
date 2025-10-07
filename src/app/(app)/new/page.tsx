@@ -5,7 +5,7 @@ import { TransactionForm } from './components/transaction-form'
 export default function NewPage() {
   return (
     <Fragment>
-      <AppHeader title="افزودن" />
+      <AppHeader title="تراکنش جدید" />
       <TransactionForm mode="add" />
     </Fragment>
   )
