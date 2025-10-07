@@ -16,5 +16,6 @@ export const config = {
     '/new',
     '/transactions/:path*',
     '/profile',
+    '/account',
   ],
 }

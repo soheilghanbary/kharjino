@@ -1,7 +1,19 @@
+import Image from 'next/image'
 import { Fragment } from 'react'
 import { AppHeader } from '@/components/layouts/app-header'
-import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
+
+const Signature = () => (
+  <Image
+    src="/signature.png"
+    alt="Vercel"
+    width={72}
+    height={16}
+    quality={100}
+    sizes="100vw"
+    className="mx-auto dark:invert"
+  />
+)
 
 export default function About() {
   return (
@@ -14,15 +26,10 @@ export default function About() {
           جدید ترین تکنولوژی های وب ساخته شده و کاملا متن باز یا (Open Source)
           میباشد.
         </p>
-        <p>توسعه دهنده: سهیل قنبری</p>
-        <p>soheilghanbary.ir</p>
-        <p>پست الکترونیک: soli.ghanbary@gmail.com</p>
-        <p>نسخه: 1.0</p>
-      </div>
-      <div className="mt-4 flex justify-center">
-        <Button className="rounded-full" asChild>
-          <a href="tel:09199973120">تلفن تماس: 09199973120</a>
-        </Button>
+        <p className="font-medium">توسعه دهنده: سهیل قنبری</p>
+        <p className="font-medium">پشتیبانی: 09199973120</p>
+        <Signature />
+        <p className="font-medium">ورژن بتا: 0.9.5</p>
       </div>
     </Fragment>
   )
