@@ -9,9 +9,15 @@ import { TransactionCard } from '../../home/components/transaction-card'
 
 export const TransactionList = () => {
   const [t] = useQueryState('type')
+  const [sort] = useQueryState('sort', {
+    defaultValue: 'newest',
+  })
   const { data: transactions, isPending } = useQuery(
     client.transaction.getAll.queryOptions({
-      input: t as TransactionType | null,
+      input: {
+        sort: sort as 'newest' | 'highest' | 'lowest',
+        type: t as TransactionType | null,
+      },
     })
   )
   if (isPending) return <Spinner className="mx-auto my-8" />

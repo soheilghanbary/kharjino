@@ -68,7 +68,7 @@ export const TransactionCard = ({
           <DrawerDescription>میخوای ویرایش یا حذف کنی؟</DrawerDescription>
         </DrawerHeader>
         <div className="grid grid-cols-2 gap-4">
-          <Button variant={'outline'} asChild>
+          <Button variant={'secondary'} asChild>
             <Link href={`/transactions/${id}`}>ویرایش</Link>
           </Button>
           <Button onClick={() => mutate(id)} variant={'destructive'}>

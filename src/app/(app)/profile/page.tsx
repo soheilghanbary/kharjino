@@ -1,4 +1,10 @@
-import { ArrowLeftIcon, MagnetIcon, User2Icon, UsersIcon } from 'lucide-react'
+import {
+  ArrowLeftIcon,
+  MagnetIcon,
+  PaletteIcon,
+  User2Icon,
+  UsersIcon,
+} from 'lucide-react'
 import Link from 'next/link'
 import { Fragment } from 'react'
 import { AppHeader } from '@/components/layouts/app-header'
@@ -17,7 +23,7 @@ const links = [
   {
     href: '/theme',
     title: 'تم اپلیکیشن',
-    icon: MagnetIcon,
+    icon: PaletteIcon,
   },
   // {
   //   href: '/support',

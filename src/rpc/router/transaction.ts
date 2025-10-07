@@ -21,19 +21,34 @@ export const transactionRouter = {
     })
   }),
   getAll: os
-    .input(z.enum(['expense', 'income']).nullish())
+    .input(
+      z
+        .object({
+          type: z.enum(['expense', 'income']).nullish(),
+          sort: z.enum(['newest', 'highest', 'lowest']).default('newest'),
+        })
+        .nullish()
+    )
     .handler(async ({ input }) => {
       const userId = await getUserId()
-      if (input === null)
-        return await db.transaction.findMany({
-          where: { userId },
-          include: { category: true },
-          orderBy: { date: 'desc' },
-        })
+      const { type, sort } = input ?? { type: null, sort: 'newest' }
+      const where = type ? { userId, type } : { userId }
+      let orderBy: any
+      switch (sort) {
+        case 'highest':
+          orderBy = { amount: 'desc' }
+          break
+        case 'lowest':
+          orderBy = { amount: 'asc' }
+          break
+        default:
+          orderBy = { date: 'desc' } // newest
+          break
+      }
       return await db.transaction.findMany({
-        where: { userId, type: input },
+        where,
         include: { category: true },
-        orderBy: { date: 'desc' },
+        orderBy,
       })
     }),
   get: os.input(z.string()).handler(async ({ input }) => {
