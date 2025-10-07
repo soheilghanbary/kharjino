@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation'
 import { Fragment, Suspense } from 'react'
 import { AppHeader } from '@/components/layouts/app-header'
+import { Separator } from '@/components/ui/separator'
 import { Spinner } from '@/components/ui/spinner'
 import { api } from '@/rpc/orpc.client'
 import { UploadAvatar } from './components/upload-avatar'
@@ -11,9 +12,9 @@ const UserDetails = async () => {
   if (!user) return notFound()
   return (
     <div className="grid gap-4">
-      <div className="-mx-4 h-1.5 bg-muted"></div>
+      <hr className="-mx-4" />
       <UploadAvatar initialImage={user.image!} />
-      <div className="-mx-4 h-1.5 bg-muted"></div>
+      <hr className="-mx-4" />
       <UserForm
         initialValues={{
           name: user.name,
