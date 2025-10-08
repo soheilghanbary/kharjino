@@ -87,4 +87,25 @@ export const transactionRouter = {
       where: { id: input, userId },
     })
   }),
+  byCategory: os
+    .input(z.enum(['expense', 'income']).nullish())
+    .handler(async ({ input }) => {
+      const userId = await getUserId()
+      const type = input ?? 'expense' // پیش‌فرض خرج‌ها
+      const result = await db.transaction.groupBy({
+        by: ['categoryId'],
+        where: { userId, type },
+        _sum: { amount: true },
+      })
+      const categories = await db.category.findMany({
+        where: { id: { in: result.map((r) => r.categoryId) } },
+        select: { id: true, name: true },
+      })
+      const data = result.map((r) => ({
+        category:
+          categories.find((c) => c.id === r.categoryId)?.name ?? 'نامشخص',
+        total: r._sum.amount || 0,
+      }))
+      return data
+    }),
 }

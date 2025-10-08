@@ -3,6 +3,7 @@ import { Fragment, Suspense } from 'react'
 import { Spinner } from '@/components/ui/spinner'
 import { RecentExpenseList } from './components/recent-expense-list'
 import { Summary } from './components/summary'
+import { TransactionChart } from './components/transaction-chart'
 import { UserInfo } from './components/user-info'
 
 export default function Page() {
@@ -13,6 +14,7 @@ export default function Page() {
         <Summary />
       </header>
       <section className="mt-30">
+        <TransactionChart />
         <div className="mb-3 flex items-center justify-between">
           <p className="font-medium text-sm">تراکنش های اخیر</p>
           <Link
