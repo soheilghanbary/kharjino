@@ -1,7 +1,7 @@
-import { ArrowLeftIcon, ChevronLeft } from 'lucide-react'
+import { ChevronLeft } from 'lucide-react'
 import Link from 'next/link'
 import { Fragment } from 'react'
-import { MagicIcon, UserIcon, UsersIcon } from '@/assets/icons/bulk'
+import { MagicIcon, NotesIcon, UserIcon, UsersIcon } from '@/assets/icons/bulk'
 import { LogoutButton } from '@/components/common/logout-button'
 import { AppHeader } from '@/components/layouts/app-header'
 
@@ -11,21 +11,16 @@ const links = [
     title: 'ویرایش حساب کاربری',
     icon: UserIcon,
   },
-  // {
-  //   href: '/profile/currency',
-  //   title: 'انتخاب واحد پول',
-  //   icon: MoneyIcon,
-  // },
+  {
+    href: '/notes',
+    title: 'یادداشت های من',
+    icon: NotesIcon,
+  },
   {
     href: '/theme',
     title: 'تم اپلیکیشن',
     icon: MagicIcon,
   },
-  // {
-  //   href: '/support',
-  //   title: 'پشتیبانی',
-  //   icon: HeadphoneIcon,
-  // },
   {
     href: '/about',
     title: 'درباره ما',

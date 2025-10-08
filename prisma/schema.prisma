@@ -67,6 +67,7 @@ model User {
   accounts      Account[]
   categories    Category[]
   transactions  Transaction[]
+  notes         Note[]
 
   @@unique([email])
   @@map("user")
@@ -101,4 +102,14 @@ model Category {
 enum TransactionType {
   expense
   income
+}
+
+model Note {
+  id          String   @id @default(nanoid())
+  title       String
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  user        User     @relation(fields: [userId], references: [id])
+  userId      String
 }

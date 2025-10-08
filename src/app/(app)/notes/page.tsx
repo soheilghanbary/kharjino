@@ -1,3 +1,22 @@
+import Link from 'next/link'
+import { PlusIcon } from '@/assets/icons/bulk'
+import { AppHeader } from '@/components/layouts/app-header'
+import { Button } from '@/components/ui/button'
+import { Separator } from '@/components/ui/separator'
+import { NoteList } from './components/note-list'
+
 export default function Page() {
-  return <div>notes</div>
+  return (
+    <>
+      <AppHeader title="یادداشت های من" />
+      <Button asChild className="w-full">
+        <Link href={'/notes/new'}>
+          <PlusIcon className="size-5" />
+          یادداشت جدید
+        </Link>
+      </Button>
+      <Separator className="my-4" />
+      <NoteList />
+    </>
+  )
 }

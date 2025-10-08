@@ -1,1 +1,1 @@
-export type IconProps = SVGProps<SVGSVGElement>
+export type IconProps = React.SVGProps<SVGSVGElement>
