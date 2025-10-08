@@ -2,33 +2,33 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import {
-  AddOutlineIcon,
-  FolderOutlineIcon,
-  HomeOutlineIcon,
-  UserSquareOutlineIcon,
-} from '@/assets/icons/outline-icons'
+  PieChartIcon,
+  PlusIcon,
+  TransactionIcon,
+  UserIcon,
+} from '@/assets/icons/bulk'
 import { cn } from '@/lib/utils'
 
 const navItems = [
   {
     href: '/home',
     label: 'خانه',
-    icon: HomeOutlineIcon,
+    icon: PieChartIcon,
   },
   {
     href: '/new',
     label: 'افزودن ',
-    icon: AddOutlineIcon,
+    icon: PlusIcon,
   },
   {
     href: '/transactions',
     label: 'تراکنش ها',
-    icon: FolderOutlineIcon,
+    icon: TransactionIcon,
   },
   {
     href: '/profile',
     label: 'پروفایل',
-    icon: UserSquareOutlineIcon,
+    icon: UserIcon,
   },
 ]
 
