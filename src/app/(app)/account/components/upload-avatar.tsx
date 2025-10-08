@@ -51,7 +51,10 @@ export function UploadAvatar({ initialImage }: Props) {
           src={path}
           alt="upload"
           quality={100}
-          className={cn('rounded-[inherit]', loading && 'animate-pulse')}
+          className={cn(
+            'rounded-[inherit] object-cover',
+            loading && 'animate-pulse'
+          )}
         />
       </figure>
       <Button
