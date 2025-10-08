@@ -1,8 +1,10 @@
-import { ArrowLeftIcon } from 'lucide-react'
+import { ArrowLeftIcon, LogOut } from 'lucide-react'
 import Link from 'next/link'
 import { Fragment } from 'react'
 import { MagicIcon, UserIcon, UsersIcon } from '@/assets/icons/bulk'
 import { AppHeader } from '@/components/layouts/app-header'
+import { Button } from '@/components/ui/button'
+import { LogoutButton } from '@/components/common/logout-button'
 
 const links = [
   {
@@ -48,6 +50,8 @@ export default function ProfilePage() {
             <ArrowLeftIcon className="size-5 text-muted-foreground" />
           </Link>
         ))}
+        <hr className="my-2" />
+        <LogoutButton />
       </div>
     </Fragment>
   )

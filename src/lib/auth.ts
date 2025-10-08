@@ -17,6 +17,6 @@ export const auth = betterAuth({
 })
 
 // auth client
-export const { signIn, signUp, useSession } = createAuthClient({
+export const { signIn, signUp, useSession, signOut } = createAuthClient({
   baseURL: process.env.NEXT_PUBLIC_URL,
 })
