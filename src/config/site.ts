@@ -1,5 +1,5 @@
 export const siteConfig = {
-  title: 'خرجینو',
+  title: 'Kharjino',
   description: 'Modern web, simplified for Web Developers',
   v: '1.0',
 }
