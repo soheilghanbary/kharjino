@@ -1,17 +1,34 @@
 import 'server-only'
-import { createRouterClient } from '@orpc/server'
+import { createORPCClient } from '@orpc/client'
+import { RPCLink } from '@orpc/client/fetch'
+import { DedupeRequestsPlugin } from '@orpc/client/plugins'
+import { inferRPCMethodFromRouter, type RouterClient } from '@orpc/server'
 import { headers } from 'next/headers'
+import { handler } from '@/app/api/rpc/[[...rest]]/route'
 import { router } from './router'
 
-globalThis.$client = createRouterClient(router, {
-  /**
-   * Provide initial context if needed.
-   *
-   * Because this client instance is shared across all requests,
-   * only include context that's safe to reuse globally.
-   * For per-request context, use middleware context or pass a function as the initial context.
-   */
-  context: async () => ({
-    headers: await headers(), // provide headers if initial context required
-  }),
+const link = new RPCLink({
+  url: process.env.NEXT_PUBLIC_URL ?? 'http://localhost:3000',
+  method: inferRPCMethodFromRouter(router),
+  plugins: [
+    new DedupeRequestsPlugin({
+      groups: [
+        {
+          condition: () => true,
+          context: {},
+        },
+      ],
+    }),
+  ],
+  fetch: async (request) => {
+    const { response } = await handler.handle(request, {
+      context: {
+        headers: await headers(), // Provide headers if needed
+      },
+    })
+
+    return response ?? new Response('Not Found', { status: 404 })
+  },
 })
+
+globalThis.$client = createORPCClient<RouterClient<typeof router>>(link)

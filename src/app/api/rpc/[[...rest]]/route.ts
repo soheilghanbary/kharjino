@@ -1,7 +1,7 @@
 import { RPCHandler } from '@orpc/server/fetch'
 import { router } from '@/rpc/router'
 
-const handler = new RPCHandler(router)
+export const handler = new RPCHandler(router)
 
 async function handleRequest(request: Request) {
   const { response } = await handler.handle(request, {
