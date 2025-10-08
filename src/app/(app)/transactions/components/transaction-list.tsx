@@ -20,7 +20,7 @@ export const TransactionList = () => {
       },
     })
   )
-  if (isPending) return <Spinner className="mx-auto my-8 size-5" />
+  if (isPending) return <Spinner className="mx-auto my-8 size-5 text-primary" />
   if (transactions?.length === 0) return <EmptyTransactionList />
   return (
     <div className="fade-up-transition grid gap-2">

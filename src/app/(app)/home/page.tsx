@@ -1,6 +1,5 @@
 import Link from 'next/link'
-import { Fragment, Suspense } from 'react'
-import { Spinner } from '@/components/ui/spinner'
+import { Fragment } from 'react'
 import { RecentExpenseList } from './components/recent-expense-list'
 import { Summary } from './components/summary'
 import { TransactionChart } from './components/transaction-chart'
@@ -13,20 +12,18 @@ export default function Page() {
         <UserInfo />
         <Summary />
       </header>
-      <section className="mt-30">
+      <section className="mt-28">
         <TransactionChart />
         <div className="mb-3 flex items-center justify-between">
           <p className="font-medium text-sm">تراکنش های اخیر</p>
           <Link
             href={'/transactions'}
-            className="text-muted-foreground text-tiny hover:text-primary sm:text-xs"
+            className="p-1 text-muted-foreground text-tiny hover:text-primary sm:text-xs"
           >
             مشاهده همه
           </Link>
         </div>
-        <Suspense fallback={<Spinner className="mx-auto my-8 size-5" />}>
-          <RecentExpenseList />
-        </Suspense>
+        <RecentExpenseList />
       </section>
     </Fragment>
   )
