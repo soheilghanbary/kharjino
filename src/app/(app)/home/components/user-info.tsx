@@ -18,7 +18,7 @@ export function UserInfo() {
             fill
             alt={String(user?.name)}
             src={String(user?.image) ?? '/avatar.png'}
-            className="rounded-[inherit]"
+            className="rounded-[inherit] object-cover"
           />
         </figure>
       ) : (
