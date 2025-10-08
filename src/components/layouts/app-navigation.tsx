@@ -41,7 +41,7 @@ const NavigationItem = ({ href, label, icon }: (typeof navItems)[0]) => {
     <Link
       href={href}
       className={cn(
-        'flex flex-col items-center gap-1 text-muted-foreground dark:text-muted-foreground/65',
+        'flex flex-col items-center gap-1 text-[#919AAF] dark:text-muted-foreground/65',
         active && 'text-primary dark:text-heading'
       )}
     >

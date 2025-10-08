@@ -8,7 +8,7 @@ import { UserInfo } from './components/user-info'
 export default function Page() {
   return (
     <Fragment>
-      <header className="-m-4 h-50 rounded-b-2xl bg-primary/85 p-4 dark:bg-blue-600/85">
+      <header className="-m-4 h-50 rounded-b-2xl bg-primary/85 p-4 dark:bg-blue-500/80">
         <UserInfo />
         <Summary />
       </header>

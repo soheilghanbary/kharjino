@@ -1,10 +1,9 @@
-import { ArrowLeftIcon, LogOut } from 'lucide-react'
+import { ArrowLeftIcon, ChevronLeft } from 'lucide-react'
 import Link from 'next/link'
 import { Fragment } from 'react'
 import { MagicIcon, UserIcon, UsersIcon } from '@/assets/icons/bulk'
-import { AppHeader } from '@/components/layouts/app-header'
-import { Button } from '@/components/ui/button'
 import { LogoutButton } from '@/components/common/logout-button'
+import { AppHeader } from '@/components/layouts/app-header'
 
 const links = [
   {
@@ -43,11 +42,11 @@ export default function ProfilePage() {
           <Link
             key={i}
             href={l.href}
-            className="flex h-12 items-center gap-3 rounded-lg border bg-card p-3 duration-150"
+            className="flex h-12 items-center gap-3 rounded-lg bg-muted p-3 duration-150 dark:bg-card"
           >
             <l.icon className="size-5 text-muted-foreground/80" />
             <span className="grow text-right text-sm/[18px]">{l.title}</span>
-            <ArrowLeftIcon className="size-5 text-muted-foreground" />
+            <ChevronLeft className="size-5 text-muted-foreground" />
           </Link>
         ))}
         <hr className="my-2" />
