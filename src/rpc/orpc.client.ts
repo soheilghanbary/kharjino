@@ -10,12 +10,7 @@ declare global {
 
 // orpc link
 const link = new RPCLink({
-  url: () => {
-    if (typeof window === 'undefined') {
-      throw new Error('RPCLink is not allowed on the server side.')
-    }
-    return `${window.location.origin}/api/rpc`
-  },
+  url: () => `${process.env.NEXT_PUBLIC_URL}/api/rpc`,
 })
 
 // orpc client

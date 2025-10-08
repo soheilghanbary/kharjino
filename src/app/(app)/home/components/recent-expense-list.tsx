@@ -1,14 +1,15 @@
-import { api } from '@/rpc/orpc.client'
-import { EmptyTransactionList } from './empty-transaction'
+'use client'
+import { useSuspenseQuery } from '@tanstack/react-query'
+import { client } from '@/rpc/orpc.client'
 import { TransactionCard } from './transaction-card'
 
-export async function RecentExpenseList() {
-  const transactions = await api.transaction.recent()
-  if (!transactions.length) return <EmptyTransactionList />
-
+export function RecentExpenseList() {
+  const { data: transactions } = useSuspenseQuery(
+    client.transaction.recent.queryOptions()
+  )
   return (
     <div className="fade-up-transition grid gap-2">
-      {transactions.map((t) => (
+      {transactions?.map((t) => (
         <TransactionCard key={t.id} {...t} />
       ))}
     </div>
