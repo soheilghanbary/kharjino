@@ -29,7 +29,9 @@ export default async function AccountPage() {
   return (
     <Fragment>
       <AppHeader title="ویرایش حساب کاربری" />
-      <Suspense fallback={<Spinner className="mx-auto my-16 size-5" />}>
+      <Suspense
+        fallback={<Spinner className="mx-auto my-16 size-5 text-primary" />}
+      >
         <UserDetails />
       </Suspense>
     </Fragment>

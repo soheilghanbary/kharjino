@@ -20,7 +20,7 @@ export default async function TransactionPage({ params }: PageProps) {
   return (
     <Fragment>
       <AppHeader title="ویرایش تراکنش" />
-      <Suspense fallback={<Spinner className="mx-auto my-16" />}>
+      <Suspense fallback={<Spinner className="mx-auto my-16 text-primary" />}>
         <TransactionDetail id={id} />
       </Suspense>
     </Fragment>
