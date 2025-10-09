@@ -6,10 +6,21 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { buttonVariants } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
-import { client } from '@/rpc/orpc.client'
+import { api, client } from '@/rpc/orpc.client'
 
 export function UserInfo() {
-  const { data: user, isPending } = useQuery(client.user.get.queryOptions())
+  // const { data: user, isPending } = useQuery({
+  //   queryKey: ['user'],
+  //   queryFn: () => api.user.get(),
+  //   refetchOnMount: false,
+  //   refetchOnWindowFocus: false,
+  // })
+  const { data: user, isPending } = useQuery(
+    client.user.get.queryOptions({
+      refetchOnMount: false,
+      refetchOnWindowFocus: false,
+    })
+  )
   return (
     <div className="flex items-center gap-2">
       {!isPending ? (

@@ -1,6 +1,6 @@
 'use client'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { toast } from 'sonner'
@@ -32,9 +32,12 @@ export function UserForm(props: { initialValues: UpdateUserFormSchema }) {
     },
   })
 
+  const qc = useQueryClient()
+
   const { mutate, isPending } = useMutation(
     client.user.update.mutationOptions({
-      onSuccess() {
+      onSuccess(user) {
+        qc.setQueryData(client.user.get.queryKey(), user)
         toast.success('اطلاعات به روز شد')
       },
     })
