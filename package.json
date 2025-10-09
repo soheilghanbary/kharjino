@@ -11,6 +11,7 @@
     "db:std": "prisma studio",
     "lint": "biome check .",
     "lint:fix": "biome check --fix --unsafe",
+    "format": "biome format --write .",
     "postinstall": "prisma generate"
   },
   "dependencies": {
