@@ -10,8 +10,7 @@
   },
   "formatter": {
     "enabled": true,
-    "useEditorconfig": true,
-    "lineEnding": "lf"
+    "useEditorconfig": true
   },
   "javascript": {
     "formatter": {
