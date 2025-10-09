@@ -6,7 +6,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { buttonVariants } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
-import { api, client } from '@/rpc/orpc.client'
+import { client } from '@/rpc/orpc.client'
 
 export function UserInfo() {
   // const { data: user, isPending } = useQuery({
