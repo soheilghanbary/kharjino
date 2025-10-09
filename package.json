@@ -12,7 +12,7 @@
     "lint": "biome check .",
     "lint:fix": "biome check --fix --unsafe",
     "format": "biome format --write .",
-    "postinstall": "prisma generate"
+    "postinstall": "prisma generate --no-engine"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
