@@ -67,7 +67,7 @@ export function TransactionChart() {
               />
               <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
               <Bar dataKey="total" radius={8}>
-                {chartData?.map((entry, index) => (
+                {chartData?.map((_entry, index) => (
                   <Cell
                     key={`cell-${index}`}
                     fill={chartColors[index % chartColors.length]}

@@ -32,6 +32,7 @@
     "cmdk": "^1.1.1",
     "date-fns-jalali": "4.1.0-0",
     "dotenv": "^17.2.3",
+    "lottie-react": "^2.4.1",
     "lucide-react": "^0.544.0",
     "motion": "^12.23.22",
     "next": "15.6.0-canary.47",
@@ -45,6 +46,7 @@
     "react-hook-form": "^7.64.0",
     "recharts": "2.15.4",
     "sonner": "^2.0.7",
+    "swiper": "^12.0.2",
     "vaul": "^1.1.2",
     "zod": "^4.1.11",
     "zustand": "^5.0.8"
