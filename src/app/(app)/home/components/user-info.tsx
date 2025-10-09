@@ -9,12 +9,6 @@ import { Skeleton } from '@/components/ui/skeleton'
 import { client } from '@/rpc/orpc.client'
 
 export function UserInfo() {
-  // const { data: user, isPending } = useQuery({
-  //   queryKey: ['user'],
-  //   queryFn: () => api.user.get(),
-  //   refetchOnMount: false,
-  //   refetchOnWindowFocus: false,
-  // })
   const { data: user, isPending } = useQuery(
     client.user.get.queryOptions({
       refetchOnMount: false,

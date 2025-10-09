@@ -1,10 +1,19 @@
+'use client'
+import { useQuery } from '@tanstack/react-query'
 import { notFound } from 'next/navigation'
-import { api } from '@/rpc/orpc.client'
+import { Spinner } from '@/components/ui/spinner'
+import { client } from '@/rpc/orpc.client'
 import { UploadAvatar } from './upload-avatar'
 import { UserForm } from './user-form'
 
-export const UserDetails = async () => {
-  const user = await api.user.get()
+export const UserDetails = () => {
+  const { data: user, isPending } = useQuery(
+    client.user.get.queryOptions({
+      refetchOnMount: false,
+      refetchOnWindowFocus: false,
+    })
+  )
+  if (isPending) return <Spinner className="mx-auto my-16 text-primary" />
   if (!user) return notFound()
   return (
     <div className="grid gap-4">
