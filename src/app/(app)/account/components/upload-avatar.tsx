@@ -1,5 +1,5 @@
 'use client'
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { UploadIcon } from 'lucide-react'
 import Image from 'next/image'
 import { useState } from 'react'
@@ -18,10 +18,12 @@ type Props = {
 export function UploadAvatar({ initialImage }: Props) {
   const [path, setPath] = useState(initialImage)
   const [loading, setLoading] = useState(false)
+  const qc = useQueryClient()
   const { mutate } = useMutation(
     client.user.updateImage.mutationOptions({
-      onSuccess() {
+      onSuccess(user) {
         setLoading(false)
+        qc.setQueryData(client.user.get.queryKey(), user)
         toast.success('تصویر پروفایل تغییر کرد')
       },
     })

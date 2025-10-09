@@ -17,6 +17,7 @@ import { client } from '@/rpc/orpc.client'
 import { type UpdateUserFormSchema, updateUserFormSchema } from '../schemas'
 
 export function UserForm(props: { initialValues: UpdateUserFormSchema }) {
+  const qc = useQueryClient()
   const [open, setOpen] = useState(false)
   const {
     register,
@@ -31,8 +32,6 @@ export function UserForm(props: { initialValues: UpdateUserFormSchema }) {
       birthday: props.initialValues.birthday ?? new Date(),
     },
   })
-
-  const qc = useQueryClient()
 
   const { mutate, isPending } = useMutation(
     client.user.update.mutationOptions({
