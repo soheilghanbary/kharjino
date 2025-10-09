@@ -1,7 +1,7 @@
 'use client'
-import { LogOutIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
+import { LogoutIcon } from '@/assets/icons/bulk'
 import { signOut } from '@/lib/auth'
 import { Button } from '../ui/button'
 import { Spinner } from '../ui/spinner'
@@ -21,7 +21,7 @@ export function LogoutButton() {
       variant={'secondary'}
       className="text-destructive"
     >
-      {loading ? <Spinner /> : <LogOutIcon />}
+      {loading ? <Spinner /> : <LogoutIcon className="size-5" />}
       خروج از حساب کاربری
     </Button>
   )

@@ -16,10 +16,10 @@ export const UserDetails = () => {
   if (isPending) return <Spinner className="mx-auto my-16 text-primary" />
   if (!user) return notFound()
   return (
-    <div className="grid gap-4">
-      <hr className="-mx-4" />
+    <div className="fade-up-transition grid gap-4">
+      <hr className="-mx-4 border-2 border-muted dark:border-card" />
       <UploadAvatar initialImage={user.image!} />
-      <hr className="-mx-4" />
+      <hr className="-mx-4 border-2 border-muted dark:border-card" />
       <UserForm
         initialValues={{
           name: user.name,

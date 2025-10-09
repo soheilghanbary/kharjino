@@ -1,10 +1,10 @@
 'use client'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { UploadIcon } from 'lucide-react'
 import Image from 'next/image'
 import { useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { toast } from 'sonner'
+import { UploadIcon } from '@/assets/icons/bulk'
 import { Button } from '@/components/ui/button'
 import { Spinner } from '@/components/ui/spinner'
 import { uploadFile } from '@/lib/s3'
@@ -63,11 +63,12 @@ export function UploadAvatar({ initialImage }: Props) {
         size={'xs'}
         disabled={loading}
         variant={'secondary'}
+        className="text-muted-foreground"
         {...getRootProps()}
       >
         <input {...getInputProps()} />
         <Icon />
-        آپلود عکس
+        آپلود پروفایل
       </Button>
     </div>
   )
