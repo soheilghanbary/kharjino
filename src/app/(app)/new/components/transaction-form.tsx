@@ -87,6 +87,11 @@ export const TransactionForm = (props: Props) => {
           <AmountField initialValue={field.value} onChange={field.onChange} />
         )}
       />
+      {errors.amount?.message && (
+        <span className="-mt-2 text-destructive text-xs">
+          {errors.amount.message}
+        </span>
+      )}
       <Controller
         control={control}
         name="date"
@@ -105,6 +110,11 @@ export const TransactionForm = (props: Props) => {
           />
         )}
       />
+      {errors.categoryId?.message && (
+        <span className="-mt-2 text-destructive text-xs">
+          {errors.categoryId.message}
+        </span>
+      )}
       <TextField
         label="توضیحات"
         error={errors.description?.message}

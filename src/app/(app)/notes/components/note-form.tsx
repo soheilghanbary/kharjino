@@ -103,7 +103,7 @@ export const NoteForm = (props: NoteFormProps) => {
           variant={props.mode === 'add' ? 'default' : 'outline'}
         >
           {isPending && <Spinner />}
-          {props.mode === 'add' ? 'ذخیره' : 'ویرایش'}
+          ذخیره
         </Button>
       </form>
       {props.mode === 'edit' && <DeleteNoteButton id={props.note.id} />}

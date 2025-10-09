@@ -1,7 +1,7 @@
 import z from 'zod'
 
 export const updateUserFormSchema = z.object({
-  name: z.string().min(3),
+  name: z.string().min(3, 'این فیلد نباید خالی باشد'),
   phone: z
     .string()
     .min(11, 'شماره تلفن باید حداقل 11 رقم داشته باشد')

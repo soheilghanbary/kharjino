@@ -49,7 +49,9 @@ export const TransactionCard = ({
           </p>
           <div className="grow">
             <p className="font-medium text-xs/6">{category.name}</p>
-            <p className="text-muted-foreground text-tiny">{description}</p>
+            <p className="text-muted-foreground text-tiny">
+              {description?.length ? description : 'بدون توضیحات'}
+            </p>
           </div>
           <div className="text-left">
             <p className="font-semibold text-sm/6">

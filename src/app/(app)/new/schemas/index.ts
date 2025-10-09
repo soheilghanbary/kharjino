@@ -2,9 +2,9 @@ import z from 'zod'
 
 export const createTransaction = z.object({
   type: z.enum(['expense', 'income']),
-  amount: z.number(),
+  amount: z.number().min(1, 'مبلغ نباید صفر باشد'),
   date: z.date(),
-  categoryId: z.string(),
+  categoryId: z.string().min(1, 'موضوع رو انتخاب کن'),
   description: z.string().nullable(),
 })
 
