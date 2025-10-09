@@ -1,5 +1,4 @@
 'use client'
-import { BackButton } from '@/components/common/back-button'
 import {
   CircleCheck,
   CircleIcon,
@@ -9,6 +8,7 @@ import {
 } from 'lucide-react'
 import { useTheme } from 'next-themes'
 import { Fragment } from 'react/jsx-runtime'
+import { BackButton } from '@/components/common/back-button'
 
 export default function ThemePage() {
   const { theme, setTheme } = useTheme()

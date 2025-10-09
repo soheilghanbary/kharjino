@@ -11,10 +11,10 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover'
+import { Spinner } from '@/components/ui/spinner'
 import { TextField } from '@/components/ui/text-field'
 import { client } from '@/rpc/orpc.client'
 import { type UpdateUserFormSchema, updateUserFormSchema } from '../schemas'
-import { Spinner } from '@/components/ui/spinner'
 
 export function UserForm(props: { initialValues: UpdateUserFormSchema }) {
   const [open, setOpen] = useState(false)
