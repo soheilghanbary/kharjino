@@ -46,7 +46,7 @@ export const NoteForm = (props: NoteFormProps) => {
   const createMutation = useMutation(
     client.note.create.mutationOptions({
       onSuccess() {
-        toast.info('یادداشت با موفقیت ایجاد شد')
+        toast.info('یادداشت ایجاد شد')
         router.push('/notes')
       },
     })
@@ -55,7 +55,7 @@ export const NoteForm = (props: NoteFormProps) => {
   const updateMutation = useMutation(
     client.note.update.mutationOptions({
       onSuccess() {
-        toast.info('یادداشت با موفقیت ویرایش شد')
+        toast.info('یادداشت ویرایش شد')
         router.push('/notes')
       },
     })
@@ -116,7 +116,7 @@ const DeleteNoteButton = ({ id }: { id: string }) => {
   const { mutate, isPending } = useMutation(
     client.note.delete.mutationOptions({
       onSuccess() {
-        toast.info('یادداشت با موفقیت حذف شد')
+        toast.info('یادداشت حذف شد')
         router.push('/notes')
       },
     })
