@@ -5,7 +5,7 @@ export default function Page() {
   return (
     <>
       <AppHeader title="افزودن یادداشت" />
-      <NoteForm />
+      <NoteForm mode="add" />
     </>
   )
 }

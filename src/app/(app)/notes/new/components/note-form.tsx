@@ -1,36 +1,49 @@
 'use client'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation } from '@tanstack/react-query'
+import { Trash2Icon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
-import z from 'zod'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Spinner } from '@/components/ui/spinner'
 import { Textarea } from '@/components/ui/textarea'
 import { client } from '@/rpc/orpc.client'
+import { createNoteSchema, type UpdateNoteSchema } from '../../schemas'
 
-const schema = z.object({
-  title: z.string().min(3, 'عنوان باید حداقل سه کاراکتر باشد'),
-  description: z.string(),
-})
+// تعریف type-safe props با discriminated union
+type NoteFormProps =
+  | {
+      mode: 'add'
+    }
+  | {
+      mode: 'edit'
+      note: UpdateNoteSchema
+    }
 
-export const NoteForm = () => {
+export const NoteForm = (props: NoteFormProps) => {
   const router = useRouter()
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: zodResolver(schema),
-    defaultValues: {
-      title: '',
-      description: '',
-    },
+    resolver: zodResolver(createNoteSchema),
+    defaultValues:
+      props.mode === 'edit'
+        ? {
+            title: props.note.title,
+            description: props.note.description,
+          }
+        : {
+            title: '',
+            description: '',
+          },
   })
 
-  const { mutate, isPending } = useMutation(
+  const createMutation = useMutation(
     client.note.create.mutationOptions({
       onSuccess() {
         toast.info('یادداشت با موفقیت ایجاد شد')
@@ -39,34 +52,85 @@ export const NoteForm = () => {
     })
   )
 
-  const onCreate = handleSubmit((data) => mutate(data))
+  const updateMutation = useMutation(
+    client.note.update.mutationOptions({
+      onSuccess() {
+        toast.info('یادداشت با موفقیت ویرایش شد')
+        router.push('/notes')
+      },
+    })
+  )
+
+  const onSubmit = handleSubmit((data) => {
+    if (props.mode === 'add') {
+      createMutation.mutate(data)
+    } else {
+      updateMutation.mutate({
+        id: props.note.id,
+        ...data,
+      })
+    }
+  })
+
+  const isPending = createMutation.isPending || updateMutation.isPending
 
   return (
-    <form
-      onSubmit={onCreate}
-      className="flex flex-col rounded-2xl bg-accent p-4 dark:bg-card"
+    <>
+      <form
+        onSubmit={onSubmit}
+        className="flex flex-col rounded-2xl bg-accent p-4 dark:bg-card"
+      >
+        <Input
+          type="text"
+          placeholder="عنوان یادداشت"
+          className="h-8 border-0 bg-transparent focus-visible:ring-0"
+          {...register('title')}
+        />
+        {errors.title?.message && (
+          <span className="text-destructive text-tiny">
+            {errors.title.message}
+          </span>
+        )}
+        <Textarea
+          placeholder="توضیحات"
+          className="resize-none border-0 bg-transparent text-foreground/65 text-xs/5 focus-visible:ring-0 dark:text-muted-foreground"
+          {...register('description')}
+        />
+        <Button
+          type="submit"
+          size={'xs'}
+          className="mt-2 mr-auto"
+          variant={props.mode === 'add' ? 'default' : 'outline'}
+        >
+          {isPending && <Spinner />}
+          {props.mode === 'add' ? 'ذخیره' : 'ویرایش'}
+        </Button>
+      </form>
+      {props.mode === 'edit' && <DeleteNoteButton id={props.note.id} />}
+    </>
+  )
+}
+
+const DeleteNoteButton = ({ id }: { id: string }) => {
+  const router = useRouter()
+  const { mutate, isPending } = useMutation(
+    client.note.delete.mutationOptions({
+      onSuccess() {
+        toast.info('یادداشت با موفقیت حذف شد')
+        router.push('/notes')
+      },
+    })
+  )
+  const onDelete = () => mutate(id)
+  return (
+    <Button
+      size={'sm'}
+      variant={'secondary'}
+      onClick={onDelete}
+      className="mt-2 w-full bg-destructive/10 text-destructive dark:bg-destructive/25"
     >
-      <Input
-        type="text"
-        placeholder="عنوان یادداشت"
-        className="h-8 border-0 bg-transparent focus-visible:ring-0"
-        {...register('title')}
-      />
-      {errors.title?.message && (
-        <span className="text-destructive text-tiny">
-          {errors.title.message}
-        </span>
-      )}
-      <hr />
-      <Textarea
-        placeholder="توضیحات"
-        className="resize-none border-0 bg-transparent text-foreground/65 text-xs focus-visible:ring-0 dark:text-muted-foreground"
-        {...register('description')}
-      />
-      <Button type="submit" size={'xs'} className="mt-2 mr-auto">
-        {isPending && <Spinner />}
-        ذخیره
-      </Button>
-    </form>
+      {isPending ? <Spinner /> : <Trash2Icon />}
+      حذف یادداشت
+    </Button>
   )
 }
