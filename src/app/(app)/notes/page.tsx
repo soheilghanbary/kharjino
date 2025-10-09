@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import { PlusIcon } from '@/assets/icons/bulk'
 import { AppHeader } from '@/components/layouts/app-header'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
@@ -10,10 +9,7 @@ export default function Page() {
     <>
       <AppHeader title="یادداشت های من" />
       <Button asChild className="w-full">
-        <Link href={'/notes/new'}>
-          <PlusIcon className="size-5" />
-          یادداشت جدید
-        </Link>
+        <Link href={'/notes/new'}>یادداشت جدید</Link>
       </Button>
       <Separator className="my-4" />
       <NoteList />

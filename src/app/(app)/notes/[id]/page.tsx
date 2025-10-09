@@ -3,7 +3,7 @@ import { Suspense } from 'react'
 import { AppHeader } from '@/components/layouts/app-header'
 import { Spinner } from '@/components/ui/spinner'
 import { api } from '@/rpc/orpc.client'
-import { NoteForm } from '../new/components/note-form'
+import { NoteForm } from '../components/note-form'
 
 type PageProps = {
   params: Promise<{ id: string }>

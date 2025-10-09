@@ -10,7 +10,7 @@ import { Input } from '@/components/ui/input'
 import { Spinner } from '@/components/ui/spinner'
 import { Textarea } from '@/components/ui/textarea'
 import { client } from '@/rpc/orpc.client'
-import { createNoteSchema, type UpdateNoteSchema } from '../../schemas'
+import { createNoteSchema, type UpdateNoteSchema } from '../schemas'
 
 // تعریف type-safe props با discriminated union
 type NoteFormProps =
