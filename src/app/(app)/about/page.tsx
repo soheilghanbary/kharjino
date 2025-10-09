@@ -2,6 +2,7 @@ import Image from 'next/image'
 import { Fragment } from 'react'
 import { AppHeader } from '@/components/layouts/app-header'
 import { Separator } from '@/components/ui/separator'
+import { siteConfig } from '@/config/site'
 
 const Signature = () => (
   <Image
@@ -29,7 +30,7 @@ export default function About() {
         <p className="font-medium">توسعه دهنده: سهیل قنبری</p>
         <p className="font-medium">پشتیبانی: 09199973120</p>
         <Signature />
-        <p className="font-medium">ورژن بتا: 0.9.5</p>
+        <p className="font-medium">ورژن بتا: {siteConfig.v}5</p>
       </div>
     </Fragment>
   )

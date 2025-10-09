@@ -1,6 +1,6 @@
 {
-  "name": "nrpc",
-  "version": "1.0.1",
+  "name": "kharjino",
+  "version": "1.0.0",
   "description": "Modern web, simplified",
   "scripts": {
     "build": "next build",
