@@ -1,3 +1,4 @@
+import { format } from 'date-fns-jalali'
 import Image from 'next/image'
 import { Fragment } from 'react'
 import { AppHeader } from '@/components/layouts/app-header'
@@ -29,8 +30,9 @@ export default function About() {
         </p>
         <p className="font-medium">توسعه دهنده: سهیل قنبری</p>
         <p className="font-medium">پشتیبانی: 09199973120</p>
+        <p>آخرین بروزرسانی: {format(new Date(), 'd MMMM yyyy')}</p>
+        <p>ورژن: {siteConfig.v}</p>
         <Signature />
-        <p className="font-medium">ورژن بتا: {siteConfig.v}5</p>
       </div>
     </Fragment>
   )

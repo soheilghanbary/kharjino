@@ -1,7 +1,8 @@
 'use client'
 import { useQuery } from '@tanstack/react-query'
-import { PlusCircleIcon, TrendingDown, TrendingUp } from 'lucide-react'
+import { TrendingDown, TrendingUp } from 'lucide-react'
 import Link from 'next/link'
+import { PlusIcon } from '@/assets/icons/bulk'
 import { Button } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
 import { client } from '@/rpc/orpc.client'
@@ -64,7 +65,7 @@ export const Summary = () => {
         asChild
       >
         <Link href={'/new'}>
-          <PlusCircleIcon />
+          <PlusIcon className="size-5" />
           تراکنش جدید
         </Link>
       </Button>

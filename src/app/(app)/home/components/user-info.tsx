@@ -1,9 +1,9 @@
 'use client'
 import { useQuery } from '@tanstack/react-query'
 import { format } from 'date-fns-jalali'
-import { UserCircle2Icon } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { UserIcon } from '@/assets/icons/bulk'
 import { buttonVariants } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
 import { client } from '@/rpc/orpc.client'
@@ -45,7 +45,7 @@ export function UserInfo() {
         href={'/profile'}
         className={buttonVariants({ variant: 'secondary', size: 'icon' })}
       >
-        <UserCircle2Icon className="size-5 text-primary" />
+        <UserIcon className="size-5 text-primary" />
       </Link>
     </div>
   )

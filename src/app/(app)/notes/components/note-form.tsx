@@ -1,10 +1,10 @@
 'use client'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation } from '@tanstack/react-query'
-import { Trash2Icon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
+import { TrashIcon } from '@/assets/icons/bulk'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Spinner } from '@/components/ui/spinner'
@@ -12,7 +12,6 @@ import { Textarea } from '@/components/ui/textarea'
 import { client } from '@/rpc/orpc.client'
 import { createNoteSchema, type UpdateNoteSchema } from '../schemas'
 
-// تعریف type-safe props با discriminated union
 type NoteFormProps =
   | {
       mode: 'add'
@@ -129,7 +128,7 @@ const DeleteNoteButton = ({ id }: { id: string }) => {
       onClick={onDelete}
       className="mt-2 w-full bg-destructive/10 text-destructive dark:bg-destructive/25"
     >
-      {isPending ? <Spinner /> : <Trash2Icon />}
+      {isPending ? <Spinner /> : <TrashIcon />}
       حذف یادداشت
     </Button>
   )
