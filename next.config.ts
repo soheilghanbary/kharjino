@@ -7,9 +7,6 @@ const nextConfig: NextConfig = {
     LIARA_ENDPOINT: process.env.LIARA_ENDPOINT,
     LIARA_BUCKET_NAME: process.env.LIARA_BUCKET_NAME,
   },
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
   typescript: {
     ignoreBuildErrors: true,
   },
