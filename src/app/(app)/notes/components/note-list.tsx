@@ -27,7 +27,7 @@ const NoteListLoading = () =>
   Array.from({ length: 4 }).map((_, i) => (
     <div
       key={i}
-      className="grid min-h-20 gap-4 rounded-2xl bg-muted p-3 dark:bg-card"
+      className="grid min-h-20 gap-4 rounded-2xl bg-muted/30 p-3 dark:bg-card"
     >
       <Skeleton className="h-5 w-1/3" />
       <div className="space-y-2">
