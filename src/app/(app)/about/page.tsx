@@ -9,11 +9,11 @@ const Signature = () => (
   <Image
     src="/signature.png"
     alt="Vercel"
-    width={72}
-    height={16}
+    width={80}
+    height={20}
     quality={100}
     sizes="100vw"
-    className="mx-auto dark:invert"
+    className="mx-auto mt-6 dark:invert"
   />
 )
 
@@ -22,17 +22,22 @@ export default function About() {
     <Fragment>
       <AppHeader title="درباره ما" />
       <Separator className="my-4" />
-      <div className="space-y-2 text-center text-sm/7">
+      <div className="space-y-2 text-sm/7">
         <p>
           خرجینو یه اپلیکیشن برای مدیریت مخارج های شما میباشد که با استفاده از
           جدید ترین تکنولوژی های وب ساخته شده و کاملا متن باز یا (Open Source)
           میباشد.
         </p>
-        <p className="font-medium">توسعه دهنده: سهیل قنبری</p>
-        <p className="font-medium">پشتیبانی: 09199973120</p>
-        <p>آخرین بروزرسانی: {format(new Date(), 'd MMMM yyyy')}</p>
-        <p>ورژن: {siteConfig.v}</p>
-        <Signature />
+        <div className="space-y-2 text-center font-medium">
+          <p>ورژن: {siteConfig.v}</p>
+          <p>
+            <a target="_blank" href="https://soheilghanbary.ir" rel="noopener">
+              توسعه دهنده: سهیل قنبری
+            </a>
+          </p>
+          <p>آخرین بروزرسانی: {format(new Date(), 'd MMMM yyyy')}</p>
+          <Signature />
+        </div>
       </div>
     </Fragment>
   )
