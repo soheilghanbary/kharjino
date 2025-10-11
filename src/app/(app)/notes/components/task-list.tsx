@@ -2,7 +2,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import type { Task } from 'generated/prisma'
 import { EditIcon } from 'lucide-react'
-import { toast } from 'sonner'
 import { TrashIcon } from '@/assets/icons/bulk'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
