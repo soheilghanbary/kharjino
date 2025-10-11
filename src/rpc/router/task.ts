@@ -42,6 +42,23 @@ export const taskRouter = {
       },
     })
   }),
+  doneTask: os
+    .input(
+      z.object({
+        id: z.string(),
+        done: z.boolean(),
+      })
+    )
+    .handler(async ({ input }) => {
+      return await db.task.updateMany({
+        where: {
+          id: input.id,
+        },
+        data: {
+          done: input.done,
+        },
+      })
+    }),
   delete: os.input(z.string()).handler(async ({ input }) => {
     return await db.task.delete({
       where: { id: input },

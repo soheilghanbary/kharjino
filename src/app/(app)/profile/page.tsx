@@ -2,6 +2,7 @@ import { ChevronLeft } from 'lucide-react'
 import Link from 'next/link'
 import { Fragment } from 'react'
 import { MagicIcon, NotesIcon, UserIcon, UsersIcon } from '@/assets/icons/bulk'
+import { DonateLink } from '@/components/common/donate-link'
 import { LogoutButton } from '@/components/common/logout-button'
 import { AppHeader } from '@/components/layouts/app-header'
 
@@ -46,6 +47,8 @@ export default function ProfilePage() {
         ))}
         <hr className="my-2" />
         <LogoutButton />
+        <hr className="my-4" />
+        <DonateLink />
       </div>
     </Fragment>
   )

@@ -12,21 +12,21 @@ export default function Page() {
   return (
     <>
       <AppHeader title="دست نویس های من" />
-      <Tabs defaultValue="tasks">
+      <Tabs defaultValue="notes">
         <TabsList className="grid w-full grid-cols-2 border-0 bg-transparent">
-          <TabsTrigger
-            className="flex-col p-0 text-muted-foreground data-[state=active]:bg-transparent data-[state=active]:text-primary dark:text-muted-foreground dark:data-[state=active]:text-primary"
-            value="tasks"
-          >
-            <CheckListIcon className="size-5" />
-            تسک ها
-          </TabsTrigger>
           <TabsTrigger
             className="flex-col p-0 text-muted-foreground data-[state=active]:bg-transparent data-[state=active]:text-primary dark:text-muted-foreground dark:data-[state=active]:text-primary"
             value="notes"
           >
             <NotesIcon className="size-5" />
             یادداشت ها
+          </TabsTrigger>
+          <TabsTrigger
+            className="flex-col p-0 text-muted-foreground data-[state=active]:bg-transparent data-[state=active]:text-primary dark:text-muted-foreground dark:data-[state=active]:text-primary"
+            value="tasks"
+          >
+            <CheckListIcon className="size-5" />
+            تسک ها
           </TabsTrigger>
         </TabsList>
         <TabsContent value="tasks">

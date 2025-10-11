@@ -1,9 +1,0 @@
-onlyBuiltDependencies:
-  - '@biomejs/biome'
-  - '@prisma/client'
-  - '@prisma/engines'
-  - '@tailwindcss/oxide'
-  - aws-sdk
-  - esbuild
-  - prisma
-  - sharp

@@ -2,10 +2,9 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { PlusIcon } from 'lucide-react'
-import { nanoid } from 'nanoid'
-import { VisuallyHidden } from 'radix-ui'
 import { type ReactNode, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
+import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import {
@@ -55,28 +54,31 @@ export function TaskForm(props: TaskFormProps & { trigger?: ReactNode }) {
 
   const { mutate: addMutate, isPending: addPending } = useMutation(
     client.task.create.mutationOptions({
-      async onMutate(values) {
-        await qc.cancelQueries({ queryKey: client.task.getAll.queryKey() })
-        const previousTasks =
-          qc.getQueryData<Awaited<ReturnType<typeof client.task.getAll.call>>>(
-            client.task.getAll.queryKey()
-          ) || []
-        const newTask = {
-          ...values,
-          id: nanoid(),
-          userId: '',
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        }
-        qc.setQueryData(client.task.getAll.queryKey(), [
-          newTask,
-          ...previousTasks,
-        ])
+      // async onMutate(values) {
+      //   await qc.cancelQueries({ queryKey: client.task.getAll.queryKey() })
+      //   const previousTasks =
+      //     qc.getQueryData<Awaited<ReturnType<typeof client.task.getAll.call>>>(
+      //       client.task.getAll.queryKey()
+      //     ) || []
+      //   const newTask = {
+      //     ...values,
+      //     id: nanoid(),
+      //     userId: '',
+      //     createdAt: new Date(),
+      //     updatedAt: new Date(),
+      //   }
+      //   qc.setQueryData(client.task.getAll.queryKey(), [
+      //     newTask,
+      //     ...previousTasks,
+      //   ])
+      //   reset()
+      //   setOpen(false)
+      // },
+      onSuccess() {
+        qc.prefetchQuery({ queryKey: client.task.getAll.queryKey() })
+        toast.success('تسک اضافه شد')
         reset()
         setOpen(false)
-      },
-      onSettled() {
-        qc.prefetchQuery({ queryKey: client.task.getAll.queryKey() })
       },
     })
   )
@@ -85,6 +87,9 @@ export function TaskForm(props: TaskFormProps & { trigger?: ReactNode }) {
     client.task.update.mutationOptions({
       onSettled() {
         qc.prefetchQuery({ queryKey: client.task.getAll.queryKey() })
+        toast.success('تسک ویرایش شد')
+        reset()
+        setOpen(false)
       },
     })
   )
@@ -111,16 +116,17 @@ export function TaskForm(props: TaskFormProps & { trigger?: ReactNode }) {
           <DrawerTitle>
             {props.mode === 'edit' ? 'ویرایش تسک' : 'تسک جدید'}
           </DrawerTitle>
-          <VisuallyHidden.Root>
-            <DrawerDescription>
-              تسک‌هات رو اضافه کن و ذهنت رو آزاد کن.
-            </DrawerDescription>
-          </VisuallyHidden.Root>
+          <DrawerDescription>
+            {props.mode === 'add'
+              ? 'تسک‌هات رو اضافه کن و ذهنت رو آزاد کن.'
+              : 'ویرایش تسک رو انجام دهید.'}
+          </DrawerDescription>
         </DrawerHeader>
         <form onSubmit={onSubmit} className="grid gap-4">
           <div className="flex items-center rounded-md border bg-muted/40">
             <Input
               type="text"
+              autoComplete="off"
               disabled={props.mode === 'edit' ? editPending : addPending}
               className="flex-1 border-0 border-none bg-transparent focus-visible:outline-none focus-visible:ring-0"
               placeholder="چه کاری داری؟"
