@@ -2,10 +2,10 @@
 import { useQuery } from '@tanstack/react-query'
 import type { TransactionType } from 'generated/prisma'
 import { useQueryState } from 'nuqs'
-import { Spinner } from '@/components/ui/spinner'
 import { client } from '@/rpc/orpc.client'
 import { EmptyTransactionList } from '../../home/components/empty-transaction'
 import { TransactionCard } from '../../home/components/transaction-card'
+import { TransactionLoading } from '../../home/components/transaction-loading'
 
 export const TransactionList = () => {
   const [t] = useQueryState('type')
@@ -20,7 +20,7 @@ export const TransactionList = () => {
       },
     })
   )
-  if (isPending) return <Spinner className="mx-auto my-8 size-5 text-primary" />
+  if (isPending) return <TransactionLoading />
   if (transactions?.length === 0) return <EmptyTransactionList />
   return (
     <div className="fade-up-transition grid gap-2">
