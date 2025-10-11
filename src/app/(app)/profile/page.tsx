@@ -13,7 +13,7 @@ const links = [
   },
   {
     href: '/notes',
-    title: 'یادداشت های من',
+    title: 'دست نویس های من',
     icon: NotesIcon,
   },
   {

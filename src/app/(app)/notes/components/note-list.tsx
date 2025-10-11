@@ -26,7 +26,7 @@ const NoteCard = (note: Note) => {
 export const NoteList = () => {
   const { data, isPending } = useQuery(client.note.getAll.queryOptions())
   if (isPending || !data)
-    return <Spinner className="mx-auto my-8 size-5 text-primary" />
+    return <Spinner className="mx-auto my-12 size-5 text-primary" />
   return (
     <div className="fade-up-transition grid gap-y-2">
       {data.map((n) => (

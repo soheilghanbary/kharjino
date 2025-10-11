@@ -9,5 +9,16 @@ export const updateNoteSchema = createNoteSchema.extend({
   id: z.string(),
 })
 
+export const createTaskSchema = z.object({
+  text: z.string().min(3, 'فیلد تسک نباید خالی باشد'),
+  done: z.boolean(),
+})
+
+export const updateTaskSchema = createTaskSchema.extend({
+  id: z.string(),
+})
+
 export type CreateNoteSchema = z.infer<typeof createNoteSchema>
 export type UpdateNoteSchema = z.infer<typeof updateNoteSchema>
+export type CreateTaskSchema = z.infer<typeof createTaskSchema>
+export type UpdateTaskSchema = z.infer<typeof updateTaskSchema>
