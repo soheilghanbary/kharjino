@@ -1,6 +1,9 @@
 import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
+  experimental: {
+    turbopackFileSystemCacheForDev: true,
+  },
   env: {
     LIARA_SECRET_KEY: process.env.LIARA_SECRET_KEY,
     LIARA_ACCESS_KEY: process.env.LIARA_ACCESS_KEY,

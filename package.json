@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "Modern web, simplified",
   "scripts": {
-    "build": "next build",
-    "start": "next start",
     "dev": "next dev --turbopack",
+    "build": "next build --turbopack",
+    "start": "next start",
     "db:gen": "prisma generate",
     "db:push": "prisma db push",
     "db:std": "prisma studio",
@@ -37,13 +37,13 @@
     "lucide-react": "^0.544.0",
     "motion": "^12.23.22",
     "nanoid": "^5.1.6",
-    "next": "^15.5.4",
+    "next": "16.0.0-beta.0",
     "next-themes": "^0.4.6",
     "nuqs": "^2.7.0",
     "radix-ui": "^1.4.3",
-    "react": "^19.2.0",
+    "react": "19.2.0",
     "react-day-picker": "^9.11.0",
-    "react-dom": "^19.2.0",
+    "react-dom": "19.2.0",
     "react-dropzone": "^14.3.8",
     "react-hook-form": "^7.64.0",
     "react-image-crop": "^11.0.10",
@@ -75,5 +75,9 @@
       "@types/react": "19.2.2",
       "@types/react-dom": "19.2.1"
     }
+  },
+  "overrides": {
+    "@types/react": "19.2.2",
+    "@types/react-dom": "19.2.1"
   }
 }
