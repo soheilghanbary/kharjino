@@ -7,8 +7,7 @@ import { getUserId } from '@/lib/helpers'
 export const userRouter = {
   get: os.handler(async () => {
     const userId = await getUserId()
-    const user = await db.user.findUnique({ where: { id: userId } })
-    return user
+    return await db.user.findUnique({ where: { id: userId } })
   }),
   update: os.input(updateUserFormSchema).handler(async ({ input }) => {
     const userId = await getUserId()
