@@ -1,4 +1,3 @@
-'use client'
 import Link from 'next/link'
 import { Fragment } from 'react'
 import { RecentExpenseList } from './components/recent-expense-list'

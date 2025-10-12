@@ -1,4 +1,3 @@
-'use client'
 import { Fragment } from 'react'
 import { AppHeader } from '@/components/layouts/app-header'
 import { UserDetails } from './components/user-details'

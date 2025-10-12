@@ -1,4 +1,3 @@
-'use client'
 import { PlusIcon } from 'lucide-react'
 import Link from 'next/link'
 import { CheckListIcon, NotesIcon } from '@/assets/icons/bulk'
