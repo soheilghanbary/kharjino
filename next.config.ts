@@ -3,7 +3,6 @@ import type { NextConfig } from 'next'
 const nextConfig: NextConfig = {
   experimental: {
     turbopackFileSystemCacheForDev: true,
-    serverComponentsHmrCache: true,
   },
   env: {
     LIARA_SECRET_KEY: process.env.LIARA_SECRET_KEY,
