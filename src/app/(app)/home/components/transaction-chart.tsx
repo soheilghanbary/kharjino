@@ -1,7 +1,8 @@
 'use client'
-import { useQuery } from '@tanstack/react-query'
+import { useSuspenseQuery } from '@tanstack/react-query'
 import type { TransactionType } from 'generated/prisma'
-import { useState } from 'react'
+import { LoaderIcon } from 'lucide-react'
+import { Suspense, useState } from 'react'
 import { Fragment } from 'react/jsx-runtime'
 import { Bar, BarChart, CartesianGrid, Cell, XAxis } from 'recharts'
 import {
@@ -28,22 +29,45 @@ const chartColors = [
   'var(--color-chart-5)',
 ]
 
-export function TransactionChart() {
-  const [transactionType, setTransactionType] =
-    useState<TransactionType>('expense')
-  const { data: chartData } = useQuery(
-    client.transaction.byCategory.queryOptions({ input: transactionType })
+const chartConfig = {
+  total: { label: 'مبلغ', color: 'var(--chart-1)' },
+} satisfies ChartConfig
+
+const ChartView = ({ type = 'expense' }: { type?: TransactionType }) => {
+  const { data: chartData } = useSuspenseQuery(
+    client.transaction.byCategory.queryOptions({ input: type })
   )
+  return (
+    <ChartContainer config={chartConfig}>
+      <BarChart data={chartData}>
+        <CartesianGrid vertical={false} />
+        <XAxis
+          dataKey="category"
+          tickLine={false}
+          tickMargin={10}
+          axisLine={false}
+        />
+        <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
+        <Bar dataKey="total" radius={8}>
+          {chartData?.map((_entry, index) => (
+            <Cell
+              key={`cell-${index}`}
+              fill={chartColors[index % chartColors.length]}
+            />
+          ))}
+        </Bar>
+      </BarChart>
+    </ChartContainer>
+  )
+}
 
-  const chartConfig = {
-    total: { label: 'مبلغ', color: 'var(--chart-1)' },
-  } satisfies ChartConfig
-
+export function TransactionChart() {
+  const [tType, setTType] = useState<TransactionType>('expense')
   return (
     <Fragment>
       <Tabs
-        defaultValue={transactionType}
-        onValueChange={(e) => setTransactionType(e as TransactionType)}
+        defaultValue={tType}
+        onValueChange={(e) => setTType(e as TransactionType)}
       >
         <TabsList className="grid w-full grid-cols-2">
           <TabsTrigger value="expense">هزینه ها</TabsTrigger>
@@ -56,26 +80,13 @@ export function TransactionChart() {
           <CardDescription>خلاصه خرج‌ها بر اساس دسته‌بندی</CardDescription>
         </CardHeader>
         <CardContent>
-          <ChartContainer config={chartConfig}>
-            <BarChart data={chartData}>
-              <CartesianGrid vertical={false} />
-              <XAxis
-                dataKey="category"
-                tickLine={false}
-                tickMargin={10}
-                axisLine={false}
-              />
-              <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
-              <Bar dataKey="total" radius={8}>
-                {chartData?.map((_entry, index) => (
-                  <Cell
-                    key={`cell-${index}`}
-                    fill={chartColors[index % chartColors.length]}
-                  />
-                ))}
-              </Bar>
-            </BarChart>
-          </ChartContainer>
+          <Suspense
+            fallback={
+              <LoaderIcon className="mx-auto my-4 size-5 animate-spin" />
+            }
+          >
+            <ChartView type={tType} />
+          </Suspense>
         </CardContent>
       </Card>
     </Fragment>

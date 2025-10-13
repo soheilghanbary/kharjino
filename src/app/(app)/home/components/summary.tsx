@@ -1,5 +1,5 @@
 'use client'
-import { useQuery } from '@tanstack/react-query'
+import { useSuspenseQuery } from '@tanstack/react-query'
 import { TrendingDown, TrendingUp } from 'lucide-react'
 import Link from 'next/link'
 import { PlusIcon } from '@/assets/icons/bulk'
@@ -7,10 +7,55 @@ import { Button } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
 import { client } from '@/rpc/orpc.client'
 
+const NewTransactionButton = () => (
+  <Button
+    size={'sm'}
+    variant={'secondary'}
+    className="w-full text-base text-primary"
+    asChild
+  >
+    <Link href={'/new'}>
+      <PlusIcon className="size-5" />
+      تراکنش جدید
+    </Link>
+  </Button>
+)
+
+export const SummarySkeleton = () => (
+  <div className="z-10 mt-4 rounded-3xl bg-card p-5 shadow-lg">
+    <div>
+      <p className="mb-1 text-center text-muted-foreground text-xs">
+        موجودی کل
+      </p>
+      <Skeleton className="mx-auto h-8 w-40 rounded-full" />
+    </div>
+    <div className="my-4 grid grid-cols-2 items-center gap-12">
+      <div className="space-y-1">
+        <p className="flex items-center gap-1.5 text-destructive text-xs">
+          <span className="flex items-center justify-center rounded-sm bg-destructive/20 p-1">
+            <TrendingDown className="size-4" />
+          </span>
+          هزینه
+        </p>
+        <Skeleton className="h-5 w-28 rounded-full" />
+      </div>
+      <div className="space-y-1">
+        <p className="flex items-center gap-1.5 text-success text-xs">
+          <span className="flex items-center justify-center rounded-sm bg-success/20 p-1">
+            <TrendingUp className="size-4" />
+          </span>
+          درآمد
+        </p>
+        <Skeleton className="h-5 w-28 rounded-full" />
+      </div>
+    </div>
+    <NewTransactionButton />
+  </div>
+)
+
+// کامپوننت اصلی
 export const Summary = () => {
-  const { data, isPending } = useQuery(
-    client.transaction.summary.queryOptions()
-  )
+  const { data } = useSuspenseQuery(client.transaction.summary.queryOptions())
 
   return (
     <div className="z-10 mt-4 rounded-3xl bg-card p-5 shadow-lg">
@@ -18,13 +63,9 @@ export const Summary = () => {
         <p className="mb-1 text-center text-muted-foreground text-xs">
           موجودی کل
         </p>
-        {isPending ? (
-          <Skeleton className="mx-auto h-8 w-40 rounded-full" />
-        ) : (
-          <p className="text-center font-bold text-2xl text-primary">
-            {data?.balance.toLocaleString('fa-IR')} تومان
-          </p>
-        )}
+        <p className="text-center font-bold text-2xl text-primary">
+          {data.balance.toLocaleString('fa-IR')} تومان
+        </p>
       </div>
       <div className="my-4 grid grid-cols-2 items-center gap-12">
         <div className="space-y-1">
@@ -34,13 +75,9 @@ export const Summary = () => {
             </span>
             هزینه
           </p>
-          {isPending ? (
-            <Skeleton className="h-5 w-28 rounded-full" />
-          ) : (
-            <p className="font-medium text-muted-foreground text-sm">
-              {data?.expense.toLocaleString('fa-IR')} تومان
-            </p>
-          )}
+          <p className="font-medium text-muted-foreground text-sm">
+            {data.expense.toLocaleString('fa-IR')} تومان
+          </p>
         </div>
         <div className="space-y-1">
           <p className="flex items-center gap-1.5 text-success text-xs">
@@ -49,26 +86,12 @@ export const Summary = () => {
             </span>
             درآمد
           </p>
-          {isPending ? (
-            <Skeleton className="h-5 w-28 rounded-full" />
-          ) : (
-            <p className="font-medium text-muted-foreground text-sm">
-              {data?.income.toLocaleString('fa-IR')} تومان
-            </p>
-          )}
+          <p className="font-medium text-muted-foreground text-sm">
+            {data.income.toLocaleString('fa-IR')} تومان
+          </p>
         </div>
       </div>
-      <Button
-        size={'sm'}
-        variant={'secondary'}
-        className="w-full text-base text-primary"
-        asChild
-      >
-        <Link href={'/new'}>
-          <PlusIcon className="size-5" />
-          تراکنش جدید
-        </Link>
-      </Button>
+      <NewTransactionButton />
     </div>
   )
 }
