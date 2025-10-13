@@ -28,7 +28,6 @@ export default function Page() {
         </Suspense>
       </header>
       <section className="mt-28">
-        <TransactionChart />
         <div className="mb-3 flex items-center justify-between">
           <p className="font-medium text-sm">تراکنش های اخیر</p>
           <Link
@@ -41,6 +40,7 @@ export default function Page() {
         <Suspense fallback={<TransactionLoading />}>
           <RecentExpenseList />
         </Suspense>
+        <TransactionChart />
       </section>
     </Fragment>
   )

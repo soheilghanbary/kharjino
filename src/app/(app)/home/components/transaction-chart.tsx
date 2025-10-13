@@ -69,7 +69,7 @@ export function TransactionChart() {
         defaultValue={tType}
         onValueChange={(e) => setTType(e as TransactionType)}
       >
-        <TabsList className="grid w-full grid-cols-2">
+        <TabsList className="mt-4 grid w-full grid-cols-2">
           <TabsTrigger value="expense">هزینه ها</TabsTrigger>
           <TabsTrigger value="income">درآمد ها</TabsTrigger>
         </TabsList>
@@ -82,7 +82,9 @@ export function TransactionChart() {
         <CardContent>
           <Suspense
             fallback={
-              <LoaderIcon className="mx-auto my-4 size-5 animate-spin" />
+              <div className="grid h-[170px] place-items-center">
+                <LoaderIcon className="size-5 animate-spin" />
+              </div>
             }
           >
             <ChartView type={tType} />
