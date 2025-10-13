@@ -1,5 +1,5 @@
 'use client'
-import { useQuery } from '@tanstack/react-query'
+import { useSuspenseQuery } from '@tanstack/react-query'
 import { format } from 'date-fns-jalali'
 import type { Note } from 'generated/prisma'
 import Link from 'next/link'
@@ -23,29 +23,26 @@ const NoteCard = (note: Note) => {
   )
 }
 
-const NoteListLoading = () =>
-  Array.from({ length: 4 }).map((_, i) => (
-    <div
-      key={i}
-      className="grid min-h-20 gap-4 rounded-2xl bg-muted/30 p-3 dark:bg-card"
-    >
-      <Skeleton className="h-5 w-1/3" />
-      <div className="space-y-2">
-        <Skeleton className="h-4 w-full" />
-        <Skeleton className="h-3 w-full" />
-        <Skeleton className="mr-auto h-3 w-1/5" />
+export const NoteListLoading = () => (
+  <div className="fade-up-transition grid gap-y-2">
+    {Array.from({ length: 4 }).map((_, i) => (
+      <div
+        key={i}
+        className="grid min-h-20 gap-4 rounded-2xl bg-muted/30 p-3 dark:bg-card"
+      >
+        <Skeleton className="h-5 w-1/3" />
+        <div className="space-y-2">
+          <Skeleton className="h-4 w-full" />
+          <Skeleton className="h-3 w-full" />
+          <Skeleton className="mr-auto h-3 w-1/5" />
+        </div>
       </div>
-    </div>
-  ))
+    ))}
+  </div>
+)
 
 export const NoteList = () => {
-  const { data, isPending } = useQuery(client.note.getAll.queryOptions())
-  if (isPending || !data)
-    return (
-      <div className="fade-up-transition grid gap-y-2">
-        <NoteListLoading />
-      </div>
-    )
+  const { data } = useSuspenseQuery(client.note.getAll.queryOptions())
   return (
     <div className="fade-up-transition grid gap-y-2">
       {data.map((n) => (
