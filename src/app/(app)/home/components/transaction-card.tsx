@@ -33,7 +33,9 @@ export const TransactionCard = ({
   const { mutate, isPending } = useMutation(
     client.transaction.delete.mutationOptions({
       onSuccess() {
-        qc.invalidateQueries({ queryKey: client.transaction.getAll.queryKey() })
+        qc.invalidateQueries(client.transaction.summary.queryOptions())
+        qc.invalidateQueries(client.transaction.recent.queryOptions())
+        qc.invalidateQueries(client.transaction.byCategory.queryOptions())
         toast.info('تراکنش حذف شد')
         setOpen(false)
       },
