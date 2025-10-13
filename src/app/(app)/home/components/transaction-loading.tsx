@@ -2,7 +2,7 @@ import { Skeleton } from '@/components/ui/skeleton'
 
 export function TransactionLoading() {
   return (
-    <div className="grid gap-2">
+    <div className="fade-up-transition grid gap-2">
       {Array.from({ length: 5 }).map((_, i) => (
         <div
           key={i}

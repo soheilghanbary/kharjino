@@ -8,7 +8,7 @@ export function RecentExpenseList() {
     client.transaction.recent.queryOptions()
   )
   return (
-    <div className="fade-up-transition grid gap-2">
+    <div className="grid gap-2">
       {transactions.map((t) => (
         <TransactionCard key={t.id} {...t} />
       ))}
