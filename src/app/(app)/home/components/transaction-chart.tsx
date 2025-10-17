@@ -1,6 +1,6 @@
 'use client'
 import { useSuspenseQuery } from '@tanstack/react-query'
-import type { TransactionType } from 'generated/prisma'
+import type { TransactionType } from '@/db/schema'
 import { LoaderIcon } from 'lucide-react'
 import { Suspense, useState } from 'react'
 import { Fragment } from 'react/jsx-runtime'

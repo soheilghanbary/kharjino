@@ -1,54 +1,57 @@
 import { os } from '@orpc/server'
 import z from 'zod'
+import { eq, and, desc } from 'drizzle-orm'
 import { createNoteSchema, updateNoteSchema } from '@/app/(app)/notes/schemas'
-import { db } from '@/lib/db'
+import { db } from '@/db'
+import { notes } from '@/db/schema'
 import { getUserId } from '@/lib/helpers'
 
 export const noteRouter = {
   getAll: os.handler(async () => {
     const userId = await getUserId()
-    return await db.note.findMany({
-      where: {
-        userId,
-      },
-      orderBy: { createdAt: 'desc' },
+    return await db.query.notes.findMany({
+      where: eq(notes.userId, userId),
+      orderBy: desc(notes.createdAt),
     })
   }),
   getById: os.input(z.string()).handler(async ({ input }) => {
     const userId = await getUserId()
-    return await db.note.findUnique({
-      where: {
-        id: input,
-        userId,
-      },
+    return await db.query.notes.findFirst({
+      where: and(eq(notes.id, input), eq(notes.userId, userId)),
     })
   }),
   create: os.input(createNoteSchema).handler(async ({ input }) => {
     const userId = await getUserId()
-    return await db.note.create({
-      data: {
+    const [newNote] = await db
+      .insert(notes)
+      .values({
         title: input.title,
         description: input.description,
         userId,
-      },
-    })
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      })
+      .returning()
+    return newNote
   }),
   update: os.input(updateNoteSchema).handler(async ({ input }) => {
     const userId = await getUserId()
-    return await db.note.update({
-      where: {
-        id: input.id,
-        userId,
-      },
-      data: {
+    const [updatedNote] = await db
+      .update(notes)
+      .set({
         title: input.title,
         description: input.description,
-      },
-    })
+        updatedAt: new Date(),
+      })
+      .where(and(eq(notes.id, input.id), eq(notes.userId, userId)))
+      .returning()
+    return updatedNote
   }),
   delete: os.input(z.string()).handler(async ({ input }) => {
-    return await db.note.delete({
-      where: { id: input },
-    })
+    const [deletedNote] = await db
+      .delete(notes)
+      .where(eq(notes.id, input))
+      .returning()
+    return deletedNote
   }),
 }

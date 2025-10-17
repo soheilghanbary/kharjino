@@ -1,46 +1,51 @@
 import { os } from '@orpc/server'
 import z from 'zod'
+import { eq, and, desc } from 'drizzle-orm'
 import { createTaskSchema, updateTaskSchema } from '@/app/(app)/notes/schemas'
-import { db } from '@/lib/db'
+import { db } from '@/db'
+import { tasks } from '@/db/schema'
 import { getUserId } from '@/lib/helpers'
 
 export const taskRouter = {
   getAll: os.handler(async () => {
     const userId = await getUserId()
-    return await db.task.findMany({
-      where: {
-        userId,
-      },
-      orderBy: { createdAt: 'desc' },
+    return await db.query.tasks.findMany({
+      where: eq(tasks.userId, userId),
+      orderBy: desc(tasks.createdAt),
     })
   }),
   getById: os.input(z.string()).handler(async ({ input }) => {
     const userId = await getUserId()
-    return await db.task.findUnique({
-      where: {
-        id: input,
-        userId,
-      },
+    const task = await db.query.tasks.findFirst({
+      where: and(eq(tasks.id, input), eq(tasks.userId, userId)),
     })
+    return task
   }),
   create: os.input(createTaskSchema).handler(async ({ input }) => {
     const userId = await getUserId()
-    return await db.task.create({
-      data: { ...input, userId },
-    })
+    const [newTask] = await db
+      .insert(tasks)
+      .values({
+        ...input,
+        userId,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      })
+      .returning()
+    return newTask
   }),
   update: os.input(updateTaskSchema).handler(async ({ input }) => {
     const userId = await getUserId()
-    return await db.task.update({
-      where: {
-        id: input.id,
-        userId,
-      },
-      data: {
+    const [updatedTask] = await db
+      .update(tasks)
+      .set({
         text: input.text,
         done: input.done,
-      },
-    })
+        updatedAt: new Date(),
+      })
+      .where(and(eq(tasks.id, input.id), eq(tasks.userId, userId)))
+      .returning()
+    return updatedTask
   }),
   doneTask: os
     .input(
@@ -50,18 +55,21 @@ export const taskRouter = {
       })
     )
     .handler(async ({ input }) => {
-      return await db.task.updateMany({
-        where: {
-          id: input.id,
-        },
-        data: {
+      const updatedTasks = await db
+        .update(tasks)
+        .set({
           done: input.done,
-        },
-      })
+          updatedAt: new Date(),
+        })
+        .where(eq(tasks.id, input.id))
+        .returning()
+      return { count: updatedTasks.length }
     }),
   delete: os.input(z.string()).handler(async ({ input }) => {
-    return await db.task.delete({
-      where: { id: input },
-    })
+    const [deletedTask] = await db
+      .delete(tasks)
+      .where(eq(tasks.id, input))
+      .returning()
+    return deletedTask
   }),
 }

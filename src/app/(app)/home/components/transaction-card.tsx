@@ -1,7 +1,6 @@
 'use client'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { format } from 'date-fns-jalali'
-import type { Prisma } from 'generated/prisma'
 import Link from 'next/link'
 import { useState } from 'react'
 import { toast } from 'sonner'
@@ -16,10 +15,11 @@ import {
 } from '@/components/ui/drawer'
 import { Spinner } from '@/components/ui/spinner'
 import { client } from '@/rpc/orpc.client'
+import { Category, Transaction } from '@/db/schema'
 
-type TransactionCardProps = Prisma.TransactionGetPayload<{
-  include: { category: true }
-}>
+type TransactionCardProps = Transaction & {
+  category: Category
+}
 
 export const TransactionCard = ({
   id,

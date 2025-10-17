@@ -1,6 +1,6 @@
 'use client'
 import { useSuspenseQuery } from '@tanstack/react-query'
-import type { TransactionType } from 'generated/prisma'
+import type { TransactionType } from '@/db/schema'
 import { useQueryState } from 'nuqs'
 import { client } from '@/rpc/orpc.client'
 import { EmptyTransactionList } from '../../home/components/empty-transaction'

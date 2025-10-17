@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import type { TransactionType } from 'generated/prisma'
+import type { TransactionType } from '@/db/schema'
 import { Label } from '@/components/ui/label'
 import {
   Select,

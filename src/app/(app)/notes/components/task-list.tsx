@@ -1,6 +1,6 @@
 'use client'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import type { Task } from 'generated/prisma'
+import type { Task } from '@/db/schema'
 import { CheckPaperIcon, EditIcon, TrashIcon } from '@/assets/icons/bulk'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'

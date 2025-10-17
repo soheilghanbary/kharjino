@@ -1,10 +1,10 @@
-'use client'
-import { useSuspenseQuery } from '@tanstack/react-query'
 import { format } from 'date-fns-jalali'
-import type { Note } from 'generated/prisma'
+import { notes, type Note } from '@/db/schema'
 import Link from 'next/link'
 import { Skeleton } from '@/components/ui/skeleton'
-import { client } from '@/rpc/orpc.client'
+import { getUserId } from '@/lib/helpers'
+import { db } from '@/db'
+import { eq } from 'drizzle-orm'
 
 const NoteCard = (note: Note) => {
   return (
@@ -41,11 +41,20 @@ export const NoteListLoading = () => (
   </div>
 )
 
-export const NoteList = () => {
-  const { data } = useSuspenseQuery(client.note.getAll.queryOptions())
+// Cached function using 'use cache' directive
+async function getCachedNotes(userId: string) {
+  return await db.query.notes.findMany({
+    where: eq(notes.userId, userId),
+  })
+}
+
+export const NoteList = async () => {
+  const userId = await getUserId()
+  const data = await getCachedNotes(userId)
+  
   return (
     <div className="fade-up-transition grid gap-y-2">
-      {data.map((n) => (
+      {data.map((n: Note) => (
         <NoteCard key={n.id} {...n} />
       ))}
     </div>
