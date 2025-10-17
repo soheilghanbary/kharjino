@@ -1,9 +1,9 @@
 import { os } from '@orpc/server'
+import { and, asc, desc, eq, inArray, sum } from 'drizzle-orm'
 import z from 'zod'
-import { eq, and, desc, asc, inArray, sum } from 'drizzle-orm'
 import { createTransaction, editTransaction } from '@/app/(app)/new/schemas'
 import { db } from '@/db'
-import { transactions, categories } from '@/db/schema'
+import { categories, transactions } from '@/db/schema'
 import { getUserId } from '@/lib/helpers'
 
 export const transactionRouter = {
@@ -47,6 +47,7 @@ export const transactionRouter = {
       const whereCondition = type
         ? and(eq(transactions.userId, userId), eq(transactions.type, type))
         : eq(transactions.userId, userId)
+      // biome-ignore lint/suspicious/noImplicitAnyLet: <explanation>
       let orderByClause
       switch (sort) {
         case 'highest':
@@ -82,11 +83,15 @@ export const transactionRouter = {
       db
         .select({ total: sum(transactions.amount) })
         .from(transactions)
-        .where(and(eq(transactions.userId, userId), eq(transactions.type, 'income'))),
+        .where(
+          and(eq(transactions.userId, userId), eq(transactions.type, 'income'))
+        ),
       db
         .select({ total: sum(transactions.amount) })
         .from(transactions)
-        .where(and(eq(transactions.userId, userId), eq(transactions.type, 'expense'))),
+        .where(
+          and(eq(transactions.userId, userId), eq(transactions.type, 'expense'))
+        ),
     ])
     const income = Number(incomeResult[0]?.total) || 0
     const expense = Number(expenseResult[0]?.total) || 0
@@ -125,7 +130,9 @@ export const transactionRouter = {
           total: sum(transactions.amount),
         })
         .from(transactions)
-        .where(and(eq(transactions.userId, userId), eq(transactions.type, type)))
+        .where(
+          and(eq(transactions.userId, userId), eq(transactions.type, type))
+        )
         .groupBy(transactions.categoryId)
       const categoryIds = result.map((r) => r.categoryId)
       const categoryList = await db
