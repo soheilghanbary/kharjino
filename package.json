@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "Modern web, simplified",
   "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build --turbopack",
+    "dev": "next dev",
+    "build": "next build",
     "start": "next start",
     "db:gen": "drizzle-kit generate",
     "db:push": "drizzle-kit push",
