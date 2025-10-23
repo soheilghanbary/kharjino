@@ -37,14 +37,14 @@
     "lucide-react": "^0.544.0",
     "motion": "^12.23.22",
     "nanoid": "^5.1.6",
-    "next": "^16.0.0-canary.4",
+    "next": "16.0.0",
     "next-themes": "^0.4.6",
     "nuqs": "^2.7.0",
     "postgres": "^3.4.7",
     "radix-ui": "^1.4.3",
-    "react": "^19.3.0-canary-d7215b49-20251013",
+    "react": "19.2.0",
     "react-day-picker": "^9.11.0",
-    "react-dom": "^19.3.0-canary-d7215b49-20251013",
+    "react-dom": "19.2.0",
     "react-dropzone": "^14.3.8",
     "react-hook-form": "^7.64.0",
     "react-image-crop": "^11.0.10",
@@ -61,7 +61,7 @@
     "@tanstack/react-query-devtools": "^5.90.2",
     "@types/node": "^24.7.0",
     "@types/react": "19.2.2",
-    "@types/react-dom": "19.2.1",
+    "@types/react-dom": "19.2.2",
     "drizzle-kit": "^0.31.5",
     "postcss": "^8.5.6",
     "tailwind-merge": "^3.3.1",
@@ -74,7 +74,7 @@
   "pnpm": {
     "overrides": {
       "@types/react": "19.2.2",
-      "@types/react-dom": "19.2.1"
+      "@types/react-dom": "19.2.2"
     },
     "onlyBuiltDependencies": [
       "@tailwindcss/oxide",
