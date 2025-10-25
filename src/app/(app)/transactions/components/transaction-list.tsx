@@ -23,7 +23,7 @@ export const TransactionList = () => {
   } = useSuspenseInfiniteQuery({
     queryKey: ['transactions', t, sort],
     queryFn: async ({ pageParam = 0 }) =>
-      api.transaction.getAll({
+      await api.transaction.getAll({
         type: t as TransactionType,
         sort: sort as 'newest' | 'highest' | 'lowest',
         page: pageParam,
@@ -67,11 +67,9 @@ export const TransactionList = () => {
         page.data.map((tr) => <TransactionCard key={tr.id} {...tr} />)
       )}
       {hasNextPage && (
-        <div ref={loaderRef} className="relative flex justify-center py-4">
+        <div ref={loaderRef}>
           {isFetchingNextPage && (
-            <div className="w-full">
-              <TransactionLoading />
-            </div>
+            <TransactionLoading count={5} />
           )}
         </div>
       )}

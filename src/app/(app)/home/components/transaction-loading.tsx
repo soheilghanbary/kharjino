@@ -3,12 +3,13 @@ import { cn } from '@/lib/utils'
 
 type Props = {
   className?: string
+  count?: number
 }
 
-export function TransactionLoading({ className }: Props) {
+export function TransactionLoading({ className, count }: Props) {
   return (
     <div className={cn('grid gap-2', className)}>
-      {Array.from({ length: 5 }).map((_, i) => (
+      {Array.from({ length: count || 5 }).map((_, i) => (
         <div
           key={i}
           className="flex min-h-[63.55px] items-center gap-2 border-b p-3 last:border-0"

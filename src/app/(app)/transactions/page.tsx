@@ -19,7 +19,7 @@ export default async function TransactionsPage() {
       <Suspense>
         <TransactionTypeTab type="all" />
       </Suspense>
-      <Suspense fallback={<TransactionLoading />}>
+      <Suspense fallback={<TransactionLoading count={10} />}>
         <TransactionList />
       </Suspense>
     </Fragment>
