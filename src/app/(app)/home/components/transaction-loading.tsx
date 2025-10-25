@@ -1,8 +1,13 @@
 import { Skeleton } from '@/components/ui/skeleton'
+import { cn } from '@/lib/utils'
 
-export function TransactionLoading() {
+type Props = {
+  className?: string
+}
+
+export function TransactionLoading({ className }: Props) {
   return (
-    <div className="fade-up-transition grid gap-2">
+    <div className={cn('grid gap-2', className)}>
       {Array.from({ length: 5 }).map((_, i) => (
         <div
           key={i}

@@ -38,15 +38,26 @@ export const transactionRouter = {
         .object({
           type: z.enum(['expense', 'income']).nullish(),
           sort: z.enum(['newest', 'highest', 'lowest']).default('newest'),
+          page: z.number().default(0),
         })
         .nullish()
     )
     .handler(async ({ input }) => {
       const userId = await getUserId()
-      const { type, sort } = input ?? { type: null, sort: 'newest' }
+      const PAGE_SIZE = 10
+
+      const { type, sort, page } = input ?? {
+        type: null,
+        sort: 'newest',
+        page: 0,
+      }
+
+      // --- WHERE condition ---
       const whereCondition = type
         ? and(eq(transactions.userId, userId), eq(transactions.type, type))
         : eq(transactions.userId, userId)
+
+      // --- ORDER BY clause ---
       // biome-ignore lint/suspicious/noImplicitAnyLet: <explanation>
       let orderByClause
       switch (sort) {
@@ -60,13 +71,26 @@ export const transactionRouter = {
           orderByClause = desc(transactions.date) // newest
           break
       }
-      return await db.query.transactions.findMany({
+
+      // --- Query transactions (fetch one extra to detect next page) ---
+      const results = await db.query.transactions.findMany({
         where: whereCondition,
         with: {
           category: true,
         },
         orderBy: orderByClause,
+        offset: page * PAGE_SIZE,
+        limit: PAGE_SIZE + 1, // Fetch one extra to check for next page
       })
+
+      // --- Determine pagination metadata ---
+      const hasNextPage = results.length > PAGE_SIZE
+      const slicedResults = results.slice(0, PAGE_SIZE)
+
+      return {
+        data: slicedResults,
+        nextPageParam: hasNextPage ? page + 1 : undefined,
+      }
     }),
   get: os.input(z.string()).handler(async ({ input }) => {
     const transaction = await db.query.transactions.findFirst({
