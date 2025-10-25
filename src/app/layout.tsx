@@ -1,4 +1,8 @@
-import '@/rpc/orpc.server'
+// ✅ فقط در محیط سرور import می‌شود
+if (typeof window === 'undefined') {
+  // dynamic import تا در client bundle نیاید
+  await import('@/rpc/orpc.server')
+}
 import '@/styles/app.css'
 import type { Metadata } from 'next'
 import type { PropsWithChildren } from 'react'

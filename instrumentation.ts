@@ -1,3 +1,3 @@
 export async function register() {
-  await import('./src/rpc/orpc.server')
+  // await import('./src/rpc/orpc.server')
 }
