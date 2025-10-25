@@ -1,5 +1,5 @@
 import { os } from '@orpc/server'
-import { and, asc, desc, eq, inArray, sum } from 'drizzle-orm'
+import { and, asc, desc, eq, sql, sum } from 'drizzle-orm'
 import z from 'zod'
 import { createTransaction, editTransaction } from '@/app/(app)/new/schemas'
 import { db } from '@/db'
@@ -103,22 +103,22 @@ export const transactionRouter = {
   }),
   summary: os.handler(async () => {
     const userId = await getUserId()
-    const [incomeResult, expenseResult] = await Promise.all([
-      db
-        .select({ total: sum(transactions.amount) })
-        .from(transactions)
-        .where(
-          and(eq(transactions.userId, userId), eq(transactions.type, 'income'))
-        ),
-      db
-        .select({ total: sum(transactions.amount) })
-        .from(transactions)
-        .where(
-          and(eq(transactions.userId, userId), eq(transactions.type, 'expense'))
-        ),
-    ])
-    const income = Number(incomeResult[0]?.total) || 0
-    const expense = Number(expenseResult[0]?.total) || 0
+    // Single aggregated query by type
+    const result = await db
+      .select({
+        type: transactions.type,
+        total: sum(transactions.amount),
+      })
+      .from(transactions)
+      .where(eq(transactions.userId, userId))
+      .groupBy(transactions.type)
+    // Aggregate results from the grouped output
+    let income = 0
+    let expense = 0
+    for (const row of result) {
+      if (row.type === 'income') income = Number(row.total) || 0
+      else if (row.type === 'expense') expense = Number(row.total) || 0
+    }
     const balance = income - expense
     return { balance, income, expense }
   }),
@@ -147,27 +147,22 @@ export const transactionRouter = {
     .input(z.enum(['expense', 'income']).nullish())
     .handler(async ({ input }) => {
       const userId = await getUserId()
-      const type = input ?? 'expense' // پیش‌فرض خرج‌ها
+      const type = input ?? 'expense'
       const result = await db
         .select({
-          categoryId: transactions.categoryId,
+          categoryName: sql<string>`COALESCE(${categories.name}, 'نامشخص')`,
           total: sum(transactions.amount),
         })
         .from(transactions)
+        .leftJoin(categories, eq(transactions.categoryId, categories.id))
         .where(
           and(eq(transactions.userId, userId), eq(transactions.type, type))
         )
-        .groupBy(transactions.categoryId)
-      const categoryIds = result.map((r) => r.categoryId)
-      const categoryList = await db
-        .select({ id: categories.id, name: categories.name })
-        .from(categories)
-        .where(inArray(categories.id, categoryIds))
-      const data = result.map((r) => ({
-        category:
-          categoryList.find((c) => c.id === r.categoryId)?.name ?? 'نامشخص',
+        .groupBy(categories.name)
+      // Cast + ensure numeric totals
+      return result.map((r) => ({
+        category: r.categoryName,
         total: Number(r.total) || 0,
       }))
-      return data
     }),
 }
