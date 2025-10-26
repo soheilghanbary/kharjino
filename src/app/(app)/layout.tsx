@@ -1,5 +1,4 @@
-import('@/rpc/orpc.server')
-
+import '@/rpc/orpc.server'
 import type { PropsWithChildren } from 'react'
 import { AppNavigation } from '@/components/layouts/app-navigation'
 

@@ -1,8 +1,10 @@
-import { CompressionPlugin, RPCHandler } from '@orpc/server/fetch'
+import { RPCHandler } from '@orpc/server/fetch'
 import { router } from '@/rpc/router'
 
+export const runtime = 'edge'
+
 export const handler = new RPCHandler(router, {
-  plugins: [new CompressionPlugin()],
+  // plugins: [new CompressionPlugin()],
 })
 
 async function handleRequest(request: Request) {
