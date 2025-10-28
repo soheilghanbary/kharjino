@@ -14,8 +14,8 @@ import {
   DrawerTrigger,
 } from '@/components/ui/drawer'
 import { Spinner } from '@/components/ui/spinner'
+import type { Category, Transaction } from '@/db/schema'
 import { client } from '@/rpc/orpc.client'
-import { Category, Transaction } from '@/db/schema'
 
 type TransactionCardProps = Transaction & {
   category: Category
@@ -45,7 +45,7 @@ export const TransactionCard = ({
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
-        <div className="flex items-center gap-3 rounded-lg border-b p-3 shadow-xs transition-[background] duration-150 last:border-b-0 hover:bg-muted dark:hover:bg-card">
+        <div className='flex items-center gap-3 rounded-lg bg-muted/65 p-3 transition-[background] duration-150 dark:bg-card'>
           <p className="size-fit rounded-full bg-primary/5 p-1 text-primary text-xl">
             {category.icon.length ? category.icon : '💷'}
           </p>
