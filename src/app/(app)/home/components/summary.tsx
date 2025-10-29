@@ -10,8 +10,7 @@ import { client } from '@/rpc/orpc.client'
 const NewTransactionButton = () => (
   <Button
     size={'sm'}
-    variant={'secondary'}
-    className="w-full text-base text-primary"
+    className="w-full text-base"
     asChild
   >
     <Link href={'/new'}>

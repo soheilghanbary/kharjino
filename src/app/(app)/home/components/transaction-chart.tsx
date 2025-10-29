@@ -1,7 +1,6 @@
 'use client'
 import { useSuspenseQuery } from '@tanstack/react-query'
-import type { TransactionType } from '@/db/schema'
-import { LoaderIcon } from 'lucide-react'
+import { LoaderIcon, TrendingDown, TrendingUp } from 'lucide-react'
 import { Suspense, useState } from 'react'
 import { Fragment } from 'react/jsx-runtime'
 import { Bar, BarChart, CartesianGrid, Cell, XAxis } from 'recharts'
@@ -19,6 +18,7 @@ import {
   ChartTooltipContent,
 } from '@/components/ui/chart'
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import type { TransactionType } from '@/db/schema'
 import { client } from '@/rpc/orpc.client'
 
 const chartColors = [
@@ -69,9 +69,21 @@ export function TransactionChart() {
         defaultValue={tType}
         onValueChange={(e) => setTType(e as TransactionType)}
       >
-        <TabsList className="mt-4 grid w-full grid-cols-2">
-          <TabsTrigger value="expense">هزینه ها</TabsTrigger>
-          <TabsTrigger value="income">درآمد ها</TabsTrigger>
+        <TabsList className="mt-4 grid w-full grid-cols-2 border-0 bg-transparent">
+          <TabsTrigger
+            value="expense"
+            className='rounded-sm border-transparent border-b-[1.5px] data-[state=active]:border-destructive data-[state=active]:bg-destructive/10 data-[state=active]:text-destructive dark:data-[state=active]:text-destructive'
+          >
+            <TrendingDown />
+            هزینه ها
+          </TabsTrigger>
+          <TabsTrigger
+            value="income"
+            className="rounded-sm border-transparent border-b-[1.5px] data-[state=active]:border-success data-[state=active]:bg-success/10 data-[state=active]:text-success dark:data-[state=active]:text-success"
+          >
+            <TrendingUp />
+            درآمد ها
+          </TabsTrigger>
         </TabsList>
       </Tabs>
       <Card className="mt-2 mb-4 shadow-none">
