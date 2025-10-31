@@ -72,14 +72,14 @@ export function TransactionChart() {
         <TabsList className="mt-4 grid w-full grid-cols-2 border-0 bg-transparent">
           <TabsTrigger
             value="expense"
-            className='rounded-sm border-transparent border-b-[1.5px] text-base data-[state=active]:border-destructive data-[state=active]:bg-destructive/10 data-[state=active]:text-destructive dark:data-[state=active]:text-destructive'
+            className='rounded-sm border-transparent border-b-[1.5px] text-sm data-[state=active]:border-destructive data-[state=active]:bg-destructive/10 data-[state=active]:text-destructive dark:data-[state=active]:text-destructive'
           >
             <TrendingDown />
             هزینه ها
           </TabsTrigger>
           <TabsTrigger
             value="income"
-            className='rounded-sm border-transparent border-b-[1.5px] text-base data-[state=active]:border-success data-[state=active]:bg-success/10 data-[state=active]:text-success dark:data-[state=active]:text-success'
+            className='rounded-sm border-transparent border-b-[1.5px] text-sm data-[state=active]:border-success data-[state=active]:bg-success/10 data-[state=active]:text-success dark:data-[state=active]:text-success'
           >
             <TrendingUp />
             درآمد ها
