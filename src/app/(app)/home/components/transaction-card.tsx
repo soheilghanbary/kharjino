@@ -45,7 +45,7 @@ export const TransactionCard = ({
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
-        <div className="flex items-center gap-3 rounded-lg bg-card p-3 transition-all duration-150">
+        <div className="flex items-center gap-3 rounded-lg bg-muted/65 p-3 transition-all duration-150 dark:bg-card">
           <p className="size-fit rounded-full bg-primary/5 p-1 text-primary text-xl">
             {category.icon.length ? category.icon : '💷'}
           </p>

@@ -62,15 +62,13 @@ export const TransactionList = () => {
     return <EmptyTransactionList />
 
   return (
-    <div className="grid gap-2">
+    <div className="fade-up-transition grid gap-2">
       {transactions.pages.map((page) =>
         page.data.map((tr) => <TransactionCard key={tr.id} {...tr} />)
       )}
       {hasNextPage && (
         <div ref={loaderRef}>
-          {isFetchingNextPage && (
-            <TransactionLoading count={5} />
-          )}
+          {isFetchingNextPage && <TransactionLoading count={5} />}
         </div>
       )}
     </div>
