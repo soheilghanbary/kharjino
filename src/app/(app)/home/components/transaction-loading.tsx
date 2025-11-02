@@ -12,7 +12,7 @@ export function TransactionLoading({ className, count }: Props) {
       {Array.from({ length: count || 5 }).map((_, i) => (
         <div
           key={i}
-          className='flex min-h-[63.55px] items-center gap-2 rounded-lg bg-muted/40 p-3'
+          className="flex min-h-[63.55px] items-center gap-2 rounded-lg p-3"
         >
           <Skeleton className="size-9 rounded-full" />
           <div className="grid grow grid-cols-2 gap-4 gap-y-1">

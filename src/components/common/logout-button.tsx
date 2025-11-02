@@ -19,7 +19,7 @@ export function LogoutButton() {
     <Button
       onClick={onSignOut}
       variant={'secondary'}
-      className="text-destructive"
+      className="bg-destructive/10 text-destructive shadow-none"
     >
       {loading ? <Spinner /> : <LogoutIcon className="size-5" />}
       خروج از حساب کاربری
