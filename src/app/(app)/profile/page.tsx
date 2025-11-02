@@ -38,16 +38,14 @@ export default function ProfilePage() {
           <Link
             key={i}
             href={l.href}
-            className="flex h-12 items-center gap-3 rounded-lg bg-card p-3 duration-150"
+            className="flex h-12 items-center gap-3 rounded-lg bg-muted p-3 duration-150 dark:bg-card"
           >
             <l.icon className="size-5 text-muted-foreground/80" />
             <span className="grow text-right text-sm/[18px]">{l.title}</span>
             <ChevronLeft className="size-5 text-muted-foreground" />
           </Link>
         ))}
-        <hr className="my-2" />
         <LogoutButton />
-        <hr className="my-4" />
         <DonateLink />
       </div>
     </Fragment>

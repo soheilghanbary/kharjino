@@ -1,6 +1,6 @@
 :root {
   --radius: 0.675rem;
-  --background: oklch(0.9798 0.0067 277.16);
+  --background: oklch(1 0 0);
   --foreground: oklch(0.3311 0.0389 268.14);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.3311 0.0389 268.14);
@@ -16,8 +16,8 @@
   --accent-foreground: oklch(0.205 0 0);
   --destructive: oklch(58.6% 0.253 17.585);
   --success: oklch(69.6% 0.17 162.48);
-  --border: oklch(0.9741 0.008 278.64);
-  --input: oklch(0.9741 0.008 278.64);
+  --border: oklch(0.9612 0 0);
+  --input: oklch(0.9612 0 0);
   --ring: oklch(0.5744 0.2328 264.07);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
