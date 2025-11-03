@@ -13,7 +13,7 @@ export default function OAuthButton() {
   }
   const Icon = loading ? Spinner : Google
   return (
-    <Button variant={'outline'} onClick={onSignIn} disabled={loading}>
+    <Button variant={'secondary'} onClick={onSignIn} disabled={loading}>
       <Icon className="text-primary" />
       ادامه با حساب گوگل
     </Button>

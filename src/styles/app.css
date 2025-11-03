@@ -81,7 +81,8 @@
     -webkit-touch-callout: none;
   }
   body {
-    @apply bg-[#e5e5e5] dark:bg-[#000000] text-foreground;
+    background-image: url("https://www.toptal.com/designers/subtlepatterns/uploads/email-pattern.png");
+    @apply text-foreground;
   }
 }
 
@@ -90,7 +91,7 @@ body::-webkit-scrollbar {
 }
 
 @utility container-sm {
-  @apply sm:max-w-sm mx-auto;
+  @apply sm:max-w-sm mx-auto bg-background;
 }
 
 @utility hidden-scrollbar {

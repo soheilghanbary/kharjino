@@ -1,6 +1,7 @@
 import { format } from 'date-fns-jalali'
 import Image from 'next/image'
 import { Fragment } from 'react'
+import { Logo } from '@/assets/icons'
 import { AppHeader } from '@/components/layouts/app-header'
 import { Separator } from '@/components/ui/separator'
 import { siteConfig } from '@/config/site'
@@ -22,20 +23,22 @@ export default function About() {
     <Fragment>
       <AppHeader title="درباره ما" />
       <Separator className="my-4" />
-      <div className="space-y-2 text-sm/7">
-        <p>
+      <Logo className="mx-auto size-24 text-primary" />
+      <div className="space-y-2 text-xs/6">
+        <p className="text-center">
           خرجینو یه اپلیکیشن برای مدیریت مخارج های شما میباشد که با استفاده از
           جدید ترین تکنولوژی های وب ساخته شده و کاملا متن باز یا (Open Source)
           میباشد.
         </p>
         <div className="space-y-2 text-center font-medium">
-          <p>ورژن: {siteConfig.v}</p>
           <p>
+            ورژن: {siteConfig.v} <br />
             <a target="_blank" href="https://soheilghanbary.ir" rel="noopener">
               توسعه دهنده: سهیل قنبری
-            </a>
+            </a>{' '}
+            <br />
+            آخرین بروزرسانی: {format(new Date(), 'd MMMM yyyy')}
           </p>
-          <p>آخرین بروزرسانی: {format(new Date(), 'd MMMM yyyy')}</p>
           <Signature />
         </div>
       </div>
