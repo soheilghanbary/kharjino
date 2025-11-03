@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { Fragment, Suspense } from 'react'
 import { UserIcon } from '@/assets/icons/bulk'
 import { buttonVariants } from '@/components/ui/button'
-import { RecentExpenseList } from './components/recent-expense-list'
+import { RecentTransactionList } from './components/recent-transaction-list'
 import { Summary, SummarySkeleton } from './components/summary'
 import { TransactionChart } from './components/transaction-chart'
 import { TransactionLoading } from './components/transaction-loading'
@@ -38,7 +38,7 @@ export default function Page() {
           </Link>
         </div>
         <Suspense fallback={<TransactionLoading />}>
-          <RecentExpenseList />
+          <RecentTransactionList />
         </Suspense>
         <TransactionChart />
       </section>

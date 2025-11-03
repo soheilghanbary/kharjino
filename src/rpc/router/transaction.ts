@@ -9,7 +9,7 @@ import { getUserId } from '@/lib/helpers'
 export const transactionRouter = {
   recent: os.handler(async () => {
     const userId = await getUserId()
-    const recentTransactions = await db.query.transactions.findMany({
+    return await db.query.transactions.findMany({
       where: eq(transactions.userId, userId),
       orderBy: desc(transactions.date),
       with: {
@@ -17,7 +17,6 @@ export const transactionRouter = {
       },
       limit: 5,
     })
-    return recentTransactions
   }),
   create: os.input(createTransaction).handler(async ({ input }) => {
     const userId = await getUserId()
@@ -103,7 +102,6 @@ export const transactionRouter = {
   }),
   summary: os.handler(async () => {
     const userId = await getUserId()
-    // Single aggregated query by type
     const result = await db
       .select({
         type: transactions.type,
@@ -112,13 +110,14 @@ export const transactionRouter = {
       .from(transactions)
       .where(eq(transactions.userId, userId))
       .groupBy(transactions.type)
-    // Aggregate results from the grouped output
-    let income = 0
-    let expense = 0
-    for (const row of result) {
-      if (row.type === 'income') income = Number(row.total) || 0
-      else if (row.type === 'expense') expense = Number(row.total) || 0
-    }
+    const { income, expense } = result.reduce(
+      (acc, row) => {
+        if (row.type === 'income') acc.income = Number(row.total ?? 0)
+        else acc.expense = Number(row.total ?? 0)
+        return acc
+      },
+      { income: 0, expense: 0 }
+    )
     const balance = income - expense
     return { balance, income, expense }
   }),

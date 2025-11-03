@@ -8,11 +8,7 @@ import { Skeleton } from '@/components/ui/skeleton'
 import { client } from '@/rpc/orpc.client'
 
 const NewTransactionButton = () => (
-  <Button
-    size={'sm'}
-    className="w-full text-base"
-    asChild
-  >
+  <Button size={'sm'} className="w-full text-base" asChild>
     <Link href={'/new'}>
       <PlusIcon className="size-5" />
       تراکنش جدید
