@@ -36,7 +36,9 @@ export const transactionRouter = {
       z
         .object({
           type: z.enum(['expense', 'income']).nullish(),
-          sort: z.enum(['newest', 'highest', 'lowest']).default('newest'),
+          sort: z
+            .enum(['newest', 'highest', 'lowest', 'oldest'])
+            .default('newest'),
           page: z.number().default(0),
         })
         .nullish()
@@ -65,6 +67,9 @@ export const transactionRouter = {
           break
         case 'lowest':
           orderByClause = asc(transactions.amount)
+          break
+        case 'oldest':
+          orderByClause = asc(transactions.date)
           break
         default:
           orderByClause = desc(transactions.date) // newest

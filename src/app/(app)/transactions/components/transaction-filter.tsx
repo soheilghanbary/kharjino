@@ -18,6 +18,7 @@ export const TransactionFilter = () => {
 
   const sortOptions = [
     { value: 'newest', label: 'جدیدترین' },
+    { value: 'oldest', label: 'قدیمی‌ترین' },
     { value: 'highest', label: 'بیشترین مبلغ' },
     { value: 'lowest', label: 'کمترین مبلغ' },
   ]
