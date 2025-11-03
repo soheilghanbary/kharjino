@@ -82,7 +82,16 @@
   }
   body {
     background-image: url("https://www.toptal.com/designers/subtlepatterns/uploads/email-pattern.png");
+    background-attachment: fixed; /* این خط باعث ثابت شدن بک‌گراند می‌شود */
+    background-repeat: repeat; /* می‌تونه repeat یا no-repeat باشه */
+    background-size: auto;
     @apply text-foreground;
+  }
+}
+
+.dark {
+  body {
+    background-image: url("https://www.toptal.com/designers/subtlepatterns/uploads/what-the-hex-dark.png"); /* پاک کردن pattern */
   }
 }
 
