@@ -165,4 +165,37 @@ export const transactionRouter = {
         total: Number(r.total) || 0,
       }))
     }),
+  getByCategory: os
+    .input(
+      z.object({
+        categoryId: z.string(),
+        page: z.number().default(0),
+      })
+    )
+    .handler(async ({ input }) => {
+      const userId = await getUserId()
+      const { categoryId, page } = input
+      const PAGE_SIZE = 10
+
+      const results = await db.query.transactions.findMany({
+        where: and(
+          eq(transactions.userId, userId),
+          eq(transactions.categoryId, categoryId)
+        ),
+        with: {
+          category: true,
+        },
+        orderBy: desc(transactions.date),
+        offset: page * PAGE_SIZE,
+        limit: PAGE_SIZE + 1,
+      })
+
+      const hasNextPage = results.length > PAGE_SIZE
+      const slicedResults = results.slice(0, PAGE_SIZE)
+
+      return {
+        data: slicedResults,
+        nextPageParam: hasNextPage ? page + 1 : undefined,
+      }
+    }),
 }

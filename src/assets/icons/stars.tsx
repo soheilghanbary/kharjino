@@ -3,7 +3,6 @@ import type { IconProps } from '@/types'
 export const StarsPattern = (props: IconProps) => (
   <svg xmlns="http://www.w3.org/2000/svg" {...props}>
     <defs>
-      {/** biome-ignore lint/correctness/useUniqueElementIds: <explanation> */}
       <pattern
         id="a"
         width={40}

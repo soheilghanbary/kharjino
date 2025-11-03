@@ -22,6 +22,11 @@ const links = [
     title: 'تم اپلیکیشن',
     icon: MagicIcon,
   },
+  // {
+  //   href: '/my-categories',
+  //   title: 'دسته بندی های من',
+  //   icon: GridIcon,
+  // },
   {
     href: '/about',
     title: 'درباره ما',

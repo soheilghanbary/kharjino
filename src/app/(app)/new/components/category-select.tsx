@@ -1,5 +1,4 @@
 import { useQuery } from '@tanstack/react-query'
-import type { TransactionType } from '@/db/schema'
 import { Label } from '@/components/ui/label'
 import {
   Select,
@@ -9,6 +8,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { Spinner } from '@/components/ui/spinner'
+import type { TransactionType } from '@/db/schema'
 import { client } from '@/rpc/orpc.client'
 
 type Props = {
@@ -33,7 +33,7 @@ export function CategorySelect({ type, initialValue, onChange }: Props) {
         <SelectTrigger>
           <SelectValue placeholder="انتخاب دسته بندی" />
         </SelectTrigger>
-        <SelectContent>
+        <SelectContent className="h-56">
           {isPending ? (
             <Spinner className="mx-auto my-4 text-center text-primary" />
           ) : (

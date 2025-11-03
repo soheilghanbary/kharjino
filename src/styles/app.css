@@ -81,7 +81,7 @@
     -webkit-touch-callout: none;
   }
   body {
-    @apply bg-[#e5e5e5] dark:bg-[#1e1e1e] text-foreground;
+    @apply bg-[#e5e5e5] dark:bg-[#000000] text-foreground;
   }
 }
 
@@ -91,6 +91,12 @@ body::-webkit-scrollbar {
 
 @utility container-sm {
   @apply sm:max-w-sm mx-auto;
+}
+
+@utility hidden-scrollbar {
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 @utility fade-up-transition {

@@ -72,6 +72,9 @@ importers:
       drizzle-orm:
         specifier: ^0.44.7
         version: 0.44.7(@neondatabase/serverless@1.0.2)(@types/pg@8.15.6)(kysely@0.28.8)(postgres@3.4.7)
+      frimousse:
+        specifier: ^0.3.0
+        version: 0.3.0(react@19.2.0)(typescript@5.9.3)
       lottie-react:
         specifier: ^2.4.1
         version: 2.4.1(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
@@ -2119,6 +2122,15 @@ packages:
       react:
         optional: true
       react-dom:
+        optional: true
+
+  frimousse@0.3.0:
+    resolution: {integrity: sha512-kO6LMoKY/cLAYEhXXtqLRaLIE6L/DagpFPrUZaLv3LsUa1/8Iza3HhwZcgN8eZ+weXnhv69eoclNUPohcCa/IQ==}
+    peerDependencies:
+      react: ^18 || ^19
+      typescript: '>=5.1.0'
+    peerDependenciesMeta:
+      typescript:
         optional: true
 
   function-bind@1.1.2:
@@ -4614,6 +4626,12 @@ snapshots:
     optionalDependencies:
       react: 19.2.0
       react-dom: 19.2.0(react@19.2.0)
+
+  frimousse@0.3.0(react@19.2.0)(typescript@5.9.3):
+    dependencies:
+      react: 19.2.0
+    optionalDependencies:
+      typescript: 5.9.3
 
   function-bind@1.1.2: {}
 
