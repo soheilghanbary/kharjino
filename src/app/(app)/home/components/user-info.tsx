@@ -1,17 +1,23 @@
 'use client'
+
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { format } from 'date-fns-jalali'
 import Image from 'next/image'
 import { Skeleton } from '@/components/ui/skeleton'
 import { client } from '@/rpc/orpc.client'
 
-const today = format(new Date(), 'EEEE / d MMMM yyyy')
+const useToday = () => format(new Date(), 'EEEE / d MMMM yyyy')
+
+const UserDate = () => {
+  const today = useToday()
+  return <p className="text-tiny text-white/85 sm:text-xs">{today}</p>
+}
 
 export const UserInfoSkeleton = () => (
   <div className="flex items-center gap-2">
     <Skeleton className="size-9 rounded-full bg-muted/30" />
     <div className="grow">
-      <p className="text-tiny text-white/85 sm:text-xs">{today}</p>
+      <UserDate />
       <Skeleton className="h-4 w-20 rounded-full bg-muted/30 sm:h-5" />
     </div>
   </div>
@@ -24,20 +30,21 @@ export function UserInfo() {
       refetchOnWindowFocus: false,
     })
   )
+
   return (
     <div className="flex items-center gap-2">
-      <figure className="relative size-9 rounded-full bg-muted/30">
+      <figure className="relative size-9 overflow-hidden rounded-full bg-muted/30">
         <Image
           fill
-          alt={String(user?.name)}
-          src={String(user?.image) ?? '/avatar.png'}
-          className="rounded-[inherit] object-cover"
+          alt={user?.name ?? 'User Avatar'}
+          src={user?.image ?? '/avatar.png'}
+          className="object-cover"
         />
       </figure>
       <div className="grow">
-        <p className="text-tiny text-white/85 sm:text-xs">{today}</p>
+        <UserDate />
         <h2 className="font-medium text-white text-xs sm:text-sm">
-          {String(user?.name)}
+          {user?.name ?? '—'}
         </h2>
       </div>
     </div>
