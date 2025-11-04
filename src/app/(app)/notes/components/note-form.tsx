@@ -148,10 +148,10 @@ const DeleteNoteButton = ({ id }: { id: string }) => {
   return (
     <Button
       size={'sm'}
-      variant={'secondary'}
       onClick={onDelete}
-      className="mt-2 w-full bg-destructive/10 text-destructive dark:bg-destructive/25"
       disabled={isPending}
+      variant={'secondary'}
+      className="mt-2 w-full bg-destructive/10 text-destructive dark:bg-destructive/25"
     >
       {isPending ? <Spinner /> : <TrashIcon />}
       حذف یادداشت

@@ -2,6 +2,7 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { PlusIcon } from 'lucide-react'
+import { nanoid } from 'nanoid'
 import { type ReactNode, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { toast } from 'sonner'
@@ -15,8 +16,17 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from '@/components/ui/drawer'
-import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
 import { Spinner } from '@/components/ui/spinner'
+import { TextField } from '@/components/ui/text-field'
+import { useSession } from '@/lib/auth'
 import { client } from '@/rpc/orpc.client'
 import { createTaskSchema, type UpdateTaskSchema } from '../schemas'
 
@@ -30,6 +40,7 @@ type TaskFormProps =
     }
 
 export function TaskForm(props: TaskFormProps & { trigger?: ReactNode }) {
+  const { data } = useSession()
   const qc = useQueryClient()
   const [open, setOpen] = useState(false)
   const {
@@ -37,6 +48,7 @@ export function TaskForm(props: TaskFormProps & { trigger?: ReactNode }) {
     handleSubmit,
     control,
     formState: { errors },
+    watch,
     reset,
   } = useForm({
     resolver: zodResolver(createTaskSchema),
@@ -45,51 +57,56 @@ export function TaskForm(props: TaskFormProps & { trigger?: ReactNode }) {
         ? {
             text: props.task.text,
             done: props.task.done,
+            priority: props.task.priority,
           }
         : {
             text: '',
             done: false,
+            priority: 1,
           },
   })
 
   const { mutate: addMutate, isPending: addPending } = useMutation(
     client.task.create.mutationOptions({
-      // async onMutate(values) {
-      //   await qc.cancelQueries({ queryKey: client.task.getAll.queryKey() })
-      //   const previousTasks =
-      //     qc.getQueryData<Awaited<ReturnType<typeof client.task.getAll.call>>>(
-      //       client.task.getAll.queryKey()
-      //     ) || []
-      //   const newTask = {
-      //     ...values,
-      //     id: nanoid(),
-      //     userId: '',
-      //     createdAt: new Date(),
-      //     updatedAt: new Date(),
-      //   }
-      //   qc.setQueryData(client.task.getAll.queryKey(), [
-      //     newTask,
-      //     ...previousTasks,
-      //   ])
-      //   reset()
-      //   setOpen(false)
-      // },
-      onSuccess() {
-        qc.prefetchQuery({ queryKey: client.task.getAll.queryKey() })
+      async onMutate(values) {
+        await qc.cancelQueries({ queryKey: client.task.getAll.queryKey() })
+        const previousTasks =
+          qc.getQueryData<Awaited<ReturnType<typeof client.task.getAll.call>>>(
+            client.task.getAll.queryKey()
+          ) || []
+        const newTask = {
+          ...values,
+          userId: String(data?.session.id),
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        }
+        qc.setQueryData(client.task.getAll.queryKey(), [
+          newTask,
+          ...previousTasks,
+        ])
         toast.success('تسک اضافه شد')
-        reset()
         setOpen(false)
+        reset()
       },
     })
   )
 
   const { mutate: editMutate, isPending: editPending } = useMutation(
     client.task.update.mutationOptions({
-      onSettled() {
-        qc.prefetchQuery({ queryKey: client.task.getAll.queryKey() })
+      async onMutate(values) {
+        await qc.cancelQueries({ queryKey: client.task.getAll.queryKey() })
+        const previousTasks =
+          qc.getQueryData<Awaited<ReturnType<typeof client.task.getAll.call>>>(
+            client.task.getAll.queryKey()
+          ) || []
+        const newList = previousTasks.map((t) => {
+          if (t.id === values.id) return { ...t, ...values }
+          return t
+        })
+        qc.setQueryData(client.task.getAll.queryKey(), [...newList])
         toast.success('تسک ویرایش شد')
-        reset()
         setOpen(false)
+        reset({ ...values })
       },
     })
   )
@@ -97,7 +114,7 @@ export function TaskForm(props: TaskFormProps & { trigger?: ReactNode }) {
   const onSubmit = handleSubmit((data) => {
     props.mode === 'edit'
       ? editMutate({ ...data, id: props.task.id })
-      : addMutate(data)
+      : addMutate({ ...data, id: nanoid() })
   })
 
   return (
@@ -111,7 +128,7 @@ export function TaskForm(props: TaskFormProps & { trigger?: ReactNode }) {
           </div>
         )}
       </DrawerTrigger>
-      <DrawerContent>
+      <DrawerContent className="dark:bg-background">
         <DrawerHeader>
           <DrawerTitle>
             {props.mode === 'edit' ? 'ویرایش تسک' : 'تسک جدید'}
@@ -123,27 +140,50 @@ export function TaskForm(props: TaskFormProps & { trigger?: ReactNode }) {
           </DrawerDescription>
         </DrawerHeader>
         <form onSubmit={onSubmit} className="grid gap-4">
-          <div className="flex items-center rounded-md border bg-muted/40">
-            <Input
-              type="text"
-              autoComplete="off"
-              disabled={props.mode === 'edit' ? editPending : addPending}
-              className="flex-1 border-0 border-none bg-transparent focus-visible:outline-none focus-visible:ring-0"
-              placeholder="چه کاری داری؟"
-              {...register('text')}
-            />
+          <TextField
+            type="text"
+            label="عنوان کار"
+            autoComplete="off"
+            disabled={props.mode === 'edit' ? editPending : addPending}
+            inputClass="bg-muted dark:bg-card"
+            {...register('text')}
+          />
+          <div className="grid gap-2">
+            <Label>اولویت</Label>
             <Controller
+              name="priority"
               control={control}
+              render={({ field }) => (
+                <Select
+                  defaultValue={String(field.value)}
+                  onValueChange={(e) => field.onChange(Number(e))}
+                >
+                  <SelectTrigger className="bg-muted dark:bg-card">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value={'0'}>🟢 پایین</SelectItem>
+                    <SelectItem value={'1'}>🟠 متوسط</SelectItem>
+                    <SelectItem value={'2'}>🔴 بالا</SelectItem>
+                  </SelectContent>
+                </Select>
+              )}
+            />
+          </div>
+          <div className="flex items-center gap-3">
+            <Controller
               name="done"
+              control={control}
               render={({ field }) => (
                 <Checkbox
                   disabled={props.mode === 'edit' ? editPending : addPending}
                   checked={field.value}
                   onCheckedChange={field.onChange}
-                  className="mx-3 size-5 bg-card"
+                  className="size-5 dark:bg-muted"
                 />
               )}
             />
+            <Label className="text-xs/5">کار انجام شده؟</Label>
           </div>
           {errors.text?.message && (
             <span className="-mt-2.5 text-destructive text-tiny">
@@ -151,8 +191,9 @@ export function TaskForm(props: TaskFormProps & { trigger?: ReactNode }) {
             </span>
           )}
           <Button
-            className="w-full"
             type="submit"
+            className="w-full"
+            variant={props.mode === 'edit' ? 'secondary' : 'default'}
             disabled={props.mode === 'edit' ? editPending : addPending}
           >
             {props.mode === 'edit'

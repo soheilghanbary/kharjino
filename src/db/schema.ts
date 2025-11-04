@@ -4,6 +4,7 @@ import {
   doublePrecision,
   pgEnum,
   pgTable,
+  smallint,
   text,
   timestamp,
 } from 'drizzle-orm/pg-core'
@@ -124,6 +125,7 @@ export const tasks = pgTable('task', {
     .$defaultFn(() => nanoid()),
   text: text('text').notNull(),
   done: boolean('done').notNull(),
+  priority: smallint('priority').notNull().default(1),
   createdAt: timestamp('createdAt').notNull().defaultNow(),
   updatedAt: timestamp('updatedAt').notNull().defaultNow(),
   userId: text('userId')

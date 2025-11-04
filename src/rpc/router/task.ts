@@ -1,7 +1,7 @@
 import { os } from '@orpc/server'
 import { and, desc, eq } from 'drizzle-orm'
 import z from 'zod'
-import { createTaskSchema, updateTaskSchema } from '@/app/(app)/notes/schemas'
+import { updateTaskSchema } from '@/app/(app)/notes/schemas'
 import { db } from '@/db'
 import { tasks } from '@/db/schema'
 import { getUserId } from '@/lib/helpers'
@@ -21,7 +21,7 @@ export const taskRouter = {
     })
     return task
   }),
-  create: os.input(createTaskSchema).handler(async ({ input }) => {
+  create: os.input(updateTaskSchema).handler(async ({ input }) => {
     const userId = await getUserId()
     const [newTask] = await db
       .insert(tasks)
@@ -39,8 +39,7 @@ export const taskRouter = {
     const [updatedTask] = await db
       .update(tasks)
       .set({
-        text: input.text,
-        done: input.done,
+        ...input,
         updatedAt: new Date(),
       })
       .where(and(eq(tasks.id, input.id), eq(tasks.userId, userId)))

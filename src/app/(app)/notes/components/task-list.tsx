@@ -35,6 +35,7 @@ const CheckboxTaskButton = ({ id, done }: { id: string; done: boolean }) => {
     <Checkbox
       checked={done}
       onCheckedChange={(e: boolean) => mutate({ id, done: e })}
+      className="dark:bg-muted"
     />
   )
 }
@@ -66,19 +67,40 @@ const DeleteTaskButton = ({ id }: { id: string }) => {
   )
 }
 
-const TaskCard = ({ id, text, done }: Task) => {
+const handlePiority = (priority: number) => {
+  switch (priority) {
+    case 0:
+      return 'پایین'
+    case 1:
+      return 'متوسط'
+    case 2:
+      return 'بالا'
+  }
+}
+
+const TaskCard = ({ id, text, done, priority }: Task) => {
   return (
-    <div className="flex items-center gap-2 rounded-2xl bg-muted p-3 dark:bg-card">
+    <div className="flex items-center gap-4 rounded-2xl bg-muted p-3 dark:bg-card">
       <CheckboxTaskButton id={id} done={done} />
-      <p
-        className={cn('grow text-foreground text-xs/6', done && 'line-through')}
-      >
-        {text}
+      <p className={'flex grow flex-col text-foreground text-xs/5'}>
+        <span className={done ? 'text-muted-foreground line-through' : ''}>
+          {text}
+        </span>
+        <span
+          className={cn(
+            'font-medium text-tiny',
+            priority === 0 && 'text-success',
+            priority === 1 && 'text-orange-500',
+            priority === 2 && 'text-destructive'
+          )}
+        >
+          {handlePiority(priority)}
+        </span>
       </p>
-      <div className="space-x-1">
+      <div className="flex items-center gap-1">
         <TaskForm
           mode="edit"
-          task={{ id, text, done }}
+          task={{ id, text, done, priority }}
           trigger={
             <Button className="size-7 hover:bg-success/10" variant={'ghost'}>
               <EditIcon className="size-4 text-success" />

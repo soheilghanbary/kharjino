@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { Suspense } from 'react'
-import { CheckListIcon, NotesIcon, PlusIcon } from '@/assets/icons/bulk'
+import { CheckListIcon, NotesIcon, PlusCircleIcon } from '@/assets/icons/bulk'
 import { AppHeader } from '@/components/layouts/app-header'
 import { Button } from '@/components/ui/button'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
@@ -35,7 +35,7 @@ export default function Page() {
             trigger={
               <div className="container-sm fixed inset-x-0 bottom-16 z-10 mx-auto flex w-fit justify-end bg-transparent p-4">
                 <Button size={'sm'} className="rounded-full px-4 shadow-none">
-                  <PlusIcon className="size-5" />
+                  <PlusCircleIcon className="size-5" />
                   تسک جدید
                 </Button>
               </div>
@@ -53,7 +53,7 @@ export default function Page() {
               className="rounded-full px-4 shadow-none"
             >
               <Link href={'/notes/new'}>
-                <PlusIcon className="size-5" />
+                <PlusCircleIcon className="size-5" />
                 یادداشت جدید
               </Link>
             </Button>
