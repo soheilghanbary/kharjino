@@ -4,6 +4,7 @@ import {
   useQueryClient,
   useSuspenseQuery,
 } from '@tanstack/react-query'
+import { useQueryState } from 'nuqs'
 import { CheckPaperIcon, EditIcon, TrashIcon } from '@/assets/icons/bulk'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
@@ -114,8 +115,16 @@ const TaskCard = ({ id, text, done, priority }: Task) => {
 }
 
 export const TaskList = () => {
+  const [filter] = useQueryState('filter')
+  const priorityFilter = filter !== null ? Number(filter) : undefined
   const { data } = useSuspenseQuery(client.task.getAll.queryOptions())
-  if (!data?.length)
+
+  const filtered =
+    priorityFilter !== undefined
+      ? data.filter((t) => t.priority === priorityFilter)
+      : data
+
+  if (!filtered?.length)
     return (
       <div className="flex h-56 flex-col items-center justify-center gap-2 rounded-md border-2 border-dashed bg-muted text-muted-foreground text-sm dark:bg-card">
         <CheckPaperIcon />
@@ -125,8 +134,8 @@ export const TaskList = () => {
     )
 
   return (
-    <div className="grid gap-1">
-      {data.map((t) => (
+    <div className="fade-up-transition grid gap-1" key={filter}>
+      {filtered.map((t) => (
         <TaskCard key={t.id} {...t} />
       ))}
     </div>

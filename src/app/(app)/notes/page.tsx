@@ -5,6 +5,7 @@ import { AppHeader } from '@/components/layouts/app-header'
 import { Button } from '@/components/ui/button'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { NoteList, NoteListLoading } from './components/note-list'
+import { TaskFilter } from './components/task-filter'
 import { TaskForm } from './components/task-form'
 import { TaskList } from './components/task-list'
 
@@ -30,6 +31,7 @@ export default function Page() {
           </TabsTrigger>
         </TabsList>
         <TabsContent value="tasks">
+          <TaskFilter />
           <TaskForm
             mode="add"
             trigger={
