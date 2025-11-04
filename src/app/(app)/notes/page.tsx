@@ -32,7 +32,9 @@ export default function Page() {
         </TabsList>
         <TabsContent value="tasks">
           <TaskForm mode="add" />
-          <TaskList />
+          <Suspense fallback={<NoteListLoading />}>
+            <TaskList />
+          </Suspense>
         </TabsContent>
         <TabsContent value="notes">
           <div className="container-sm fixed inset-x-0 bottom-16 z-10 mx-auto flex w-fit justify-end bg-transparent p-4">

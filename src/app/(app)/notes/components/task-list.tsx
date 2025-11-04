@@ -1,10 +1,13 @@
 'use client'
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import type { Task } from '@/db/schema'
+import {
+  useMutation,
+  useQueryClient,
+  useSuspenseQuery,
+} from '@tanstack/react-query'
 import { CheckPaperIcon, EditIcon, TrashIcon } from '@/assets/icons/bulk'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
-import { Spinner } from '@/components/ui/spinner'
+import type { Task } from '@/db/schema'
 import { cn } from '@/lib/utils'
 import { client } from '@/rpc/orpc.client'
 import { TaskForm } from './task-form'
@@ -89,10 +92,7 @@ const TaskCard = ({ id, text, done }: Task) => {
 }
 
 export const TaskList = () => {
-  const { data, isPending } = useQuery(client.task.getAll.queryOptions())
-  if (isPending)
-    return <Spinner className="mx-auto my-12 size-5 text-primary" />
-
+  const { data } = useSuspenseQuery(client.task.getAll.queryOptions())
   if (!data?.length)
     return (
       <div className="flex h-56 flex-col items-center justify-center gap-2 rounded-md border-2 border-dashed bg-muted text-muted-foreground text-sm dark:bg-card">
