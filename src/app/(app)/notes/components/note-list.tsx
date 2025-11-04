@@ -1,10 +1,11 @@
+'use client'
+import { useSuspenseQuery } from '@tanstack/react-query'
 import { format } from 'date-fns-jalali'
-import { notes, type Note } from '@/db/schema'
 import Link from 'next/link'
+import { NotesIcon } from '@/assets/icons/bulk'
 import { Skeleton } from '@/components/ui/skeleton'
-import { getUserId } from '@/lib/helpers'
-import { db } from '@/db'
-import { eq } from 'drizzle-orm'
+import type { Note } from '@/db/schema'
+import { client } from '@/rpc/orpc.client'
 
 const NoteCard = (note: Note) => {
   return (
@@ -41,19 +42,26 @@ export const NoteListLoading = () => (
   </div>
 )
 
-// Cached function using 'use cache' directive
-async function getCachedNotes(userId: string) {
-  return await db.query.notes.findMany({
-    where: eq(notes.userId, userId),
-  })
-}
+export const NoteList = () => {
+  const { data } = useSuspenseQuery(
+    client.note.getAll.queryOptions({
+      refetchOnMount: false,
+      refetchOnReconnect: false,
+      refetchOnWindowFocus: false,
+    })
+  )
 
-export const NoteList = async () => {
-  const userId = await getUserId()
-  const data = await getCachedNotes(userId)
-  
+  if (!data.length)
+    return (
+      <div className="flex h-56 flex-col items-center justify-center gap-2 rounded-md border-2 border-dashed bg-muted text-muted-foreground text-sm dark:bg-card">
+        <NotesIcon />
+        یادداشت نزاشتی
+        <span className="text-xs">رو دکمه + بزن و یادداشت ایجاد کنید</span>
+      </div>
+    )
+
   return (
-    <div className="fade-up-transition grid gap-y-2">
+    <div className="fade-up-transition mb-14 grid gap-y-2">
       {data.map((n: Note) => (
         <NoteCard key={n.id} {...n} />
       ))}

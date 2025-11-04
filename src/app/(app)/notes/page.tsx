@@ -35,14 +35,15 @@ export default function Page() {
           <TaskList />
         </TabsContent>
         <TabsContent value="notes">
-          <div className="container-sm fixed inset-x-0 z-10 bottom-16 mx-auto flex w-full justify-end p-4">
+          <div className="container-sm fixed inset-x-0 bottom-16 z-10 mx-auto flex w-fit justify-end bg-transparent p-4">
             <Button
               asChild
-              className="size-10 rounded-full"
-              variant={'secondary'}
+              size={'sm'}
+              className="rounded-full px-4 shadow-none"
             >
               <Link href={'/notes/new'}>
-                <PlusIcon className="size-5 text-primary" />
+                <PlusIcon className="size-5" />
+                یادداشت جدید
               </Link>
             </Button>
           </div>

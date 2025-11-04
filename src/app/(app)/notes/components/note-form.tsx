@@ -1,6 +1,6 @@
 'use client'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Spinner } from '@/components/ui/spinner'
 import { Textarea } from '@/components/ui/textarea'
+import type { Note } from '@/db/schema'
 import { client } from '@/rpc/orpc.client'
 import { createNoteSchema, type UpdateNoteSchema } from '../schemas'
 
@@ -23,6 +24,7 @@ type NoteFormProps =
 
 export const NoteForm = (props: NoteFormProps) => {
   const router = useRouter()
+  const qc = useQueryClient()
 
   const {
     register,
@@ -44,7 +46,12 @@ export const NoteForm = (props: NoteFormProps) => {
 
   const createMutation = useMutation(
     client.note.create.mutationOptions({
-      onSuccess() {
+      onSuccess(res) {
+        qc.cancelQueries({ queryKey: client.note.getAll.queryKey() })
+        const previousNotes = qc.getQueryData(
+          client.note.getAll.queryKey()
+        ) as Note[]
+        qc.setQueryData(client.note.getAll.queryKey(), [res, ...previousNotes])
         toast.info('یادداشت ایجاد شد')
         router.push('/notes')
       },
@@ -53,7 +60,16 @@ export const NoteForm = (props: NoteFormProps) => {
 
   const updateMutation = useMutation(
     client.note.update.mutationOptions({
-      onSuccess() {
+      onSuccess(res) {
+        qc.cancelQueries({ queryKey: client.note.getAll.queryKey() })
+        const previousNotes = qc.getQueryData(
+          client.note.getAll.queryKey()
+        ) as Note[]
+        const newNote = previousNotes.map((n) => {
+          if (n.id === res.id) return res
+          return n
+        })
+        qc.setQueryData(client.note.getAll.queryKey(), newNote)
         toast.info('یادداشت ویرایش شد')
         router.push('/notes')
       },
@@ -100,6 +116,7 @@ export const NoteForm = (props: NoteFormProps) => {
           size={'xs'}
           className="mt-2 mr-auto"
           variant={props.mode === 'add' ? 'default' : 'outline'}
+          disabled={isPending}
         >
           {isPending && <Spinner />}
           ذخیره
@@ -112,9 +129,16 @@ export const NoteForm = (props: NoteFormProps) => {
 
 const DeleteNoteButton = ({ id }: { id: string }) => {
   const router = useRouter()
+  const qc = useQueryClient()
   const { mutate, isPending } = useMutation(
     client.note.delete.mutationOptions({
       onSuccess() {
+        qc.cancelQueries({ queryKey: client.note.getAll.queryKey() })
+        const previousNotes = qc.getQueryData(
+          client.note.getAll.queryKey()
+        ) as Note[]
+        const newNotes = previousNotes.filter((n) => n.id !== id)
+        qc.setQueryData(client.note.getAll.queryKey(), newNotes)
         toast.info('یادداشت حذف شد')
         router.push('/notes')
       },
@@ -127,6 +151,7 @@ const DeleteNoteButton = ({ id }: { id: string }) => {
       variant={'secondary'}
       onClick={onDelete}
       className="mt-2 w-full bg-destructive/10 text-destructive dark:bg-destructive/25"
+      disabled={isPending}
     >
       {isPending ? <Spinner /> : <TrashIcon />}
       حذف یادداشت

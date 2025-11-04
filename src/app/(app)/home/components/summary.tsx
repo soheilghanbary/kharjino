@@ -1,11 +1,10 @@
 'use client'
-import { useSuspenseQuery } from '@tanstack/react-query'
 import { TrendingDown, TrendingUp } from 'lucide-react'
 import Link from 'next/link'
 import { PlusIcon } from '@/assets/icons/bulk'
 import { Button } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
-import { client } from '@/rpc/orpc.client'
+import { useGetSummary } from '../hooks'
 
 const NewTransactionButton = () => (
   <Button size={'sm'} className="w-full text-base" asChild>
@@ -48,10 +47,9 @@ export const SummarySkeleton = () => (
   </div>
 )
 
-// کامپوننت اصلی
 export const Summary = () => {
-  const { data } = useSuspenseQuery(client.transaction.summary.queryOptions())
-
+  const { data } = useGetSummary()
+  const { balance, expense, income } = data
   return (
     <div className="z-10 mt-4 rounded-3xl bg-card p-5 shadow-lg">
       <div>
@@ -59,7 +57,7 @@ export const Summary = () => {
           موجودی کل
         </p>
         <p className="text-center font-bold text-2xl text-primary">
-          {data.balance.toLocaleString('fa-IR')} تومان
+          {balance.toLocaleString('fa-IR')} تومان
         </p>
       </div>
       <div className="my-4 grid grid-cols-2 items-center gap-12">
@@ -71,7 +69,7 @@ export const Summary = () => {
             هزینه
           </p>
           <p className="font-medium text-muted-foreground text-sm">
-            {data.expense.toLocaleString('fa-IR')} تومان
+            {expense.toLocaleString('fa-IR')} تومان
           </p>
         </div>
         <div className="space-y-1">
@@ -82,7 +80,7 @@ export const Summary = () => {
             درآمد
           </p>
           <p className="font-medium text-muted-foreground text-sm">
-            {data.income.toLocaleString('fa-IR')} تومان
+            {income.toLocaleString('fa-IR')} تومان
           </p>
         </div>
       </div>
