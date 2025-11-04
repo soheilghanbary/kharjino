@@ -1,7 +1,6 @@
-import { PlusIcon } from 'lucide-react'
 import Link from 'next/link'
 import { Suspense } from 'react'
-import { CheckListIcon, NotesIcon } from '@/assets/icons/bulk'
+import { CheckListIcon, NotesIcon, PlusIcon } from '@/assets/icons/bulk'
 import { AppHeader } from '@/components/layouts/app-header'
 import { Button } from '@/components/ui/button'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
@@ -31,7 +30,23 @@ export default function Page() {
           </TabsTrigger>
         </TabsList>
         <TabsContent value="tasks">
-          <TaskForm mode="add" />
+          <TaskForm
+            mode="add"
+            trigger={
+              <div className="container-sm fixed inset-x-0 bottom-16 z-10 mx-auto flex w-fit justify-end bg-transparent p-4">
+                <Button
+                  asChild
+                  size={'sm'}
+                  className="rounded-full px-4 shadow-none"
+                >
+                  <Link href={'/notes/new'}>
+                    <PlusIcon className="size-5" />
+                    تسک جدید
+                  </Link>
+                </Button>
+              </div>
+            }
+          />
           <Suspense fallback={<NoteListLoading />}>
             <TaskList />
           </Suspense>
