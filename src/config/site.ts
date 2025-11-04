@@ -7,7 +7,7 @@ import walletAnimation from '@/assets/lotties/wallet.json'
 export const siteConfig = {
   title: 'Kharjino',
   description: 'Modern web, simplified for Web Developers',
-  v: '2.0',
+  v: '2.1',
 }
 
 export const wizardData = [

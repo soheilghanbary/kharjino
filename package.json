@@ -1,6 +1,6 @@
 {
   "name": "kharjino",
-  "version": "1.0.0",
+  "version": "2.1.0",
   "description": "Modern web, simplified",
   "scripts": {
     "dev": "next dev",
