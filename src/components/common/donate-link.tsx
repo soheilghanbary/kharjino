@@ -15,5 +15,8 @@ export const DonateLink = () => (
         daramet.com/soly
       </span>
     </Link>
+    <p className="text-center text-muted-foreground text-tiny">
+      حمایت شما به رشد و پیشرفت این پروژه متن باز کمک میکنه
+    </p>
   </div>
 )

@@ -2,6 +2,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import {
+  NotesIcon,
   PieChartIcon,
   PlusIcon,
   TransactionIcon,
@@ -16,14 +17,19 @@ const navItems = [
     icon: PieChartIcon,
   },
   {
-    href: '/new',
-    label: 'افزودن ',
-    icon: PlusIcon,
-  },
-  {
     href: '/transactions',
     label: 'تراکنش ها',
     icon: TransactionIcon,
+  },
+  {
+    href: '/new',
+    label: 'افزودن',
+    icon: PlusIcon,
+  },
+  {
+    href: '/notes',
+    label: 'دست نویس ها',
+    icon: NotesIcon,
   },
   {
     href: '/profile',
@@ -46,7 +52,7 @@ const NavigationItem = ({ href, label, icon }: (typeof navItems)[0]) => {
       )}
     >
       <IconComponent className="size-6" />
-      <p className="font-medium text-xs/[16px]">{label}</p>
+      <p className="font-medium text-tiny/[16px]">{label}</p>
     </Link>
   )
 }
@@ -54,7 +60,7 @@ const NavigationItem = ({ href, label, icon }: (typeof navItems)[0]) => {
 export const AppNavigation = () => {
   return (
     <footer className="container-sm fixed inset-x-0 bottom-0 left-0 z-10 border-t bg-card/85 backdrop-blur-md">
-      <section className="grid w-full grid-cols-4 gap-6 px-3 py-2.5">
+      <section className="grid w-full grid-cols-5 gap-x-3 px-3 py-2.5">
         {navItems.map((item) => (
           <NavigationItem key={item.href} {...item} />
         ))}

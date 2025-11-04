@@ -1,7 +1,14 @@
 import { ChevronLeft } from 'lucide-react'
 import Link from 'next/link'
 import { Fragment } from 'react'
-import { MagicIcon, NotesIcon, UserIcon, UsersIcon } from '@/assets/icons/bulk'
+import {
+  DollarIcon,
+  MagicIcon,
+  NotesIcon,
+  TransactionIcon,
+  UserIcon,
+  UsersIcon,
+} from '@/assets/icons/bulk'
 import { DonateLink } from '@/components/common/donate-link'
 import { LogoutButton } from '@/components/common/logout-button'
 import { AppHeader } from '@/components/layouts/app-header'
@@ -13,6 +20,11 @@ const links = [
     icon: UserIcon,
   },
   {
+    href: '/transactions',
+    title: 'تراکنش های من',
+    icon: TransactionIcon,
+  },
+  {
     href: '/notes',
     title: 'دست نویس های من',
     icon: NotesIcon,
@@ -21,6 +33,11 @@ const links = [
     href: '/theme',
     title: 'تم اپلیکیشن',
     icon: MagicIcon,
+  },
+  {
+    href: '/currency',
+    title: 'ارز ها',
+    icon: DollarIcon,
   },
   // {
   //   href: '/my-categories',
