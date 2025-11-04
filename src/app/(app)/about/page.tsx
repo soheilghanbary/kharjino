@@ -10,8 +10,8 @@ const Signature = () => (
   <Image
     src="/signature.png"
     alt="Vercel"
-    width={80}
-    height={20}
+    width={100}
+    height={50}
     quality={100}
     sizes="100vw"
     className="mx-auto mt-6 dark:invert"
