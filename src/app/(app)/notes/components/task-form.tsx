@@ -5,7 +5,6 @@ import { PlusIcon } from 'lucide-react'
 import { nanoid } from 'nanoid'
 import { type ReactNode, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
-import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import {
@@ -84,7 +83,6 @@ export function TaskForm(props: TaskFormProps & { trigger?: ReactNode }) {
           newTask,
           ...previousTasks,
         ])
-        toast.success('تسک اضافه شد')
         setOpen(false)
         reset()
       },
@@ -104,7 +102,6 @@ export function TaskForm(props: TaskFormProps & { trigger?: ReactNode }) {
           return t
         })
         qc.setQueryData(client.task.getAll.queryKey(), [...newList])
-        toast.success('تسک ویرایش شد')
         setOpen(false)
         reset({ ...values })
       },
