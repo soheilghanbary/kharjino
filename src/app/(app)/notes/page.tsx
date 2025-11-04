@@ -34,15 +34,9 @@ export default function Page() {
             mode="add"
             trigger={
               <div className="container-sm fixed inset-x-0 bottom-16 z-10 mx-auto flex w-fit justify-end bg-transparent p-4">
-                <Button
-                  asChild
-                  size={'sm'}
-                  className="rounded-full px-4 shadow-none"
-                >
-                  <Link href={'/notes/new'}>
-                    <PlusIcon className="size-5" />
-                    تسک جدید
-                  </Link>
+                <Button size={'sm'} className="rounded-full px-4 shadow-none">
+                  <PlusIcon className="size-5" />
+                  تسک جدید
                 </Button>
               </div>
             }
