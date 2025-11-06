@@ -47,7 +47,6 @@ export function TaskForm(props: TaskFormProps & { trigger?: ReactNode }) {
     handleSubmit,
     control,
     formState: { errors },
-    watch,
     reset,
   } = useForm({
     resolver: zodResolver(createTaskSchema),
@@ -143,6 +142,7 @@ export function TaskForm(props: TaskFormProps & { trigger?: ReactNode }) {
             autoComplete="off"
             disabled={props.mode === 'edit' ? editPending : addPending}
             inputClass="bg-muted dark:bg-card"
+            error={errors.text?.message}
             {...register('text')}
           />
           <div className="grid gap-2">
@@ -182,11 +182,6 @@ export function TaskForm(props: TaskFormProps & { trigger?: ReactNode }) {
             />
             <Label className="text-xs/5">کار انجام شده؟</Label>
           </div>
-          {errors.text?.message && (
-            <span className="-mt-2.5 text-destructive text-tiny">
-              {errors.text.message}
-            </span>
-          )}
           <Button
             type="submit"
             className="w-full"

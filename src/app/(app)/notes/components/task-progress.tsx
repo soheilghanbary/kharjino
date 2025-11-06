@@ -5,11 +5,7 @@ import { Progress } from '@/components/ui/progress'
 import { client } from '@/rpc/orpc.client'
 
 export const TaskProgress = () => {
-  const {
-    data: tasks,
-    isLoading,
-    isError,
-  } = useQuery(client.task.getAll.queryOptions())
+  const { data: tasks, isLoading } = useQuery(client.task.getAll.queryOptions())
 
   const progress = useMemo(() => {
     if (!tasks || tasks.length === 0) return 0
@@ -25,7 +21,7 @@ export const TaskProgress = () => {
 
   if (isLoading)
     return (
-      <div className="grid max-w-40 grow gap-1">
+      <div className="grid max-w-32 grow gap-1">
         <span className="text-muted-foreground text-xs">
           در حال بارگذاری...
         </span>
@@ -33,16 +29,8 @@ export const TaskProgress = () => {
       </div>
     )
 
-  if (isError)
-    return (
-      <div className="grid max-w-40 grow gap-1">
-        <span className="text-destructive text-xs">خطا در دریافت اطلاعات</span>
-        <Progress value={0} />
-      </div>
-    )
-
   return (
-    <div className="grid max-w-40 grow gap-1">
+    <div className="grid max-w-32 grow gap-1">
       <span className="text-muted-foreground text-xs">
         انجام شده: {progress}%
       </span>

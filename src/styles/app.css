@@ -114,3 +114,9 @@ body::-webkit-scrollbar {
 @utility fade-up-transition {
   @apply animate-fade-up animate-duration-300;
 }
+
+input[type="text"],
+input[type="number"],
+textarea {
+  font-size: 16px !important;
+}

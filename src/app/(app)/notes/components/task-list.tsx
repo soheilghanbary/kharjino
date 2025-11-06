@@ -60,8 +60,9 @@ const DeleteTaskButton = ({ id }: { id: string }) => {
   return (
     <Button
       onClick={onDelete}
-      className="size-7 hover:bg-destructive/10"
+      size={'icon'}
       variant={'ghost'}
+      className="size-7 hover:bg-destructive/10"
     >
       <TrashIcon className="size-4 text-destructive" />
     </Button>
@@ -81,7 +82,7 @@ const handlePiority = (priority: number) => {
 
 const TaskCard = ({ id, text, done, priority }: Task) => {
   return (
-    <div className="flex items-center gap-4 rounded-2xl bg-muted p-3 dark:bg-card">
+    <div className="flex items-center gap-4 rounded-2xl bg-muted px-3 py-2 dark:bg-card">
       <CheckboxTaskButton id={id} done={done} />
       <p className={'flex grow flex-col text-foreground text-xs/5'}>
         <span className={done ? 'text-muted-foreground line-through' : ''}>
@@ -103,7 +104,11 @@ const TaskCard = ({ id, text, done, priority }: Task) => {
           mode="edit"
           task={{ id, text, done, priority }}
           trigger={
-            <Button className="size-7 hover:bg-success/10" variant={'ghost'}>
+            <Button
+              size={'icon'}
+              variant={'ghost'}
+              className="size-7 hover:bg-success/10"
+            >
               <EditIcon className="size-4 text-success" />
             </Button>
           }

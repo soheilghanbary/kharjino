@@ -33,8 +33,8 @@ export default function Page() {
         </TabsList>
         <TabsContent value="tasks">
           <div className="mb-4 flex items-center justify-between gap-4">
-            <TaskFilter />
             <TaskProgress />
+            <TaskFilter />
           </div>
           <TaskForm
             mode="add"
