@@ -20,9 +20,9 @@ export function TaskFilter() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="secondary" size="sm" className="mb-4">
+        <Button variant="secondary" size="sm">
           <Filter />
-          فیلتر
+          اولویت
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>

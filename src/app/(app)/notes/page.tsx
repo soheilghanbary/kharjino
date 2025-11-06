@@ -8,6 +8,7 @@ import { NoteList, NoteListLoading } from './components/note-list'
 import { TaskFilter } from './components/task-filter'
 import { TaskForm } from './components/task-form'
 import { TaskList } from './components/task-list'
+import { TaskProgress } from './components/task-progress'
 
 export default function Page() {
   return (
@@ -31,7 +32,10 @@ export default function Page() {
           </TabsTrigger>
         </TabsList>
         <TabsContent value="tasks">
-          <TaskFilter />
+          <div className="mb-4 flex items-center justify-between gap-4">
+            <TaskFilter />
+            <TaskProgress />
+          </div>
           <TaskForm
             mode="add"
             trigger={
