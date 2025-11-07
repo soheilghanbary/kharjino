@@ -27,33 +27,33 @@ const links = [
   },
   {
     href: '/theme',
-    title: 'تم اپلیکیشن',
+    title: 'تغییر پوسته اپلیکیشن',
     icon: MagicIcon,
   },
-  {
-    href: '/transactions',
-    title: 'تراکنش های من',
-    icon: TransactionIcon,
-  },
-  {
-    href: '/notes',
-    title: 'دست نویس های من',
-    icon: NotesIcon,
-  },
+  // {
+  //   href: '/transactions',
+  //   title: 'تراکنش های من',
+  //   icon: TransactionIcon,
+  // },
+  // {
+  //   href: '/notes',
+  //   title: 'دست نویس های من',
+  //   icon: NotesIcon,
+  // },
   // {
   //   href: '/my-categories',
   //   title: 'دسته بندی های من',
   //   icon: GridIcon,
   // },
   {
+    href: '/support',
+    title: 'پشتیبان آنلاین',
+    icon: HeadphoneIcon,
+  },
+  {
     href: '/about',
     title: 'درباره ما',
     icon: UsersIcon,
-  },
-  {
-    href: '/support',
-    title: 'پشتیبانی',
-    icon: HeadphoneIcon,
   },
 ]
 
