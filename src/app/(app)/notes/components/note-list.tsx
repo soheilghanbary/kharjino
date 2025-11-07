@@ -14,7 +14,7 @@ const NoteCard = (note: Note) => {
       className="rounded-2xl bg-muted p-3 dark:bg-card"
     >
       <h2 className="font-medium text-sm/6">{note.title}</h2>
-      <p className="line-clamp-3 text-foreground/65 text-xs/6">
+      <p className="line-clamp-3 text-foreground/65 text-xs/5">
         {note.description}
       </p>
       <p className="text-left text-foreground/65 text-xs/6">
