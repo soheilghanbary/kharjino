@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { Fragment } from 'react'
 import {
   DollarIcon,
+  HeadphoneIcon,
   MagicIcon,
   NotesIcon,
   TransactionIcon,
@@ -48,6 +49,11 @@ const links = [
     href: '/about',
     title: 'درباره ما',
     icon: UsersIcon,
+  },
+  {
+    href: '/support',
+    title: 'پشتیبانی',
+    icon: HeadphoneIcon,
   },
 ]
 

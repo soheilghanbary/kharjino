@@ -106,7 +106,7 @@ export default function CurrencyPage() {
             </TabsTrigger>
             {/* <TabsTrigger value="crypto">🔐 کریپتو</TabsTrigger> */}
           </TabsList>
-          <div className="sticky top-2 grid grid-cols-3 items-center gap-2 rounded-full border p-3 text-xs shadow-xs backdrop-blur-md">
+          <div className="sticky top-2 grid grid-cols-3 items-center gap-2 rounded-full border bg-card/65 p-3 text-xs shadow-xs backdrop-blur-md">
             <p>نام</p>
             <p className="text-center">آخرین تغییرات</p>
             <p className="whitespace-nowrap text-left">قیمت (تومان)</p>
