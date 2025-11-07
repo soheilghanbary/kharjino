@@ -30,14 +30,14 @@ const links = [
     icon: NotesIcon,
   },
   {
+    href: '/market',
+    title: 'قیمت لحظه ای بازار',
+    icon: DollarIcon,
+  },
+  {
     href: '/theme',
     title: 'تم اپلیکیشن',
     icon: MagicIcon,
-  },
-  {
-    href: '/currency',
-    title: 'ارز ها',
-    icon: DollarIcon,
   },
   // {
   //   href: '/my-categories',
