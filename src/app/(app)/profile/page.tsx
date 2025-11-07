@@ -20,16 +20,6 @@ const links = [
     icon: UserIcon,
   },
   {
-    href: '/transactions',
-    title: 'تراکنش های من',
-    icon: TransactionIcon,
-  },
-  {
-    href: '/notes',
-    title: 'دست نویس های من',
-    icon: NotesIcon,
-  },
-  {
     href: '/market',
     title: 'قیمت لحظه ای بازار',
     icon: DollarIcon,
@@ -38,6 +28,16 @@ const links = [
     href: '/theme',
     title: 'تم اپلیکیشن',
     icon: MagicIcon,
+  },
+  {
+    href: '/transactions',
+    title: 'تراکنش های من',
+    icon: TransactionIcon,
+  },
+  {
+    href: '/notes',
+    title: 'دست نویس های من',
+    icon: NotesIcon,
   },
   // {
   //   href: '/my-categories',

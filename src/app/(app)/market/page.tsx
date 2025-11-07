@@ -57,7 +57,8 @@ export default function CurrencyPage() {
     queryKey: ['currency'],
     queryFn: async () => {
       const response = await fetch(
-        `https://BrsApi.ir/Api/Market/Gold_Currency.php?key=${process.env.NEXT_PUBLIC_BRSAPI_KEY}`
+        // `https://BrsApi.ir/Api/Market/Gold_Currency.php?key=${process.env.NEXT_PUBLIC_BRSAPI_KEY}`
+        'https://brsapi.ir/Api/Market/Sample/FreeApi_Gold_Currency.json'
       )
       return await response.json()
     },
@@ -84,19 +85,29 @@ export default function CurrencyPage() {
             </span>
             قیمت لحظه ای بازار
           </h3>
-          <span className="flex items-center gap-1.5 rounded-full bg-muted px-2 py-1.5 font-medium text-foreground/65 text-xs dark:bg-card">
+          <span className="flex items-center gap-1.5 rounded-full bg-muted px-2 py-1.5 font-medium text-foreground/75 text-xs dark:bg-card">
             {format(new Date(), 'yyyy/MM/d')}
             <CalendarIcon className="size-4" />
           </span>
         </div>
         <Tabs defaultValue="gold">
           <TabsList className="grid w-full grid-cols-2">
-            <TabsTrigger value="gold">🪙 طلا</TabsTrigger>
-            <TabsTrigger value="currency">💵 ارز</TabsTrigger>
+            <TabsTrigger
+              className="data-[state=active]:bg-muted data-[state=active]:text-foreground dark:data-[state=active]:text-foreground"
+              value="gold"
+            >
+              🪙 طلا
+            </TabsTrigger>
+            <TabsTrigger
+              className="data-[state=active]:bg-muted data-[state=active]:text-foreground dark:data-[state=active]:text-foreground"
+              value="currency"
+            >
+              💵 ارز
+            </TabsTrigger>
             {/* <TabsTrigger value="crypto">🔐 کریپتو</TabsTrigger> */}
           </TabsList>
-          <div className="sticky top-2 mt-2 grid grid-cols-3 items-center gap-2 rounded-full border bg-muted/50 p-3 text-xs shadow-xs backdrop-blur-md">
-            <p>ارز</p>
+          <div className="sticky top-2 grid grid-cols-3 items-center gap-2 rounded-full border p-3 text-xs shadow-xs backdrop-blur-md">
+            <p>نام</p>
             <p className="text-center">آخرین تغییرات</p>
             <p className="whitespace-nowrap text-left">قیمت (تومان)</p>
           </div>
