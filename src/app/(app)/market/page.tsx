@@ -57,8 +57,8 @@ export default function CurrencyPage() {
     queryKey: ['currency'],
     queryFn: async () => {
       const response = await fetch(
-        // `https://BrsApi.ir/Api/Market/Gold_Currency.php?key=${process.env.NEXT_PUBLIC_BRSAPI_KEY}`
-        'https://brsapi.ir/Api/Market/Sample/FreeApi_Gold_Currency.json'
+        `https://BrsApi.ir/Api/Market/Gold_Currency.php?key=${process.env.NEXT_PUBLIC_BRSAPI_KEY}`
+        // 'https://brsapi.ir/Api/Market/Sample/FreeApi_Gold_Currency.json'
       )
       return await response.json()
     },
