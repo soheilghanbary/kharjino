@@ -105,6 +105,10 @@ body::-webkit-scrollbar {
   @apply sm:max-w-sm mx-auto bg-background;
 }
 
+.ltr {
+  direction: ltr;
+}
+
 @utility hidden-scrollbar {
   &::-webkit-scrollbar {
     display: none;
