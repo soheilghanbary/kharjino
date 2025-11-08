@@ -84,13 +84,17 @@ const TaskCard = ({ id, text, done, priority }: Task) => {
   return (
     <div className="flex items-center gap-4 rounded-2xl bg-muted px-3 py-2 dark:bg-card">
       <CheckboxTaskButton id={id} done={done} />
-      <p className={'flex grow flex-col text-foreground text-xs/5'}>
-        <span className={done ? 'text-muted-foreground line-through' : ''}>
+      <p
+        className={'flex grow flex-col text-foreground text-tiny sm:text-xs/5'}
+      >
+        <span
+          className={done ? 'text-muted-foreground text-xs/5 line-through' : ''}
+        >
           {text}
         </span>
         <span
           className={cn(
-            'font-medium text-tiny',
+            'font-medium',
             priority === 0 && 'text-success',
             priority === 1 && 'text-orange-500',
             priority === 2 && 'text-destructive'
