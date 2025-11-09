@@ -3,7 +3,7 @@ import { and, desc, eq } from 'drizzle-orm'
 import z from 'zod'
 import { db } from '@/db'
 import { tasks } from '@/db/schema'
-import { updateTaskSchema } from '@/features/note'
+import { updateTaskSchema } from '@/features/task'
 import { getUserId } from '@/shared/lib/helpers'
 
 export const taskRouter = {
