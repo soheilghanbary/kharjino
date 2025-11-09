@@ -4,8 +4,8 @@ import Link from 'next/link'
 import { useRef, useState } from 'react'
 import type { Swiper as SwiperType } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Button } from '@/components/ui/button'
-import { wizardData } from '@/config/site'
+import { Button } from '@/shared/components/ui/button'
+import { wizardData } from '@/shared/config/site'
 import { StepCard } from './step-card'
 
 const SwiperPagination = ({

@@ -1,10 +1,10 @@
 import { os } from '@orpc/server'
 import { and, asc, desc, eq, sql, sum } from 'drizzle-orm'
 import z from 'zod'
-import { createTransaction, editTransaction } from '@/app/(app)/new/schemas'
 import { db } from '@/db'
 import { categories, transactions } from '@/db/schema'
-import { getUserId } from '@/lib/helpers'
+import { createTransaction, editTransaction } from '@/features/transaction'
+import { getUserId } from '@/shared/lib/helpers'
 
 export const transactionRouter = {
   recent: os.handler(async () => {

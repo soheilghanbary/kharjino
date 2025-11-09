@@ -2,8 +2,8 @@
 import { CircleCheck, CircleIcon } from 'lucide-react'
 import { useTheme } from 'next-themes'
 import { Fragment } from 'react/jsx-runtime'
-import { MoonIcon, SunIcon, SystemIcon } from '@/assets/icons/bulk'
-import { BackButton } from '@/components/common/back-button'
+import { MoonIcon, SunIcon, SystemIcon } from '@/shared/assets/icons/bulk'
+import { BackButton } from '@/shared/components/common/back-button'
 
 export default function ThemePage() {
   const { theme, setTheme } = useTheme()

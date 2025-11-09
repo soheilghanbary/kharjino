@@ -5,14 +5,12 @@ import {
   DollarIcon,
   HeadphoneIcon,
   MagicIcon,
-  NotesIcon,
-  TransactionIcon,
   UserIcon,
   UsersIcon,
-} from '@/assets/icons/bulk'
-import { DonateLink } from '@/components/common/donate-link'
-import { LogoutButton } from '@/components/common/logout-button'
-import { AppHeader } from '@/components/layouts/app-header'
+} from '@/shared/assets/icons/bulk'
+import { DonateLink } from '@/shared/components/common/donate-link'
+import { LogoutButton } from '@/shared/components/common/logout-button'
+import { AppHeader } from '@/shared/components/layouts/app-header'
 
 const links = [
   {

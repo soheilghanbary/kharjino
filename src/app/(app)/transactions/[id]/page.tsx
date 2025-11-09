@@ -1,9 +1,9 @@
 import { notFound } from 'next/navigation'
 import { Fragment, Suspense } from 'react'
-import { AppHeader } from '@/components/layouts/app-header'
-import { Spinner } from '@/components/ui/spinner'
+import { TransactionForm } from '@/features/transaction'
 import { api } from '@/rpc/orpc.client'
-import { TransactionForm } from '../../new/components/transaction-form'
+import { AppHeader } from '@/shared/components/layouts/app-header'
+import { Spinner } from '@/shared/components/ui/spinner'
 
 type PageProps = {
   params: Promise<{ id: string }>

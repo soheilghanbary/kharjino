@@ -1,30 +1,29 @@
 'use client'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useMutation } from '@tanstack/react-query'
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
-import { AppHeader } from '@/components/layouts/app-header'
-import { Button } from '@/components/ui/button'
+import { toast } from 'sonner'
+import { client } from '@/rpc/orpc.client'
+import { AppHeader } from '@/shared/components/layouts/app-header'
+import { Button } from '@/shared/components/ui/button'
 import {
   EmojiPicker,
   EmojiPickerContent,
   EmojiPickerFooter,
   EmojiPickerSearch,
-} from '@/components/ui/emoji-picker'
-import { Label } from '@/components/ui/label'
+} from '@/shared/components/ui/emoji-picker'
+import { Label } from '@/shared/components/ui/label'
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@/components/ui/popover'
-import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { TextField } from '@/components/ui/text-field'
+} from '@/shared/components/ui/popover'
+import { Spinner } from '@/shared/components/ui/spinner'
+import { Tabs, TabsList, TabsTrigger } from '@/shared/components/ui/tabs'
+import { TextField } from '@/shared/components/ui/text-field'
 import { createCategorySchema } from '../schemas'
-import { useDynamicRouteParams } from 'next/dist/server/app-render/dynamic-rendering'
-import { useMutation } from '@tanstack/react-query'
-import { client } from '@/rpc/orpc.client'
-import { Spinner } from '@/components/ui/spinner'
-import { toast } from 'sonner'
-import { useRouter } from 'next/navigation'
 
 export default function NewCategoryPage() {
   const { push } = useRouter()

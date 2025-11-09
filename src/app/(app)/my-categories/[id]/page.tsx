@@ -1,8 +1,8 @@
 'use client'
 import { useQuery } from '@tanstack/react-query'
 import { notFound, useParams } from 'next/navigation'
-import { AppHeader } from '@/components/layouts/app-header'
 import { client } from '@/rpc/orpc.client'
+import { AppHeader } from '@/shared/components/layouts/app-header'
 import Loading from '../../loading'
 import { CategoryTransactionList } from './components/category-transaction-list'
 

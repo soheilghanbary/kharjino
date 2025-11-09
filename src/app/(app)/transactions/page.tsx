@@ -1,9 +1,11 @@
 import { Fragment, Suspense } from 'react'
-import { AppHeader } from '@/components/layouts/app-header'
-import { TransactionLoading } from '../home/components/transaction-loading'
-import { TransactionFilter } from './components/transaction-filter'
-import { TransactionList } from './components/transaction-list'
-import { TransactionTypeTab } from './components/transaction-type-tab'
+import {
+  TransactionFilter,
+  TransactionList,
+  TransactionLoading,
+  TransactionTypeTab,
+} from '@/features/transaction'
+import { AppHeader } from '@/shared/components/layouts/app-header'
 
 export default async function TransactionsPage() {
   return (

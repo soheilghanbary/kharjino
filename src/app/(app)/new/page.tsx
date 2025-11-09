@@ -1,6 +1,6 @@
 import { Fragment } from 'react'
-import { AppHeader } from '@/components/layouts/app-header'
-import { TransactionForm } from './components/transaction-form'
+import { TransactionForm } from '@/features/transaction'
+import { AppHeader } from '@/shared/components/layouts/app-header'
 
 export default function NewPage() {
   return (

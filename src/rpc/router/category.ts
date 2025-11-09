@@ -7,7 +7,7 @@ import {
 } from '@/app/(app)/my-categories/schemas'
 import { db } from '@/db'
 import { categories } from '@/db/schema'
-import { getUserId } from '@/lib/helpers'
+import { getUserId } from '@/shared/lib/helpers'
 
 export const categoryRouter = {
   create: os.input(createCategorySchema).handler(async ({ input }) => {

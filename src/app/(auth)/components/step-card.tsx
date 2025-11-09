@@ -1,5 +1,5 @@
-import { Lottie } from '@/components/ui/lottie'
-import type { wizardData } from '@/config/site'
+import { Lottie } from '@/shared/components/ui/lottie'
+import type { wizardData } from '@/shared/config/site'
 
 type StepCardProps = (typeof wizardData)[number] & {
   isActive: boolean
@@ -13,7 +13,7 @@ export const StepCard = ({
 }: StepCardProps) => {
   return (
     <div className="flex flex-col items-center justify-center">
-      <div className="h-[320px]">
+      <div className="h-80">
         {isActive && (
           <Lottie height={320} animationData={lottie} loop={false} />
         )}

@@ -1,9 +1,9 @@
 import '@/styles/app.css'
 import type { Metadata } from 'next'
 import type { PropsWithChildren } from 'react'
-import { font } from '@/assets/font'
-import Providers from '@/components/providers'
-import { siteConfig } from '@/config/site'
+import { font } from '@/shared/assets/font'
+import Providers from '@/shared/components/providers'
+import { siteConfig } from '@/shared/config/site'
 
 export const metadata: Metadata = {
   title: {

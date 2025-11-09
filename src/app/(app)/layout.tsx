@@ -1,6 +1,6 @@
 import '@/rpc/orpc.server'
 import type { PropsWithChildren } from 'react'
-import { AppNavigation } from '@/components/layouts/app-navigation'
+import { AppNavigation } from '@/shared/components/layouts/app-navigation'
 
 export default function AppLayout({ children }: PropsWithChildren) {
   return (

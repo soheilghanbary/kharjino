@@ -1,10 +1,10 @@
 import { os } from '@orpc/server'
 import { and, desc, eq } from 'drizzle-orm'
 import z from 'zod'
-import { updateTaskSchema } from '@/app/(app)/notes/schemas'
 import { db } from '@/db'
 import { tasks } from '@/db/schema'
-import { getUserId } from '@/lib/helpers'
+import { updateTaskSchema } from '@/features/note'
+import { getUserId } from '@/shared/lib/helpers'
 
 export const taskRouter = {
   getAll: os.handler(async () => {

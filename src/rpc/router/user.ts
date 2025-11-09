@@ -1,10 +1,10 @@
 import { os } from '@orpc/server'
 import { eq } from 'drizzle-orm'
 import z from 'zod'
-import { updateUserFormSchema } from '@/app/(app)/account/schemas'
 import { db } from '@/db'
 import { user } from '@/db/schema'
-import { getUserId } from '@/lib/helpers'
+import { updateUserFormSchema } from '@/features/account'
+import { getUserId } from '@/shared/lib/helpers'
 
 export const userRouter = {
   get: os.handler(async () => {

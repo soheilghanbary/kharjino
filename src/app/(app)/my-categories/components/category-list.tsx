@@ -1,9 +1,9 @@
 'use client'
 import { useQuery } from '@tanstack/react-query'
 import Link from 'next/link'
-import { Button } from '@/components/ui/button'
-import { cn } from '@/lib/utils'
 import { client } from '@/rpc/orpc.client'
+import { Button } from '@/shared/components/ui/button'
+import { cn } from '@/shared/lib/utils'
 import { CategoryListLoading } from './category-list-loading'
 
 const Line = () => (

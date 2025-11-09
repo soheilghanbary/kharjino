@@ -1,5 +1,5 @@
-import { AppHeader } from '@/components/layouts/app-header'
-import { NoteForm } from '../components/note-form'
+import { NoteForm } from '@/features/note'
+import { AppHeader } from '@/shared/components/layouts/app-header'
 
 export default function Page() {
   return (

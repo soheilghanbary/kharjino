@@ -1,14 +1,26 @@
 import Link from 'next/link'
 import { Suspense } from 'react'
-import { CheckListIcon, NotesIcon, PlusCircleIcon } from '@/assets/icons/bulk'
-import { AppHeader } from '@/components/layouts/app-header'
-import { Button } from '@/components/ui/button'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { NoteList, NoteListLoading } from './components/note-list'
-import { TaskFilter } from './components/task-filter'
-import { TaskForm } from './components/task-form'
-import { TaskList } from './components/task-list'
-import { TaskProgress } from './components/task-progress'
+import {
+  NoteList,
+  NoteListLoading,
+  TaskFilter,
+  TaskForm,
+  TaskList,
+  TaskProgress,
+} from '@/features/note'
+import {
+  CheckListIcon,
+  NotesIcon,
+  PlusCircleIcon,
+} from '@/shared/assets/icons/bulk'
+import { AppHeader } from '@/shared/components/layouts/app-header'
+import { Button } from '@/shared/components/ui/button'
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from '@/shared/components/ui/tabs'
 
 export default function Page() {
   return (

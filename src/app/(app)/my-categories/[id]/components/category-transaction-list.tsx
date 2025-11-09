@@ -1,9 +1,9 @@
 'use client'
 import { useSuspenseInfiniteQuery } from '@tanstack/react-query'
 import { useEffect, useRef } from 'react'
-import { EmptyTransactionList } from '@/app/(app)/home/components/empty-transaction'
-import { TransactionCard } from '@/app/(app)/home/components/transaction-card'
-import { TransactionLoading } from '@/app/(app)/home/components/transaction-loading'
+import { EmptyTransactionList } from '@/features/transaction'
+import { TransactionCard } from '@/features/transaction/components/transaction-card'
+import { TransactionLoading } from '@/features/transaction/components/transaction-loading'
 import { api } from '@/rpc/orpc.client'
 
 export function CategoryTransactionList({

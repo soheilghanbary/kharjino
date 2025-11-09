@@ -1,9 +1,9 @@
 'use client'
 import { useState } from 'react'
-import { Google } from '@/assets/icons'
-import { Button } from '@/components/ui/button'
-import { Spinner } from '@/components/ui/spinner'
-import { signIn } from '@/lib/auth'
+import { Google } from '@/shared/assets/icons'
+import { Button } from '@/shared/components/ui/button'
+import { Spinner } from '@/shared/components/ui/spinner'
+import { signIn } from '@/shared/lib/auth'
 
 export default function OAuthButton() {
   const [loading, setLoading] = useState(false)

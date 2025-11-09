@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation'
-import { Logo } from '@/assets/icons'
-import { Separator } from '@/components/ui/separator'
-import { getUserId } from '@/lib/helpers'
+import { Logo } from '@/shared/assets/icons'
+import { Separator } from '@/shared/components/ui/separator'
+import { getUserId } from '@/shared/lib/helpers'
 import OAuthButton from '../components/oauth-button'
 
 export default async function Page() {

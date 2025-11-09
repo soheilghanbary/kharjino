@@ -1,6 +1,6 @@
 import { Fragment } from 'react'
-import { AppHeader } from '@/components/layouts/app-header'
-import { UserDetails } from './components/user-details'
+import { UserDetails } from '@/features/account'
+import { AppHeader } from '@/shared/components/layouts/app-header'
 
 export default function AccountPage() {
   return (

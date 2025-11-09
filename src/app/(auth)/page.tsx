@@ -1,5 +1,5 @@
 import { redirect } from 'next/navigation'
-import { getUserId } from '@/lib/helpers'
+import { getUserId } from '@/shared/lib/helpers'
 import StepSlider from './components/step-slider'
 
 export default async function WizardPgae() {

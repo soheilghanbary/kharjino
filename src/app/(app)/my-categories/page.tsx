@@ -1,8 +1,8 @@
 import Link from 'next/link'
 import { Fragment } from 'react/jsx-runtime'
-import { PlusIcon } from '@/assets/icons/bulk'
-import { AppHeader } from '@/components/layouts/app-header'
-import { Button } from '@/components/ui/button'
+import { PlusIcon } from '@/shared/assets/icons/bulk'
+import { AppHeader } from '@/shared/components/layouts/app-header'
+import { Button } from '@/shared/components/ui/button'
 import { CategoryList } from './components/category-list'
 
 export default function MyCategories() {

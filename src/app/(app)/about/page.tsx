@@ -1,10 +1,10 @@
 import { format } from 'date-fns-jalali'
 import Image from 'next/image'
 import { Fragment } from 'react'
-import { Logo } from '@/assets/icons'
-import { AppHeader } from '@/components/layouts/app-header'
-import { Separator } from '@/components/ui/separator'
-import { siteConfig } from '@/config/site'
+import { Logo } from '@/shared/assets/icons'
+import { AppHeader } from '@/shared/components/layouts/app-header'
+import { Separator } from '@/shared/components/ui/separator'
+import { siteConfig } from '@/shared/config/site'
 
 const Signature = () => (
   <Image

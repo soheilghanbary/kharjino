@@ -1,10 +1,10 @@
 import { os } from '@orpc/server'
 import { and, desc, eq } from 'drizzle-orm'
 import z from 'zod'
-import { createNoteSchema, updateNoteSchema } from '@/app/(app)/notes/schemas'
 import { db } from '@/db'
 import { notes } from '@/db/schema'
-import { getUserId } from '@/lib/helpers'
+import { createNoteSchema, updateNoteSchema } from '@/features/note'
+import { getUserId } from '@/shared/lib/helpers'
 
 export const noteRouter = {
   getAll: os.handler(async () => {

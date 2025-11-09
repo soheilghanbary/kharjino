@@ -1,11 +1,16 @@
 'use client'
 import { useQuery } from '@tanstack/react-query'
 import { format } from 'date-fns-jalali'
-import { CalendarIcon } from '@/assets/icons/bulk'
-import { AppHeader } from '@/components/layouts/app-header'
-import { Skeleton } from '@/components/ui/skeleton'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { cn } from '@/lib/utils'
+import { CalendarIcon } from '@/shared/assets/icons/bulk'
+import { AppHeader } from '@/shared/components/layouts/app-header'
+import { Skeleton } from '@/shared/components/ui/skeleton'
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from '@/shared/components/ui/tabs'
+import { cn } from '@/shared/lib/utils'
 
 interface CurrencyItem {
   date: string
