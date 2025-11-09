@@ -4,6 +4,7 @@ import {
   useQueryClient,
   useSuspenseQuery,
 } from '@tanstack/react-query'
+import { AnimatePresence, motion } from 'motion/react'
 import { useQueryState } from 'nuqs'
 import type { Task } from '@/db/schema'
 import { client } from '@/rpc/orpc.client'
@@ -125,15 +126,18 @@ export const TaskList = () => {
   const [filter] = useQueryState('filter')
   const priorityFilter = filter !== null ? Number(filter) : undefined
   const { data } = useSuspenseQuery(client.task.getAll.queryOptions())
+  const [hideDone] = useQueryState('hideDone')
 
-  const filtered =
-    priorityFilter !== undefined
-      ? data.filter((t) => t.priority === priorityFilter)
-      : data
+  const filtered = data.filter((t) => {
+    const byPriority =
+      priorityFilter !== undefined ? t.priority === priorityFilter : true
+    const byDone = hideDone === 'true' ? !t.done : true
+    return byPriority && byDone
+  })
 
   if (!filtered?.length)
     return (
-      <div className="flex h-56 flex-col items-center justify-center gap-2 rounded-md border-2 border-dashed bg-muted text-muted-foreground text-sm dark:bg-card">
+      <div className="fade-up-transition flex h-56 flex-col items-center justify-center gap-2 rounded-md border-2 border-dashed bg-muted text-muted-foreground text-sm dark:bg-card">
         <CheckPaperIcon />
         کاری برای انجام نداری
         <span className="text-xs">رو دکمه + بزن و کاراتو ایجاد کنید</span>
@@ -141,10 +145,21 @@ export const TaskList = () => {
     )
 
   return (
-    <div className="fade-up-transition grid gap-1" key={filter}>
-      {filtered.map((t) => (
-        <TaskCard key={t.id} {...t} />
-      ))}
+    <div className="grid gap-1">
+      <AnimatePresence>
+        {filtered.map((t) => (
+          <motion.div
+            layout
+            key={t.id}
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.9 }}
+            transition={{ duration: 0.2 }}
+          >
+            <TaskCard {...t} />
+          </motion.div>
+        ))}
+      </AnimatePresence>
     </div>
   )
 }

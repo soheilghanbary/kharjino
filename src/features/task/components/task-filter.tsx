@@ -1,5 +1,5 @@
 'use client'
-import { Filter } from 'lucide-react'
+import { Eye, EyeOff, Filter } from 'lucide-react'
 import { useQueryState } from 'nuqs'
 import { Button } from '@/shared/components/ui/button'
 import {
@@ -11,6 +11,20 @@ import {
   DropdownMenuTrigger,
 } from '@/shared/components/ui/dropdown-menu'
 import { cn } from '@/shared/lib/utils'
+
+export const ToggleTaskDone = () => {
+  const [hideDone, setHideDone] = useQueryState('hideDone', {
+    defaultValue: 'false',
+  })
+  const isHidden = hideDone === 'true'
+  const toggle = () => setHideDone(isHidden ? 'false' : 'true')
+  return (
+    <Button variant="secondary" size="sm" onClick={toggle}>
+      {isHidden ? <EyeOff /> : <Eye />}
+      {isHidden ? 'نمایش همه' : 'مخفی کردن'}
+    </Button>
+  )
+}
 
 export function TaskFilter() {
   const [filter, setFilter] = useQueryState('filter')

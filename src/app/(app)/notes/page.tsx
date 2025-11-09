@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { Suspense } from 'react'
 import { NoteList, NoteListLoading } from '@/features/note'
 import { TaskFilter, TaskForm, TaskList, TaskProgress } from '@/features/task'
+import { ToggleTaskDone } from '@/features/task/components/task-filter'
 import {
   CheckListIcon,
   NotesIcon,
@@ -40,6 +41,7 @@ export default function Page() {
         <TabsContent value="tasks">
           <div className="mb-4 flex items-center justify-between gap-4">
             <TaskProgress />
+            <ToggleTaskDone />
             <TaskFilter />
           </div>
           <TaskForm
