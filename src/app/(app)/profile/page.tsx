@@ -8,7 +8,7 @@ import {
   UserIcon,
   UsersIcon,
 } from '@/shared/assets/icons/bulk'
-import { DonateLink } from '@/shared/components/common/donate-link'
+import { CoffeeLink, DonateLink } from '@/shared/components/common/donate-link'
 import { LogoutButton } from '@/shared/components/common/logout-button'
 import { AppHeader } from '@/shared/components/layouts/app-header'
 
@@ -73,6 +73,7 @@ export default function ProfilePage() {
         ))}
         <LogoutButton />
         <DonateLink />
+        <CoffeeLink />
       </div>
     </Fragment>
   )

@@ -20,3 +20,14 @@ export const DonateLink = () => (
     </p>
   </div>
 )
+
+export const CoffeeLink = () => (
+  <a href="https://www.coffeebede.com/soheildev">
+    {/** biome-ignore lint/performance/noImgElement: <explanation> */}
+    <img
+      alt="coffeebede"
+      className="img-fluid"
+      src="https://coffeebede.ir/DashboardTemplateV2/app-assets/images/banner/default-yellow.svg"
+    />
+  </a>
+)
