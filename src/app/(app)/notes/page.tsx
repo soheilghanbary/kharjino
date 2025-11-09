@@ -1,13 +1,7 @@
 import Link from 'next/link'
 import { Suspense } from 'react'
-import {
-  NoteList,
-  NoteListLoading,
-  TaskFilter,
-  TaskForm,
-  TaskList,
-  TaskProgress,
-} from '@/features/note'
+import { NoteList, NoteListLoading } from '@/features/note'
+import { TaskFilter, TaskForm, TaskList, TaskProgress } from '@/features/task'
 import {
   CheckListIcon,
   NotesIcon,
