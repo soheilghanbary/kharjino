@@ -87,9 +87,7 @@ const TaskCard = ({ id, text, done, priority }: Task) => {
       <p
         className={'flex grow flex-col text-foreground text-tiny sm:text-xs/5'}
       >
-        <span
-          className={done ? 'text-muted-foreground text-xs/5 line-through' : ''}
-        >
+        <span className={done ? 'text-muted-foreground line-through' : ''}>
           {text}
         </span>
         <span
