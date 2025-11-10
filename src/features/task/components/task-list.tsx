@@ -37,7 +37,7 @@ const CheckboxTaskButton = ({ id, done }: { id: string; done: boolean }) => {
     <Checkbox
       checked={done}
       onCheckedChange={(e: boolean) => mutate({ id, done: e })}
-      className="dark:bg-muted"
+      className="bg-muted"
     />
   )
 }
@@ -83,7 +83,7 @@ const handlePiority = (priority: number) => {
 
 const TaskCard = ({ id, text, done, priority }: Task) => {
   return (
-    <div className="flex items-center gap-4 rounded-2xl bg-muted px-3 py-2 dark:bg-card">
+    <div className="flex items-center gap-4">
       <CheckboxTaskButton id={id} done={done} />
       <p className={'flex grow flex-col text-foreground text-xs/5'}>
         <span className={done ? 'text-muted-foreground line-through' : ''}>
@@ -143,7 +143,7 @@ export const TaskList = () => {
     )
 
   return (
-    <div className="grid gap-1">
+    <div className="grid gap-2">
       <AnimatePresence>
         {filtered.map((t) => (
           <motion.div
