@@ -37,7 +37,7 @@ const CheckboxTaskButton = ({ id, done }: { id: string; done: boolean }) => {
     <Checkbox
       checked={done}
       onCheckedChange={(e: boolean) => mutate({ id, done: e })}
-      className="bg-muted"
+      className="size-4.5 rounded-full bg-muted"
     />
   )
 }
