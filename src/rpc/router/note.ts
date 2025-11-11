@@ -34,7 +34,6 @@ export const noteRouter = {
     return newNote
   }),
   update: os.input(updateNoteSchema).handler(async ({ input }) => {
-    const userId = await getUserId()
     const [updatedNote] = await db
       .update(notes)
       .set({
@@ -42,7 +41,7 @@ export const noteRouter = {
         description: input.description,
         updatedAt: new Date(),
       })
-      .where(and(eq(notes.id, input.id), eq(notes.userId, userId)))
+      .where(eq(notes.id, input.id))
       .returning()
     return updatedNote
   }),
