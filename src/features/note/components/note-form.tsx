@@ -1,17 +1,13 @@
 'use client'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
-import { toast } from 'sonner'
-import type { Note } from '@/db/schema'
 import { createNoteSchema, type UpdateNoteSchema } from '@/features/note'
-import { client } from '@/rpc/orpc.client'
 import { TrashIcon } from '@/shared/assets/icons/bulk'
 import { Button } from '@/shared/components/ui/button'
 import { Input } from '@/shared/components/ui/input'
 import { Spinner } from '@/shared/components/ui/spinner'
 import { Textarea } from '@/shared/components/ui/textarea'
+import { useCreateNote, useDeleteNote, useUpdateNote } from '../hooks'
 
 type NoteFormProps =
   | {
@@ -23,9 +19,8 @@ type NoteFormProps =
     }
 
 export const NoteForm = (props: NoteFormProps) => {
-  const router = useRouter()
-  const qc = useQueryClient()
-
+  const createMutation = useCreateNote()
+  const updateMutation = useUpdateNote()
   const {
     register,
     handleSubmit,
@@ -43,39 +38,6 @@ export const NoteForm = (props: NoteFormProps) => {
             description: '',
           },
   })
-
-  const createMutation = useMutation(
-    client.note.create.mutationOptions({
-      onSuccess(res) {
-        qc.cancelQueries({ queryKey: client.note.getAll.queryKey() })
-        const previousNotes = qc.getQueryData(
-          client.note.getAll.queryKey()
-        ) as Note[]
-        qc.setQueryData(client.note.getAll.queryKey(), [res, ...previousNotes])
-        toast.info('یادداشت ایجاد شد')
-        router.push('/notes')
-      },
-    })
-  )
-
-  const updateMutation = useMutation(
-    client.note.update.mutationOptions({
-      onSuccess(res) {
-        qc.cancelQueries({ queryKey: client.note.getAll.queryKey() })
-        const previousNotes = qc.getQueryData(
-          client.note.getAll.queryKey()
-        ) as Note[]
-        const newNote = previousNotes.map((n) => {
-          if (n.id === res.id) return res
-          return n
-        })
-        qc.setQueryData(client.note.getAll.queryKey(), newNote)
-        toast.info('یادداشت ویرایش شد')
-        router.push('/notes')
-      },
-    })
-  )
-
   const onSubmit = handleSubmit((data) => {
     if (props.mode === 'add') {
       createMutation.mutate(data)
@@ -86,9 +48,7 @@ export const NoteForm = (props: NoteFormProps) => {
       })
     }
   })
-
   const isPending = createMutation.isPending || updateMutation.isPending
-
   return (
     <>
       <form
@@ -128,22 +88,7 @@ export const NoteForm = (props: NoteFormProps) => {
 }
 
 const DeleteNoteButton = ({ id }: { id: string }) => {
-  const router = useRouter()
-  const qc = useQueryClient()
-  const { mutate, isPending } = useMutation(
-    client.note.delete.mutationOptions({
-      onSuccess() {
-        qc.cancelQueries({ queryKey: client.note.getAll.queryKey() })
-        const previousNotes = qc.getQueryData(
-          client.note.getAll.queryKey()
-        ) as Note[]
-        const newNotes = previousNotes.filter((n) => n.id !== id)
-        qc.setQueryData(client.note.getAll.queryKey(), newNotes)
-        toast.info('یادداشت حذف شد')
-        router.push('/notes')
-      },
-    })
-  )
+  const { mutate, isPending } = useDeleteNote(id)
   const onDelete = () => mutate(id)
   return (
     <Button

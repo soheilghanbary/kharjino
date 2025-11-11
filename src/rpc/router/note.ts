@@ -15,9 +15,8 @@ export const noteRouter = {
     })
   }),
   getById: os.input(z.string()).handler(async ({ input }) => {
-    const userId = await getUserId()
     return await db.query.notes.findFirst({
-      where: and(eq(notes.id, input), eq(notes.userId, userId)),
+      where: and(eq(notes.id, input)),
     })
   }),
   create: os.input(createNoteSchema).handler(async ({ input }) => {
