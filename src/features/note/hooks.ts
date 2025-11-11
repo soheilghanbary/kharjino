@@ -41,6 +41,9 @@ export const useUpdateNote = () => {
     client.note.update.mutationOptions({
       onSuccess(res) {
         qc.cancelQueries({ queryKey: client.note.getAll.queryKey() })
+        qc.cancelQueries({
+          queryKey: client.note.getById.queryKey({ input: res.id }),
+        })
         const previousNotes = qc.getQueryData(
           client.note.getAll.queryKey()
         ) as Note[]
@@ -49,6 +52,7 @@ export const useUpdateNote = () => {
           return n
         })
         qc.setQueryData(client.note.getAll.queryKey(), newNote)
+        qc.setQueryData(client.note.getById.queryKey({ input: res.id }), res)
         toast.info('یادداشت ویرایش شد')
         router.push('/notes')
       },
