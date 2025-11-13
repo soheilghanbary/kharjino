@@ -4,7 +4,7 @@ import { format } from 'date-fns-jalali'
 import Link from 'next/link'
 import { useState } from 'react'
 import { toast } from 'sonner'
-import type { Category, Transaction } from '@/db/schema'
+import type { Category, Transaction, TransactionType } from '@/db/schema'
 import { client } from '@/rpc/orpc.client'
 import { Button } from '@/shared/components/ui/button'
 import {
@@ -15,7 +15,19 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from '@/shared/components/ui/drawer'
+import { Separator } from '@/shared/components/ui/separator'
 import { Spinner } from '@/shared/components/ui/spinner'
+
+const handleTransactionType = (type: TransactionType) => {
+  switch (type) {
+    case 'expense':
+      return 'هزینه'
+    case 'income':
+      return 'درآمد'
+    default:
+      return 'نامعلوم'
+  }
+}
 
 type TransactionCardProps = Transaction & {
   category: Category
@@ -27,6 +39,7 @@ export const TransactionCard = ({
   date,
   description,
   category,
+  type,
 }: TransactionCardProps) => {
   const qc = useQueryClient()
   const [open, setOpen] = useState(false)
@@ -67,9 +80,28 @@ export const TransactionCard = ({
       </DrawerTrigger>
       <DrawerContent>
         <DrawerHeader>
-          <DrawerTitle>عملیات</DrawerTitle>
-          <DrawerDescription>میخوای ویرایش یا حذف کنی؟</DrawerDescription>
+          <DrawerTitle>تراکنش «{category.name}»</DrawerTitle>
+          <DrawerDescription className="invisible" />
         </DrawerHeader>
+        <ul className="grid gap-2.5">
+          <li className="flex items-center justify-between text-sm [&>span:nth-child(1)]:text-muted-foreground">
+            <span>نوع تراکنش</span>
+            <span>{handleTransactionType(type)}</span>
+          </li>
+          <li className="flex items-center justify-between text-sm [&>span:nth-child(1)]:text-muted-foreground">
+            <span>مبلغ</span>
+            <span>{amount.toLocaleString('fa-IR')} تومان</span>
+          </li>
+          <li className="flex items-center justify-between text-sm [&>span:nth-child(1)]:text-muted-foreground">
+            <span>تاریخ</span>
+            <span>{format(date, 'yyyy/MM/d')}</span>
+          </li>
+          <li className="flex items-center justify-between text-sm [&>span:nth-child(1)]:text-muted-foreground">
+            <span>توضیحات</span>
+            <span>{description?.length ? description : 'بدون توضیحات'}</span>
+          </li>
+        </ul>
+        <Separator className="my-4" />
         <div className="grid grid-cols-2 gap-4">
           <Button variant={'secondary'} asChild>
             <Link href={`/transactions/${id}`}>ویرایش</Link>
