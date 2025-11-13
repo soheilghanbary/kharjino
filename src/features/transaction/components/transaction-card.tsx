@@ -80,7 +80,7 @@ export const TransactionCard = ({
       </DrawerTrigger>
       <DrawerContent>
         <DrawerHeader>
-          <DrawerTitle>تراکنش «{category.name}»</DrawerTitle>
+          <DrawerTitle>«{category.name}»</DrawerTitle>
           <DrawerDescription className="invisible" />
         </DrawerHeader>
         <ul className="grid gap-2.5">
