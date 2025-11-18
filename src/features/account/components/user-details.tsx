@@ -1,7 +1,7 @@
 'use client'
 import { useQuery } from '@tanstack/react-query'
 import { notFound } from 'next/navigation'
-import { client } from '@/rpc/orpc.client'
+import { client } from '@/server/lib/orpc.client'
 import { Spinner } from '@/shared/components/ui/spinner'
 import { UploadAvatar } from './upload-avatar'
 import { UserForm } from './user-form'

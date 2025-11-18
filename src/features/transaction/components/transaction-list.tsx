@@ -2,13 +2,13 @@
 import { useSuspenseInfiniteQuery } from '@tanstack/react-query'
 import { useQueryState } from 'nuqs'
 import { useEffect, useRef } from 'react'
-import type { TransactionType } from '@/db/schema'
 import {
   EmptyTransactionList,
   TransactionCard,
   TransactionLoading,
 } from '@/features/transaction'
-import { api } from '@/rpc/orpc.client'
+import type { TransactionType } from '@/server/db/schema'
+import { api } from '@/server/lib/orpc.client'
 
 export const TransactionList = () => {
   const [t] = useQueryState('type')

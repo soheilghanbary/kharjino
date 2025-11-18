@@ -1,6 +1,6 @@
 'use client'
 import { useQuery } from '@tanstack/react-query'
-import { client } from '@/rpc/orpc.client'
+import { client } from '@/server/lib/orpc.client'
 import { Progress } from '@/shared/components/ui/progress'
 
 type Task = {

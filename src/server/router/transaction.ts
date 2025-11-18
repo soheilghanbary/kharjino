@@ -1,9 +1,9 @@
 import { os } from '@orpc/server'
 import { and, asc, desc, eq, sql, sum } from 'drizzle-orm'
 import z from 'zod'
-import { db } from '@/db'
-import { categories, transactions } from '@/db/schema'
 import { createTransaction, editTransaction } from '@/features/transaction'
+import { db } from '@/server/db'
+import { categories, transactions } from '@/server/db/schema'
 import { getUserId } from '@/shared/lib/helpers'
 
 export const transactionRouter = {

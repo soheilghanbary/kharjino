@@ -1,5 +1,5 @@
 import { CompressionPlugin, RPCHandler } from '@orpc/server/fetch'
-import { router } from '@/rpc/router'
+import { router } from '@/server/router'
 
 export const handler = new RPCHandler(router, {
   plugins: [new CompressionPlugin()],

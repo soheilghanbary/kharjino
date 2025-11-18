@@ -1,9 +1,9 @@
 import { os } from '@orpc/server'
 import { and, desc, eq } from 'drizzle-orm'
 import z from 'zod'
-import { db } from '@/db'
-import { notes } from '@/db/schema'
 import { createNoteSchema, updateNoteSchema } from '@/features/note'
+import { db } from '@/server/db'
+import { notes } from '@/server/db/schema'
 import { getUserId } from '@/shared/lib/helpers'
 
 export const noteRouter = {
@@ -24,8 +24,7 @@ export const noteRouter = {
     const [newNote] = await db
       .insert(notes)
       .values({
-        title: input.title,
-        description: input.description,
+        ...input,
         userId,
         createdAt: new Date(),
         updatedAt: new Date(),
@@ -37,8 +36,7 @@ export const noteRouter = {
     const [updatedNote] = await db
       .update(notes)
       .set({
-        title: input.title,
-        description: input.description,
+        ...input,
         updatedAt: new Date(),
       })
       .where(eq(notes.id, input.id))

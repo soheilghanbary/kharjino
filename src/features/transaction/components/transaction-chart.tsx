@@ -4,8 +4,8 @@ import { LoaderIcon, TrendingDown, TrendingUp } from 'lucide-react'
 import { Suspense, useState } from 'react'
 import { Fragment } from 'react/jsx-runtime'
 import { Bar, BarChart, CartesianGrid, Cell, XAxis } from 'recharts'
-import type { TransactionType } from '@/db/schema'
-import { client } from '@/rpc/orpc.client'
+import type { TransactionType } from '@/server/db/schema'
+import { client } from '@/server/lib/orpc.client'
 import {
   Card,
   CardContent,

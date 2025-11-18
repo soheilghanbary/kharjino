@@ -9,7 +9,7 @@ import {
   createTransaction,
   type EditTransaction,
 } from '@/features/transaction'
-import { client } from '@/rpc/orpc.client'
+import { client } from '@/server/lib/orpc.client'
 import { Button } from '@/shared/components/ui/button'
 import { Spinner } from '@/shared/components/ui/spinner'
 import { Tabs, TabsList, TabsTrigger } from '@/shared/components/ui/tabs'

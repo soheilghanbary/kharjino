@@ -1,6 +1,6 @@
-import Link from 'next/link'
 import { Suspense } from 'react'
 import { NoteList, NoteListLoading } from '@/features/note'
+import { NoteDrawer } from '@/features/note/components/note-drawer'
 import { TaskFilter, TaskForm, TaskList, TaskProgress } from '@/features/task'
 import { ToggleTaskDone } from '@/features/task/components/task-filter'
 import {
@@ -60,18 +60,16 @@ export default function Page() {
           </Suspense>
         </TabsContent>
         <TabsContent value="notes">
-          <div className="container-sm fixed inset-x-0 bottom-16 z-10 mx-auto flex w-fit justify-end bg-transparent p-4">
-            <Button
-              asChild
-              size={'sm'}
-              className="rounded-full px-4 shadow-none"
-            >
-              <Link href={'/notes/new'}>
-                <PlusCircleIcon className="size-5" />
-                یادداشت جدید
-              </Link>
-            </Button>
-          </div>
+          <NoteDrawer options={{ mode: 'add' }}>
+            <div className="container-sm pointer-events-none fixed inset-x-0 bottom-16 z-10 mx-auto flex w-fit justify-end bg-transparent p-4">
+              <Button
+                size={'sm'}
+                className="pointer-events-auto rounded-full px-4 shadow-none"
+              >
+                <PlusCircleIcon className="size-5" /> یادداشت جدید{' '}
+              </Button>
+            </div>
+          </NoteDrawer>
           <Suspense fallback={<NoteListLoading />}>
             <NoteList />
           </Suspense>

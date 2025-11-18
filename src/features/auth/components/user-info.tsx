@@ -2,7 +2,7 @@
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { format } from 'date-fns-jalali'
 import Image from 'next/image'
-import { client } from '@/rpc/orpc.client'
+import { client } from '@/server/lib/orpc.client'
 import { Skeleton } from '@/shared/components/ui/skeleton'
 
 const useToday = () => format(new Date(), 'EEEE / d MMMM yyyy')

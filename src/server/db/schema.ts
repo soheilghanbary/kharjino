@@ -113,6 +113,7 @@ export const notes = pgTable('note', {
   description: text('description'),
   createdAt: timestamp('createdAt').notNull().defaultNow(),
   updatedAt: timestamp('updatedAt').notNull().defaultNow(),
+  color: text('color').default('default').notNull(),
   userId: text('userId')
     .notNull()
     .references(() => user.id),

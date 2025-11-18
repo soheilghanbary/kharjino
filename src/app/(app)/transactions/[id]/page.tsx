@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation'
 import { Fragment, Suspense } from 'react'
 import { TransactionForm } from '@/features/transaction'
-import { api } from '@/rpc/orpc.client'
+import { api } from '@/server/lib/orpc.client'
 import { AppHeader } from '@/shared/components/layouts/app-header'
 import { Spinner } from '@/shared/components/ui/spinner'
 

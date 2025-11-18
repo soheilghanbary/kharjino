@@ -1,9 +1,9 @@
 import { os } from '@orpc/server'
 import { and, desc, eq } from 'drizzle-orm'
 import z from 'zod'
-import { db } from '@/db'
-import { tasks } from '@/db/schema'
 import { updateTaskSchema } from '@/features/task'
+import { db } from '@/server/db'
+import { tasks } from '@/server/db/schema'
 import { getUserId } from '@/shared/lib/helpers'
 
 export const taskRouter = {

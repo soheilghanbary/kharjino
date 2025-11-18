@@ -1,9 +1,9 @@
 import { os } from '@orpc/server'
 import { eq } from 'drizzle-orm'
 import z from 'zod'
-import { db } from '@/db'
-import { user } from '@/db/schema'
 import { updateUserFormSchema } from '@/features/account'
+import { db } from '@/server/db'
+import { user } from '@/server/db/schema'
 import { getUserId } from '@/shared/lib/helpers'
 
 export const userRouter = {

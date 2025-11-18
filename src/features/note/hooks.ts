@@ -1,8 +1,8 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useParams, useRouter } from 'next/navigation'
 import { toast } from 'sonner'
-import type { Note } from '@/db/schema'
-import { client } from '@/rpc/orpc.client'
+import type { Note } from '@/server/db/schema'
+import { client } from '@/server/lib/orpc.client'
 
 export const useGetNote = () => {
   const { id } = useParams() as { id: string }
@@ -17,7 +17,6 @@ export const useGetNote = () => {
 }
 
 export const useCreateNote = () => {
-  const router = useRouter()
   const qc = useQueryClient()
   return useMutation(
     client.note.create.mutationOptions({
@@ -28,14 +27,13 @@ export const useCreateNote = () => {
         ) as Note[]
         qc.setQueryData(client.note.getAll.queryKey(), [res, ...previousNotes])
         toast.info('یادداشت ایجاد شد')
-        router.push('/notes')
       },
     })
   )
 }
 
 export const useUpdateNote = () => {
-  const router = useRouter()
+  const _router = useRouter()
   const qc = useQueryClient()
   return useMutation(
     client.note.update.mutationOptions({
@@ -54,14 +52,12 @@ export const useUpdateNote = () => {
         qc.setQueryData(client.note.getAll.queryKey(), newNote)
         qc.setQueryData(client.note.getById.queryKey({ input: res.id }), res)
         toast.info('یادداشت ویرایش شد')
-        router.push('/notes')
       },
     })
   )
 }
 
 export const useDeleteNote = (id: string) => {
-  const router = useRouter()
   const qc = useQueryClient()
   return useMutation(
     client.note.delete.mutationOptions({
@@ -73,7 +69,6 @@ export const useDeleteNote = (id: string) => {
         const newNotes = previousNotes.filter((n) => n.id !== id)
         qc.setQueryData(client.note.getAll.queryKey(), newNotes)
         toast.info('یادداشت حذف شد')
-        router.push('/notes')
       },
     })
   )

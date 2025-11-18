@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { toast } from 'sonner'
-import { client } from '@/rpc/orpc.client'
+import { client } from '@/server/lib/orpc.client'
 import { AppHeader } from '@/shared/components/layouts/app-header'
 import { Button } from '@/shared/components/ui/button'
 import {

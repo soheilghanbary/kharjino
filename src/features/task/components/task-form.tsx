@@ -6,7 +6,7 @@ import { nanoid } from 'nanoid'
 import { type ReactNode, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { createTaskSchema, type UpdateTaskSchema } from '@/features/task'
-import { client } from '@/rpc/orpc.client'
+import { client } from '@/server/lib/orpc.client'
 import { Button } from '@/shared/components/ui/button'
 import { Checkbox } from '@/shared/components/ui/checkbox'
 import {

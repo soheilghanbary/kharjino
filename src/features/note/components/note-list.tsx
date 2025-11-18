@@ -1,26 +1,36 @@
 'use client'
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { format } from 'date-fns-jalali'
-import Link from 'next/link'
-import type { Note } from '@/db/schema'
-import { client } from '@/rpc/orpc.client'
+import type { Note } from '@/server/db/schema'
+import { client } from '@/server/lib/orpc.client'
 import { NotesIcon } from '@/shared/assets/icons/bulk'
 import { Skeleton } from '@/shared/components/ui/skeleton'
+import { type ColorKey, cn, colorMap } from '@/shared/lib/utils'
+import { NoteDrawer } from './note-drawer'
 
-const NoteCard = (note: Note) => {
+const NoteCard = ({ id, color, title, description, createdAt }: Note) => {
+  const noteColor = color as ColorKey
+  const bg = colorMap[noteColor] ?? colorMap.default
   return (
-    <Link
-      href={`/notes/${note.id}`}
-      className="rounded-2xl bg-muted p-3 dark:bg-card"
+    <NoteDrawer
+      options={{
+        mode: 'edit',
+        note: {
+          id,
+          title,
+          color: noteColor,
+          description,
+        },
+      }}
     >
-      <h2 className="font-medium text-sm/6">{note.title}</h2>
-      <p className="line-clamp-3 text-foreground/65 text-xs/5">
-        {note.description}
-      </p>
-      <p className="text-left text-foreground/65 text-xs/6">
-        {format(note.createdAt, 'd MMMM yyyy')}
-      </p>
-    </Link>
+      <div className={cn('rounded-2xl border border-transparent p-3', bg)}>
+        <h2 className="font-medium text-sm/6">{title}</h2>
+        <p className="line-clamp-3 text-xs/5">{description}</p>
+        <p className="text-left text-xs/6">
+          {format(createdAt, 'd MMMM yyyy')}
+        </p>
+      </div>
+    </NoteDrawer>
   )
 }
 

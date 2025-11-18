@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react'
 import { EmptyTransactionList } from '@/features/transaction'
 import { TransactionCard } from '@/features/transaction/components/transaction-card'
 import { TransactionLoading } from '@/features/transaction/components/transaction-loading'
-import { api } from '@/rpc/orpc.client'
+import { api } from '@/server/lib/orpc.client'
 
 export function CategoryTransactionList({
   categoryId,

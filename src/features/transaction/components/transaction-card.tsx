@@ -4,8 +4,8 @@ import { format } from 'date-fns-jalali'
 import Link from 'next/link'
 import { useState } from 'react'
 import { toast } from 'sonner'
-import type { Category, Transaction, TransactionType } from '@/db/schema'
-import { client } from '@/rpc/orpc.client'
+import type { Category, Transaction, TransactionType } from '@/server/db/schema'
+import { client } from '@/server/lib/orpc.client'
 import { Button } from '@/shared/components/ui/button'
 import {
   Drawer,
@@ -65,15 +65,12 @@ export const TransactionCard = ({
           <div className="grow">
             <p className="font-medium text-xs/6">{category.name}</p>
             <p className="text-muted-foreground text-tiny">
-              {description?.length ? description : 'بدون توضیحات'}
+              {format(date, 'yyy/MM/d')}
             </p>
           </div>
           <div className="text-left">
             <p className="font-semibold text-sm/6">
               {amount.toLocaleString('fa-IR')} تومان
-            </p>
-            <p className="text-muted-foreground text-tiny">
-              {format(date, 'yyy/MM/d')}
             </p>
           </div>
         </div>

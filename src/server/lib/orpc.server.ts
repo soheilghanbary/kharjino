@@ -5,7 +5,7 @@ import { DedupeRequestsPlugin } from '@orpc/client/plugins'
 import { inferRPCMethodFromRouter, type RouterClient } from '@orpc/server'
 import { headers } from 'next/headers'
 import { handler } from '@/app/api/rpc/[[...rest]]/route'
-import { router } from './router'
+import { router } from '../router'
 
 const link = new RPCLink({
   url: process.env.NEXT_PUBLIC_URL ?? 'http://localhost:3000',

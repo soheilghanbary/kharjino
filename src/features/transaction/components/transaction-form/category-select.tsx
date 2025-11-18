@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
-import type { TransactionType } from '@/db/schema'
-import { client } from '@/rpc/orpc.client'
+import type { TransactionType } from '@/server/db/schema'
+import { client } from '@/server/lib/orpc.client'
 import { Label } from '@/shared/components/ui/label'
 import {
   Select,
