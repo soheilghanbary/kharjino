@@ -26,6 +26,10 @@ export default function RootLayout({ children }: PropsWithChildren) {
           name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
         />
+        <meta
+          name="format-detection"
+          content="telephone=no, date=no, email=no, address=no"
+        />
       </head>
       <body className={`${font.className} antialiased`}>
         <Providers>{children}</Providers>

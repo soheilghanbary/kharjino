@@ -71,9 +71,9 @@ export const TransactionCard = ({
           <div className="text-left">
             <p className="font-semibold text-sm/6">
               {amount.toLocaleString('fa-IR')} تومان
-              <p className="text-muted-foreground text-tiny">
-                {format(date, 'yyy/MM/d')}
-              </p>
+            </p>
+            <p className="text-muted-foreground text-tiny">
+              {format(date, 'yyy/MM/d')}
             </p>
           </div>
         </div>
