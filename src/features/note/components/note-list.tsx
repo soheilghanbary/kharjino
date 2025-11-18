@@ -11,16 +11,12 @@ import { NoteDrawer } from './note-drawer'
 const NoteCard = ({ id, color, title, description, createdAt }: Note) => {
   const noteColor = color as ColorKey
   const bg = colorMap[noteColor] ?? colorMap.default
+  const note = { id, title, color: noteColor, description, createdAt }
   return (
     <NoteDrawer
       options={{
         mode: 'edit',
-        note: {
-          id,
-          title,
-          color: noteColor,
-          description,
-        },
+        note,
       }}
     >
       <div className={cn('rounded-2xl border border-transparent p-3', bg)}>
