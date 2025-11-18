@@ -55,6 +55,8 @@ export const TransactionCard = ({
     })
   )
 
+  const excerpt = description?.length ? description : 'بدون توضیحات'
+
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
@@ -64,13 +66,14 @@ export const TransactionCard = ({
           </p>
           <div className="grow">
             <p className="font-medium text-xs/6">{category.name}</p>
-            <p className="text-muted-foreground text-tiny">
-              {format(date, 'yyy/MM/d')}
-            </p>
+            <p className="text-muted-foreground text-tiny">{excerpt}</p>
           </div>
           <div className="text-left">
             <p className="font-semibold text-sm/6">
               {amount.toLocaleString('fa-IR')} تومان
+              <p className="text-muted-foreground text-tiny">
+                {format(date, 'yyy/MM/d')}
+              </p>
             </p>
           </div>
         </div>
@@ -95,7 +98,7 @@ export const TransactionCard = ({
           </li>
           <li className="flex items-center justify-between text-sm [&>span:nth-child(1)]:text-muted-foreground">
             <span>توضیحات</span>
-            <span>{description?.length ? description : 'بدون توضیحات'}</span>
+            <span>{excerpt}</span>
           </li>
         </ul>
         <Separator className="my-4" />
