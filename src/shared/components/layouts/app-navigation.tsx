@@ -4,7 +4,7 @@ import { usePathname } from 'next/navigation'
 import {
   NotesIcon,
   PieChartIcon,
-  PlusIcon,
+  PlusCircleIcon,
   TransactionIcon,
   UserIcon,
 } from '@/shared/assets/icons/bulk'
@@ -24,7 +24,7 @@ const navItems = [
   {
     href: '/new',
     label: 'افزودن',
-    icon: PlusIcon,
+    icon: PlusCircleIcon,
   },
   {
     href: '/notes',

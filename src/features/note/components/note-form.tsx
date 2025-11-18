@@ -88,7 +88,7 @@ export const NoteForm = (props: NoteFormProps) => {
         <hr />
         <Textarea
           placeholder="توضیحات"
-          className="resize-none border-0 bg-transparent text-foreground/65 text-xs/5 focus-visible:ring-0 dark:text-muted-foreground"
+          className="max-h-40 resize-none border-0 bg-transparent text-foreground/65 focus-visible:ring-0 dark:text-muted-foreground"
           {...register('description')}
         />
         <div className="flex items-center justify-between space-x-2 p-3">
@@ -110,7 +110,9 @@ export const NoteForm = (props: NoteFormProps) => {
           </Button>
         </div>
       </form>
-      {props.mode === 'edit' && <DeleteNoteButton id={props.note.id} />}
+      <div className="flex justify-center">
+        {props.mode === 'edit' && <DeleteNoteButton id={props.note.id} />}
+      </div>
     </>
   )
 }
@@ -124,7 +126,7 @@ const DeleteNoteButton = ({ id }: { id: string }) => {
       onClick={onDelete}
       disabled={isPending}
       variant={'secondary'}
-      className="mt-4 bg-destructive/10 text-destructive dark:bg-destructive/25"
+      className="mx-auto mt-4 bg-destructive/10 text-destructive dark:bg-destructive/25"
     >
       {isPending ? <Spinner /> : <TrashIcon />}
       حذف یادداشت

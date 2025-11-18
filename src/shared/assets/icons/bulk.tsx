@@ -1,4 +1,4 @@
-import type { IconProps } from '@/types'
+import type { IconProps } from '@/shared/types'
 
 export const PieChartIcon = (props: IconProps) => (
   <svg
@@ -386,20 +386,28 @@ export const GridIcon = (props: IconProps) => (
   </svg>
 )
 
-export const PlusCircleIcon = (props: IconProps) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width={24}
-    height={24}
-    viewBox="0 0 24 24"
-    {...props}
-  >
-    <g fill="none" stroke="currentColor" strokeWidth={1.5}>
-      <circle cx={12} cy={12} r={10} opacity={0.5}></circle>
-      <path strokeLinecap="round" d="M15 12h-3m0 0H9m3 0V9m0 3v3"></path>
-    </g>
-  </svg>
-)
+export function PlusCircleIcon(props: IconProps) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="1em"
+      height="1em"
+      viewBox="0 0 24 24"
+      {...props}
+    >
+      {/* Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ */}
+      <path
+        fill="currentColor"
+        d="M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2s10 4.477 10 10"
+        opacity=".5"
+      />
+      <path
+        fill="currentColor"
+        d="M12.75 9a.75.75 0 0 0-1.5 0v2.25H9a.75.75 0 0 0 0 1.5h2.25V15a.75.75 0 0 0 1.5 0v-2.25H15a.75.75 0 0 0 0-1.5h-2.25z"
+      />
+    </svg>
+  )
+}
 
 export const DollarIcon = (props: IconProps) => (
   <svg

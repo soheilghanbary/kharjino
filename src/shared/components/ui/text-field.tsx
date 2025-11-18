@@ -21,7 +21,7 @@ export const TextField = forwardRef(function MyInput(
 ) {
   const id = useId()
   return (
-    <div className={cn('grid gap-2 [&>label]:text-sm', className)}>
+    <div className={cn('grid gap-2', className)}>
       <Label htmlFor={id}>{label}</Label>
       <Input
         id={id}

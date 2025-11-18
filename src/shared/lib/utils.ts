@@ -18,13 +18,13 @@ export function dataURLtoFile(dataUrl: string, filename: string): File {
 }
 
 export const colorMap = {
-  amber: 'bg-amber-100 dark:bg-amber-500 text-amber-950',
-  teal: 'bg-teal-100 dark:bg-teal-500 text-teal-950',
-  purple: 'bg-purple-100 dark:bg-purple-500 text-purple-950',
+  amber: 'bg-amber-100 dark:bg-amber-200 text-amber-950',
+  teal: 'bg-teal-100 dark:bg-teal-200 text-teal-950',
+  purple: 'bg-purple-100 dark:bg-purple-200 text-purple-950',
   black: 'bg-black text-white dark:bg-black text-white',
-  blue: 'bg-blue-100 dark:bg-blue-500 text-blue-950',
-  rose: 'bg-rose-100 dark:bg-rose-500 text-rose-950',
-  orange: 'bg-orange-100 dark:bg-orange-500 text-orange-950',
+  blue: 'bg-blue-100 dark:bg-blue-200 text-blue-950',
+  rose: 'bg-rose-100 dark:bg-rose-200 text-rose-950',
+  orange: 'bg-orange-100 dark:bg-orange-200 text-orange-950',
   default: 'bg-card text-foreground dark:bg-card text-foreground border-border',
 }
 
